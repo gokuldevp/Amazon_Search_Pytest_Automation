@@ -104,4 +104,8 @@ run.bat
 ## Test Execution
 You can view the test execution process and how to run the tests in this video:
 
-Watch Test Execution on YouTube[https://youtu.be/f8BHg7vmhxI?si=ECYRETFpJD7rh4-W]
+## Test Execution
+
+You can view the test execution process and how to run the tests in this video:
+
+[Watch Test Execution on YouTube](https://youtu.be/f8BHg7vmhxI)

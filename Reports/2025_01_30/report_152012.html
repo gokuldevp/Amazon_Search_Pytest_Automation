@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title id="head-title">Automation Report</title>
+      <style type="text/css">body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  /* do not increase min-width as some may use split screens */
+  min-width: 800px;
+  color: #999;
+}
+
+h1 {
+  font-size: 24px;
+  color: black;
+}
+
+h2 {
+  font-size: 16px;
+  color: black;
+}
+
+p {
+  color: black;
+}
+
+a {
+  color: #999;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+/******************************
+ * SUMMARY INFORMATION
+ ******************************/
+#environment td {
+  padding: 5px;
+  border: 1px solid #e6e6e6;
+  vertical-align: top;
+}
+#environment tr:nth-child(odd) {
+  background-color: #f6f6f6;
+}
+#environment ul {
+  margin: 0;
+  padding: 0 20px;
+}
+
+/******************************
+ * TEST RESULT COLORS
+ ******************************/
+span.passed,
+.passed .col-result {
+  color: green;
+}
+
+span.skipped,
+span.xfailed,
+span.rerun,
+.skipped .col-result,
+.xfailed .col-result,
+.rerun .col-result {
+  color: orange;
+}
+
+span.error,
+span.failed,
+span.xpassed,
+.error .col-result,
+.failed .col-result,
+.xpassed .col-result {
+  color: red;
+}
+
+.col-links__extra {
+  margin-right: 3px;
+}
+
+/******************************
+ * RESULTS TABLE
+ *
+ * 1. Table Layout
+ * 2. Extra
+ * 3. Sorting items
+ *
+ ******************************/
+/*------------------
+ * 1. Table Layout
+ *------------------*/
+#results-table {
+  border: 1px solid #e6e6e6;
+  color: #999;
+  font-size: 12px;
+  width: 100%;
+}
+#results-table th,
+#results-table td {
+  padding: 5px;
+  border: 1px solid #e6e6e6;
+  text-align: left;
+}
+#results-table th {
+  font-weight: bold;
+}
+
+/*------------------
+ * 2. Extra
+ *------------------*/
+.logwrapper {
+  max-height: 230px;
+  overflow-y: scroll;
+  background-color: #e6e6e6;
+}
+.logwrapper.expanded {
+  max-height: none;
+}
+.logwrapper.expanded .logexpander:after {
+  content: "collapse [-]";
+}
+.logwrapper .logexpander {
+  z-index: 1;
+  position: sticky;
+  top: 10px;
+  width: max-content;
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 5px 7px;
+  margin: 10px 0 10px calc(100% - 80px);
+  cursor: pointer;
+  background-color: #e6e6e6;
+}
+.logwrapper .logexpander:after {
+  content: "expand [+]";
+}
+.logwrapper .logexpander:hover {
+  color: #000;
+  border-color: #000;
+}
+.logwrapper .log {
+  min-height: 40px;
+  position: relative;
+  top: -50px;
+  height: calc(100% + 50px);
+  border: 1px solid #e6e6e6;
+  color: black;
+  display: block;
+  font-family: "Courier New", Courier, monospace;
+  padding: 5px;
+  padding-right: 80px;
+  white-space: pre-wrap;
+}
+
+div.media {
+  border: 1px solid #e6e6e6;
+  float: right;
+  height: 240px;
+  margin: 0 5px;
+  overflow: hidden;
+  width: 320px;
+}
+
+.media-container {
+  display: grid;
+  grid-template-columns: 25px auto 25px;
+  align-items: center;
+  flex: 1 1;
+  overflow: hidden;
+  height: 200px;
+}
+
+.media-container--fullscreen {
+  grid-template-columns: 0px auto 0px;
+}
+
+.media-container__nav--right,
+.media-container__nav--left {
+  text-align: center;
+  cursor: pointer;
+}
+
+.media-container__viewport {
+  cursor: pointer;
+  text-align: center;
+  height: inherit;
+}
+.media-container__viewport img,
+.media-container__viewport video {
+  object-fit: cover;
+  width: 100%;
+  max-height: 100%;
+}
+
+.media__name,
+.media__counter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex: 0 0 25px;
+  align-items: center;
+}
+
+.collapsible td:not(.col-links) {
+  cursor: pointer;
+}
+.collapsible td:not(.col-links):hover::after {
+  color: #bbb;
+  font-style: italic;
+  cursor: pointer;
+}
+
+.col-result {
+  width: 130px;
+}
+.col-result:hover::after {
+  content: " (hide details)";
+}
+
+.col-result.collapsed:hover::after {
+  content: " (show details)";
+}
+
+#environment-header h2:hover::after {
+  content: " (hide details)";
+  color: #bbb;
+  font-style: italic;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+#environment-header.collapsed h2:hover::after {
+  content: " (show details)";
+  color: #bbb;
+  font-style: italic;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/*------------------
+ * 3. Sorting items
+ *------------------*/
+.sortable {
+  cursor: pointer;
+}
+.sortable.desc:after {
+  content: " ";
+  position: relative;
+  left: 5px;
+  bottom: -12.5px;
+  border: 10px solid #4caf50;
+  border-bottom: 0;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.sortable.asc:after {
+  content: " ";
+  position: relative;
+  left: 5px;
+  bottom: 12.5px;
+  border: 10px solid #4caf50;
+  border-top: 0;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+
+.hidden, .summary__reload__button.hidden {
+  display: none;
+}
+
+.summary__data {
+  flex: 0 0 550px;
+}
+.summary__reload {
+  flex: 1 1;
+  display: flex;
+  justify-content: center;
+}
+.summary__reload__button {
+  flex: 0 0 300px;
+  display: flex;
+  color: white;
+  font-weight: bold;
+  background-color: #4caf50;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.summary__reload__button:hover {
+  background-color: #46a049;
+}
+.summary__spacer {
+  flex: 0 0 550px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filters,
+.collapse {
+  display: flex;
+  align-items: center;
+}
+.filters button,
+.collapse button {
+  color: #999;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.filters button:hover,
+.collapse button:hover {
+  color: #ccc;
+}
+
+.filter__label {
+  margin-right: 10px;
+}
+
+      </style>
+    
+  </head>
+  <body>
+    <h1 id="title">Automation Report</h1>
+    <p>Report generated on 30-Jan-2025 at 15:21:38 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a>
+        v4.1.1</p>
+    <div id="environment-header">
+      <h2>Environment</h2>
+    </div>
+    <table id="environment"></table>
+    <!-- TEMPLATES -->
+      <template id="template_environment_row">
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+    </template>
+    <template id="template_results-table__body--empty">
+      <tbody class="results-table-row">
+        <tr id="not-found-message">
+          <td colspan="4">No results found. Check the filters.</th>
+        </tr>
+    </template>
+    <template id="template_results-table__tbody">
+      <tbody class="results-table-row">
+        <tr class="collapsible">
+        </tr>
+        <tr class="extras-row">
+          <td class="extra" colspan="4">
+            <div class="extraHTML"></div>
+            <div class="media">
+              <div class="media-container">
+                  <div class="media-container__nav--left"><</div>
+                  <div class="media-container__viewport">
+                    <img src="" />
+                    <video controls>
+                      <source src="" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="media-container__nav--right">></div>
+                </div>
+                <div class="media__name"></div>
+                <div class="media__counter"></div>
+            </div>
+            <div class="logwrapper">
+              <div class="logexpander"></div>
+              <div class="log"></div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </template>
+    <!-- END TEMPLATES -->
+    <div class="summary">
+      <div class="summary__data">
+        <h2>Summary</h2>
+        <div class="additional-summary prefix">
+        </div>
+        <p class="run-count">5 tests took 00:01:24.</p>
+        <p class="filter">(Un)check the boxes to filter the results.</p>
+        <div class="summary__reload">
+          <div class="summary__reload__button hidden" onclick="location.reload()">
+            <div>There are still tests running. <br />Reload this page to get the latest results!</div>
+          </div>
+        </div>
+        <div class="summary__spacer"></div>
+        <div class="controls">
+          <div class="filters">
+            <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="failed" disabled/>
+            <span class="failed">0 Failed,</span>
+            <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="passed" />
+            <span class="passed">5 Passed,</span>
+            <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="skipped" disabled/>
+            <span class="skipped">0 Skipped,</span>
+            <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="xfailed" disabled/>
+            <span class="xfailed">0 Expected failures,</span>
+            <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="xpassed" disabled/>
+            <span class="xpassed">0 Unexpected passes,</span>
+            <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="error" />
+            <span class="error">1 Errors,</span>
+            <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="rerun" disabled/>
+            <span class="rerun">0 Reruns</span>
+          </div>
+          <div class="collapse">
+            <button id="show_all_details">Show all details</button>&nbsp;/&nbsp;<button id="hide_all_details">Hide all details</button>
+          </div>
+        </div>
+      </div>
+      <div class="additional-summary summary">
+      </div>
+      <div class="additional-summary postfix">
+      </div>
+    </div>
+    <table id="results-table">
+      <thead id="results-table-head">
+        <tr>
+          <th class="sortable" data-column-type="result">Result</th>
+          <th class="sortable" data-column-type="testId">Test</th>
+          <th class="sortable" data-column-type="duration">Duration</th>
+          <th>Links</th>
+        </tr>
+      </thead>
+    </table>
+  </body>
+  <footer>
+    <div id="data-container" data-jsonblob="{&#34;environment&#34;: {&#34;Python&#34;: &#34;3.13.1&#34;, &#34;Platform&#34;: &#34;Windows-11-10.0.22631-SP0&#34;, &#34;Packages&#34;: {&#34;pytest&#34;: &#34;8.3.4&#34;, &#34;pluggy&#34;: &#34;1.5.0&#34;}, &#34;Plugins&#34;: {&#34;base-url&#34;: &#34;2.1.0&#34;, &#34;dependency&#34;: &#34;0.6.0&#34;, &#34;html&#34;: &#34;4.1.1&#34;, &#34;metadata&#34;: &#34;3.1.1&#34;, &#34;ordering&#34;: &#34;0.6&#34;, &#34;selenium&#34;: &#34;4.1.0&#34;, &#34;variables&#34;: &#34;3.1.0&#34;, &#34;xdist&#34;: &#34;3.6.1&#34;}, &#34;Base URL&#34;: &#34;&#34;, &#34;Driver&#34;: null, &#34;Capabilities&#34;: {}}, &#34;tests&#34;: {&#34;test_cases/test_basic_crawling.py::TestBasicCrawling::test_amazon_product_search_and_export[chrome-mobile]&#34;: [{&#34;extras&#34;: [{&#34;name&#34;: null, &#34;format_type&#34;: &#34;html&#34;, &#34;content&#34;: &#34;&lt;div&gt;&lt;img src=\&#34;\\Reports\\2025_01_30\\30_01_2025_15_20_26_261530012025.png\&#34; alt=\&#34;screenshot\&#34; style=\&#34;width:304px;height:228px;\&#34; onclick=\&#34;window.open(this.src)\&#34; align=\&#34;right\&#34;/&gt;&lt;/div&gt;&#34;, &#34;mime_type&#34;: null, &#34;extension&#34;: null}], &#34;result&#34;: &#34;Error&#34;, &#34;testId&#34;: &#34;test_cases/test_basic_crawling.py::TestBasicCrawling::test_amazon_product_search_and_export[chrome-mobile]::setup&#34;, &#34;duration&#34;: &#34;00:00:14&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Error&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;test_cases/test_basic_crawling.py::TestBasicCrawling::test_amazon_product_search_and_export[chrome-mobile]::setup&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:14&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;self = &amp;lt;test_cases.test_basic_crawling.TestBasicCrawling object at 0x0000026784702D50&amp;gt;\n\n    @pytest.fixture(autouse=True)\n    def setup_pages(self):\n        self.home_page = HomePage(self.driver, self.logger)\n        self.search_result_page = SearchResultPage(self.driver, self.logger)\n        # Open Amazon homepage\n        success = self.home_page.open_amazon_website()\n&amp;gt;       assert success, &amp;quot;Failed to open Amazon homepage&amp;quot;\nE       AssertionError: Failed to open Amazon homepage\nE       assert False\n\ntest_cases\\test_basic_crawling.py:25: AssertionError\n\n------------------------------ Captured log setup ------------------------------\nINFO     root:conftest.py:144 Launching Chrome Browser\nINFO     root:home_page.py:25 Info :: chrome :: Navigating to Amazon home page.\nERROR    root:home_page.py:29 Error :: chrome :: Timeout while loading Amazon home page.\n&#34;}], &#34;test_cases/test_basic_crawling.py::TestBasicCrawling::test_amazon_product_search_and_export[chrome-laptop]&#34;: [{&#34;extras&#34;: [{&#34;name&#34;: null, &#34;format_type&#34;: &#34;html&#34;, &#34;content&#34;: &#34;&lt;div&gt;&lt;img src=\&#34;\\Reports\\2025_01_30\\30_01_2025_15_20_36_361530012025.png\&#34; alt=\&#34;screenshot\&#34; style=\&#34;width:304px;height:228px;\&#34; onclick=\&#34;window.open(this.src)\&#34; align=\&#34;right\&#34;/&gt;&lt;/div&gt;&#34;, &#34;mime_type&#34;: null, &#34;extension&#34;: null}], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;test_cases/test_basic_crawling.py::TestBasicCrawling::test_amazon_product_search_and_export[chrome-laptop]&#34;, &#34;duration&#34;: &#34;00:00:10&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;test_cases/test_basic_crawling.py::TestBasicCrawling::test_amazon_product_search_and_export[chrome-laptop]&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:10&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nINFO     root:home_page.py:25 Info :: chrome :: Navigating to Amazon home page.\nINFO     root:home_page.py:25 Info :: chrome :: Amazon home page loaded successfully.\n\n------------------------------ Captured log call -------------------------------\nINFO     root:home_page.py:25 Info :: chrome :: Attempting to search for: laptop\nINFO     root:home_page.py:25 Info :: chrome :: Search executed successfully.\nINFO     root:search_result_page.py:31 chrome :: Starting to extract product information.\nINFO     root:search_result_page.py:31 chrome :: Found product details in the search results.\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 1: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Lenovo IdeaPad Slim 3 12th Gen Intel Core i5-12450H 15.6&amp;quot; (39.6cm) FHD IPS Thin &amp;amp; Light Laptop (16GB/512GB SSD/Intel UHD Graphics/Win 11/MSO 21/Backlit KB/1 Yr ADP Free/Grey/1.6Kg), 83ER008DIN&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 50,130&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.8&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo1NjYxODk0NTEwMjY0ODExOjE3MzgyMzA2Mjk6c3BfYXRmOjMwMDQ2OTY4NDAyNTAzMjo6MDo6&amp;amp;url=%2FLenovo-IdeaPad-i5-12450H-Warranty-83ER008DIN%2Fdp%2FB0CNVH114V%2Fref%3Dsr_1_1_sspa%3Fdib%3DeyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE%26dib_tag%3Dse%26keywords%3Dlaptop%26qid%3D1738230629%26sr%3D8-1-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9hdGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 2: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Lenovo Yoga Slim 7 Aura Edition Intel Evo Core Ultra 7 258V (32GB RAM/1TB SSD/15(38.86cm)/Copilot+ PC/Windows 11/Office Home 2024/Grey/1.53Kg), 83HM004NIN AI Laptop&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,47,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;5.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo1NjYxODk0NTEwMjY0ODExOjE3MzgyMzA2Mjk6c3BfYXRmOjMwMDQ1NjUwNzczNDMzMjo6MDo6&amp;amp;url=%2FLenovo-38-86cm-Copilot-Windows-83HM004NIN%2Fdp%2FB0DP6RBVSK%2Fref%3Dsr_1_2_sspa%3Fdib%3DeyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE%26dib_tag%3Dse%26keywords%3Dlaptop%26qid%3D1738230629%26sr%3D8-2-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9hdGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 3: {&amp;#x27;Name&amp;#x27;: &amp;#x27;(Refurbished) Lenovo ThinkPad 8th Gen Intel Core i5 Thin &amp;amp; Light HD Laptop (16 GB DDR4 RAM/512 GB SSD/14 (35.6 cm) HD/Windows 11/MS Office/WiFi/Bluetooth 4.1/Webcam/Intel Graphics)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 18,340&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.4&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Refurbished-Lenovo-ThinkPad-Bluetooth-Graphics/dp/B0DMTPY8PJ/ref=sr_1_3?dib=eyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230629&amp;amp;sr=8-3&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 4: {&amp;#x27;Name&amp;#x27;: &amp;#x27;HP Laptop 255 G9 AMD Ryzen 3 3250U Dual Core - (8GB/512GB SSD/AMD Radeon Graphics) Thin and Light Business Laptop/15.6&amp;quot; (39.62cm)/Black/1.47 kg&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 24,950&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.2&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/HP-Laptop-255-G9-Ryzen/dp/B0DJCWBY7G/ref=sr_1_4?dib=eyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230629&amp;amp;sr=8-4&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 5: {&amp;#x27;Name&amp;#x27;: &amp;#x27;DELL Latitude 3440 Intel Core i3 12th Gen 1215U - (8GB/512 GB SSD/Intel UHD Graphics) Thin and Light Business Laptop/14 HD Display/Grey/1.5 kg&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 32,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.5&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/DELL-Latitude-3440-Intel-1215U/dp/B0B8XFRNT8/ref=sr_1_5?dib=eyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230629&amp;amp;sr=8-5&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 6: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Lenovo V14 G3 Intel Core i5 12th Gen 1235U /16GB/512GB SSD/Intel UHD Graphics/Windows 11/ Thin and Light Business Laptop/14.0&amp;quot; FHD Display/Iron Grey/1.57 kg&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 36,970&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Lenovo-V14-G3-Graphics-Business/dp/B08HJWSGW6/ref=sr_1_6?dib=eyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230629&amp;amp;sr=8-6&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 7: {&amp;#x27;Name&amp;#x27;: &amp;#x27;HP Laptop 255 G9 (2024), AMD Ryzen 5 5625U Hexa Core - (8GB/512GB SSD/AMD Radeon Graphics) Thin and Light Business Laptop/15.6&amp;quot; (39.62cm)/Silver/1.47 kg&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 29,940&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/HP-Laptop-255-G9-Ryzen/dp/B0DH8831VF/ref=sr_1_7?dib=eyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230629&amp;amp;sr=8-7&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 8: {&amp;#x27;Name&amp;#x27;: &amp;#x27;HP 15, 13th Gen Intel Core i5-1334U, 16GB DDR4, 512GB SSD, (Win 11, Office 21, Silver, 1.59kg), Anti-Glare, 15.6-inch(39.6cm) FHD Laptop, Iris Xe Graphics, FHD Camera, Backlit KB, fd0316TU/fd0315TU&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 55,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.5&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/HP-i5-1334U-Anti-glare-15-6-inch-Graphics/dp/B0D4LWYWF9/ref=sr_1_8?dib=eyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230629&amp;amp;sr=8-8&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 9: {&amp;#x27;Name&amp;#x27;: &amp;#x27;ASUS Vivobook 15, 15.6&amp;quot; FHD (1920 x 1080), Intel Core i3-1215U Processor 1.2 GHz, Thin &amp;amp; Light Laptop(16GB RAM/512GB SSD/Integrated Graphics/Windows 11/Office Home/Cool Silver/1.7 Kg), X1504ZA-NJ342WS&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 34,980&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/ASUS-Vivobook-Processor-Integrated-X1504ZA-NJ342WS/dp/B09KBC64HS/ref=sr_1_9?dib=eyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230629&amp;amp;sr=8-9&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 10: {&amp;#x27;Name&amp;#x27;: &amp;#x27;(Refurbished) Lenovo Thinkpad Laptop T480 Intel Core i7 8th Generation - 8550u Processor 16 GB Ram &amp;amp; 512 GB SSD, 14 Inches Notebook Computer&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 17,825&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.5&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Refurbished-Lenovo-Thinkpad-Laptop-Generation/dp/B0CXXBW47R/ref=sr_1_10?dib=eyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230629&amp;amp;sr=8-10&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 11: {&amp;#x27;Name&amp;#x27;: &amp;#x27;MSI Crosshair 16 HX, Intel 14th Gen. i7-14700HX, 41CM QHD+ 240Hz Gaming Laptop(16GB/1TB NVMe SSD/Windows 11 Home/NVIDIA GeForce RTX 4060, GDDR6 8GB /Cosmos Gray/2.5Kg), D14VFKG-206IN&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,39,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.6&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo1NjYxODk0NTEwMjY0ODExOjE3MzgyMzA2Mjk6c3BfbXRmOjMwMDI0NjEwNzI2MzgzMjo6MDo6&amp;amp;url=%2FMSI-Crosshair-16-i7-14700HX-D14VFKG-206IN%2Fdp%2FB0CVL5JLH3%2Fref%3Dsr_1_11_sspa%3Fdib%3DeyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE%26dib_tag%3Dse%26keywords%3Dlaptop%26qid%3D1738230629%26sr%3D8-11-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9tdGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 12: {&amp;#x27;Name&amp;#x27;: &amp;#x27;HP Victus, 13th Gen Intel Core i5-13420H, 6GB NVIDIA RTX 4050, 16GB DDR4, 512GB SSD (Win11, Office 21, Silver, 2.29kg) 144Hz, 9MS, IPS, 15.6-inch(39.6cm) FHD Gaming Laptop, Enhanced Cooling, fa1319TX&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 80,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.2&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo1NjYxODk0NTEwMjY0ODExOjE3MzgyMzA2Mjk6c3BfbXRmOjMwMDQ2OTQ5MTA2MjMzMjo6MDo6&amp;amp;url=%2FHP-i5-13420H-15-6-inch-Backlit-fa1319TX%2Fdp%2FB0D1YJR2ZY%2Fref%3Dsr_1_12_sspa%3Fdib%3DeyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE%26dib_tag%3Dse%26keywords%3Dlaptop%26qid%3D1738230629%26sr%3D8-12-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9tdGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 13: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Lenovo V14 G4 (2024), AMD Ryzen 3 7320U Quad Core - (8GB/512GB SSD/AMD Radeon Graphics 610M/Windows 11) Thin and Light Business Laptop/14 FHD Display/Silver/1.47 kg/MS Office 2021&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 25,850&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.7&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Lenovo-V14-Ryzen-7320U-Quad/dp/B0DKG7KLMN/ref=sr_1_13?dib=eyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230629&amp;amp;sr=8-13&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 14: {&amp;#x27;Name&amp;#x27;: &amp;#x27;HP 15s, 12th Gen Intel Core i3-1215U, 8GB DDR4, 512GB SSD, (Win 11, Office 21, Silver, 1.69kg) Anti-glare, Micro-edge, 15.6-inch(39.6cm) FHD laptop, Intel UHD Graphics, HD camera, Backlit KB, fq5327tu&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 36,999&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/HP-i3-1215U-15-6-inch-Graphics-Speakers/dp/B0BP2M7CCS/ref=sr_1_14?dib=eyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230629&amp;amp;sr=8-14&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 15: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Acer Aspire Lite AMD Ryzen 5-5625U Premium Thin and Light Laptop (16 GB RAM/512 GB SSD/Windows 11 Home) AL15-41, 39.62 cm (15.6&amp;quot;) Full HD Display, Metal Body, Steel Gray, 1.59 KG&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 38,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/5-5625U-Premium-Windows-AL15-41-Display/dp/B0DG2GCTD7/ref=sr_1_15?dib=eyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230629&amp;amp;sr=8-15&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 16: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Lenovo V15 AMD Ryzen 7 7730U 15.6&amp;quot; (39.62cm) FHD 250 Nits Antiglare Thin and Light Laptop (16GB/512GB SSD/Windows 11/Iron Grey/1.65 Kg) Grey&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 39,899&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.9&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Lenovo-Ryzen-39-62cm-Antiglare-Laptop/dp/B0D39BVJ7Y/ref=sr_1_16?dib=eyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230629&amp;amp;sr=8-16&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 17: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Lenovo IdeaPad Slim 1 Intel Core Celeron N4020 14&amp;quot; HD Thin and Light Laptop (8GB/512GB SSD/Windows 11 Home/Office 21/1Yr Warranty/Cloud Grey/1.3Kg), 82V6009LIN&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 23,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.9&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Lenovo-IdeaPad-Celeron-Warranty-82V6009LIN/dp/B0D6Z2H2HR/ref=sr_1_17?dib=eyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230629&amp;amp;sr=8-17&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 18: {&amp;#x27;Name&amp;#x27;: &amp;#x27;ASUS Vivobook Go 14, Thin and Light Laptop, AMD Ryzen 3 7320U, 14&amp;quot; (35.56 cm) FHD, (8 GB RAM/512GB SSD/Windows 11/Office 2021/42WHr /Black/1.38 kg), E1404FA-NK325WS&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 33,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/ASUS-Vivobook-Laptop-Office-E1404FA-NK325WS/dp/B0CCPC5DTD/ref=sr_1_18?dib=eyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230629&amp;amp;sr=8-18&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 19: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Acer Aspire 3 Laptop Intel Core Celeron N4500 Processor Laptop (8 GB LPDDR4X SDRAM/512 GB SSD/Win11 Home/38 WHR/HD Webcam) A325-45 with 39.63 cm (15.6&amp;quot;) HD Display, Pure Silver, 1.5 KG&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 23,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Acer-Celeron-Processor-LPDDR4X-A325-45/dp/B0D7PYTTGH/ref=sr_1_19?dib=eyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230629&amp;amp;sr=8-19&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 20: {&amp;#x27;Name&amp;#x27;: &amp;#x27;HP 15, 12th Gen Intel Core i5-1235U, 16GB DDR4, 512GB SSD, (Win 11, Office 21, Silver, 1.69kg), Anti-Glare, 15.6-inch(39.6cm) FHD Laptop, Intel Iris Xe Graphics, HD Camera, Backlit Keyboard, fy5009tu&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 52,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.8&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/HP-Keyboard-15-6-inch-fy5009TU-fd0111tu/dp/B0D4M66F6R/ref=sr_1_20?dib=eyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230629&amp;amp;sr=8-20&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 21: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Lenovo V15 12th Gen Intel Core i7-1255U 15.6&amp;quot; FHD Thin and Light Laptop (16GB RAM/512GB SSD/Windows 11 Home/MS Office Home &amp;amp; Student 2021/Iron Grey/1.70 kg), 82TTA073IN&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 49,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.2&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo1NjYxODk0NTEwMjY0ODExOjE3MzgyMzA2Mjk6c3BfYnRmOjMwMDQ0MDQyNDc5NDMzMjo6MDo6&amp;amp;url=%2FLenovo-V15-i7-1255U-Windows-82TTA073IN%2Fdp%2FB0DDY3XT48%2Fref%3Dsr_1_21_sspa%3Fdib%3DeyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE%26dib_tag%3Dse%26keywords%3Dlaptop%26qid%3D1738230629%26sr%3D8-21-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9idGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 22: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Lenovo IdeaPad Slim 5 Ryzen 7 7730U (16GB RAM/1TB SSD/Windows 11/MS Office 2021/WUXGA OLED/14 (35.5cm)/Backlit KB/Alexa/3 Month Game Pass/Grey/1.46Kg), 82XE007EIN Laptop&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 64,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.7&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo1NjYxODk0NTEwMjY0ODExOjE3MzgyMzA2Mjk6c3BfYnRmOjMwMDI5MDY1MzM3ODAzMjo6MDo6&amp;amp;url=%2FLenovo-Ideapad-35-5Cm-Backlit-82Xe007Ein%2Fdp%2FB0D1KF34VD%2Fref%3Dsr_1_22_sspa%3Fdib%3DeyJ2IjoiMSJ9.Kq6xvSBkUHQcGOUtNjakxyfFAYqsQlfmTWAbs2OL24N3BR7fFNbvr2E40N2Uoy8SXI7uuvI2ATxJgdzTRJpR2R0QWNxkiNHrn9HsyjId8uHfxQbvyKvMQSm-PrD7Wm_w8wjQRE4CK1WJg5ydVKG4U9zK33Zhec9wfiEVsA90ZEtmgcBEia-c7SDtJ6TjRb_KfQRvcSZy9GAv1w-KClbYX3jVyN5xMfXv4NDY-0b9dF4.2RQWPizsFZ18xwIfiT3EhEyT5UgSX1DrFxRufvrQADE%26dib_tag%3Dse%26keywords%3Dlaptop%26qid%3D1738230629%26sr%3D8-22-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9idGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Finished extracting product information.\nINFO     root:search_result_page.py:31 chrome :: Attempting to click the Next Page link.\nINFO     root:search_result_page.py:31 chrome :: Successfully clicked the Next Page link.\nINFO     root:search_result_page.py:31 chrome :: Starting to extract product information.\nINFO     root:search_result_page.py:31 chrome :: Found product details in the search results.\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 1: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Lenovo IdeaPad Slim 1 AMD Ryzen 5 5500U 15.6&amp;quot; HD Thin and Light Laptop (16GB/512GB SSD/Integrated AMD Graphics/Windows 11 Home/MSO 21/1Yr ADP Free/Cloud Grey/1.61Kg), 82R400ERIN&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 37,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.9&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo2MTA3NzMwMDMzMDAyOTgyOjE3MzgyMzA2MzM6c3BfYXRmX25leHQ6MzAwMTE5ODA5MzE0NjMyOjowOjo&amp;amp;url=%2FLenovo-IdeaPad-Laptop-Windows-82R400ERIN%2Fdp%2FB0CP2KRYLM%2Fref%3Dsr_1_17_sspa%3Fdib%3DeyJ2IjoiMSJ9.a4qAvWV0Ww-fh7H_SaQlEnvoThkJ_rfLqh4vBHRQLfvGjHj071QN20LucGBJIEps.LG8ErfAp64zwOiYndTXBcJ5pUuAI5epOMSMn-QKldWg%26dib_tag%3Dse%26keywords%3Dlaptop%26qid%3D1738230633%26sr%3D8-17-spons%26xpid%3DJpWNsomoVnDpq%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9hdGZfbmV4dA%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 2: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Lenovo IdeaPad 3 12th Gen Intel Core i3-1215U 14 Inch (35.5cm) FHD Thin &amp;amp; Light Laptop (8GB/512GB SSD/Win 11/Office 2021/Backlit KB/3months Game Pass/Arctic Grey/1.43Kg), 82RJ00FKIN&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 35,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo2MTA3NzMwMDMzMDAyOTgyOjE3MzgyMzA2MzM6c3BfYXRmX25leHQ6MzAwMjg2MjIxNzA2NTMyOjowOjo&amp;amp;url=%2FLenovo-IdeaPad-i3-1215U-Backlit-82RJ00FKIN%2Fdp%2FB0DB1WCBBS%2Fref%3Dsr_1_18_sspa%3Fdib%3DeyJ2IjoiMSJ9.a4qAvWV0Ww-fh7H_SaQlEnvoThkJ_rfLqh4vBHRQLfvGjHj071QN20LucGBJIEps.LG8ErfAp64zwOiYndTXBcJ5pUuAI5epOMSMn-QKldWg%26dib_tag%3Dse%26keywords%3Dlaptop%26qid%3D1738230633%26sr%3D8-18-spons%26xpid%3DJpWNsomoVnDpq%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9hdGZfbmV4dA%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 3: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Lenovo V15 G4 (2024), AMD Ryzen 5 7520U Quad Core - (8GB/512GB SSD/AMD Radeon Graphics/Windows 11 Home) Business Laptop/15.6&amp;quot; FHD Display/Arctic Grey/1.57 kg/MS Office&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 31,490&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.6&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Lenovo-V15-Ryzen-7520U-Quad/dp/B0DKY4SLTR/ref=sr_1_19?dib=eyJ2IjoiMSJ9.a4qAvWV0Ww-fh7H_SaQlEnvoThkJ_rfLqh4vBHRQLfucrG2XRK7RJkXzMszHC6oxH2-cF346Dd3MdVCq3QcdX_SsUEZ-DGKm8iXoyDzzUakfrNJ3c6gq4Nu8N1K1cVGFQvXyrbu45GpUZ6ySS5vjVezPFxY_P5L-zGxwsdynDHgtXSLHO1mr_NgEEzCXgGaJVPd-9aiuoynSxuHWqPsGO8o0XkWhKWAOGNY4oOZ_woY.rSftu-lyVdR-gR3sukiRh1INLzCCfahU78sHm30ofug&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230633&amp;amp;sr=8-19&amp;amp;xpid=JpWNsomoVnDpq&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 4: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Dell Inspiron 3535, Windows 11 Home, AMD Ryzen 3 7320U Processor, (8GB RAM/512GB SSD/Window 11/Ms Office\\&amp;#x27; 21/15.6&amp;quot;(39.62 Cm) FHD Display/15 Month Mcafee/Carbon Black/1.67Kg Thin &amp;amp; Light Laptop&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 29,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.9&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Dell-Inspiron-3535-Windows-Processor/dp/B0DG5CY2Y2/ref=sr_1_20?dib=eyJ2IjoiMSJ9.a4qAvWV0Ww-fh7H_SaQlEnvoThkJ_rfLqh4vBHRQLfucrG2XRK7RJkXzMszHC6oxH2-cF346Dd3MdVCq3QcdX_SsUEZ-DGKm8iXoyDzzUakfrNJ3c6gq4Nu8N1K1cVGFQvXyrbu45GpUZ6ySS5vjVezPFxY_P5L-zGxwsdynDHgtXSLHO1mr_NgEEzCXgGaJVPd-9aiuoynSxuHWqPsGO8o0XkWhKWAOGNY4oOZ_woY.rSftu-lyVdR-gR3sukiRh1INLzCCfahU78sHm30ofug&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230633&amp;amp;sr=8-20&amp;amp;xpid=JpWNsomoVnDpq&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 5: {&amp;#x27;Name&amp;#x27;: &amp;#x27;ASUS Vivobook Go 14, AMD Ryzen 3 7320U, Thin and Light Laptop, 14&amp;quot; (35.56 cm) FHD, (8 GB RAM/512GB SSD/Windows 11/Office 2021/42WHr /Silver/1.38 kg), E1404FA-NK321WS&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 29,980&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/ASUS-Vivobook-14-inch-Windows-E1404FA-NK321WS/dp/B0C37G66X5/ref=sr_1_21?dib=eyJ2IjoiMSJ9.a4qAvWV0Ww-fh7H_SaQlEnvoThkJ_rfLqh4vBHRQLfucrG2XRK7RJkXzMszHC6oxH2-cF346Dd3MdVCq3QcdX_SsUEZ-DGKm8iXoyDzzUakfrNJ3c6gq4Nu8N1K1cVGFQvXyrbu45GpUZ6ySS5vjVezPFxY_P5L-zGxwsdynDHgtXSLHO1mr_NgEEzCXgGaJVPd-9aiuoynSxuHWqPsGO8o0XkWhKWAOGNY4oOZ_woY.rSftu-lyVdR-gR3sukiRh1INLzCCfahU78sHm30ofug&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230633&amp;amp;sr=8-21&amp;amp;xpid=JpWNsomoVnDpq&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 6: {&amp;#x27;Name&amp;#x27;: &amp;#x27;HP Victus, AMD Ryzen 5 5600H, NVIDIA RTX 3050, 16GB DDR4, 512GB SSD (Win11, Office21, Blue, 2.37kg) 144Hz, 9MS, IPS, 15.6-inch(39.6cm) Gaming Laptop, Backlit kb, Enhanced Cooling, fb0106AX/Fb0112AX&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 60,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.1&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/HP-GeForce-Graphics-Response-15-fb0106AX/dp/B0BWS9YNCX/ref=sr_1_17?dib=eyJ2IjoiMSJ9.a4qAvWV0Ww-fh7H_SaQlEnvoThkJ_rfLqh4vBHRQLfucrG2XRK7RJkXzMszHC6oxH2-cF346Dd3MdVCq3QcdX_SsUEZ-DGKm8iXoyDzzUakfrNJ3c6gq4Nu8N1K1cVGFQvXyrbu45GpUZ6ySS5vjVezPFxY_P5L-zGxwsdynDHgtXSLHO1mr_NgEEzCXgGaJVPd-9aiuoynSxuHWqPsGO8o0XkWhKWAOGNY4oOZ_woY.rSftu-lyVdR-gR3sukiRh1INLzCCfahU78sHm30ofug&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230633&amp;amp;sr=8-17&amp;amp;xpid=JpWNsomoVnDpq&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 7: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Lenovo IdeaPad Slim 3 13th Gen Intel Core i7-13620H 15.6&amp;quot; (39.62cm) FHDIPS300 Nits Thin&amp;amp;Light Laptop (16GB/512GB SSD/Intel UHDGraphics/Win11/Office Home 2024/1YrADP Free/ARCTIC-Grey/1.6Kg), 83EM00GTIN&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 66,490&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.9&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Lenovo-i7-13620H-UHDGraphics-ARCTIC-Grey-83EM00GTIN/dp/B0DL5N2TFC/ref=sr_1_18?dib=eyJ2IjoiMSJ9.a4qAvWV0Ww-fh7H_SaQlEnvoThkJ_rfLqh4vBHRQLfucrG2XRK7RJkXzMszHC6oxH2-cF346Dd3MdVCq3QcdX_SsUEZ-DGKm8iXoyDzzUakfrNJ3c6gq4Nu8N1K1cVGFQvXyrbu45GpUZ6ySS5vjVezPFxY_P5L-zGxwsdynDHgtXSLHO1mr_NgEEzCXgGaJVPd-9aiuoynSxuHWqPsGO8o0XkWhKWAOGNY4oOZ_woY.rSftu-lyVdR-gR3sukiRh1INLzCCfahU78sHm30ofug&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230633&amp;amp;sr=8-18&amp;amp;xpid=JpWNsomoVnDpq&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 8: {&amp;#x27;Name&amp;#x27;: &amp;#x27;HP Laptop 250R G9 Intel Core i3 13th Gen 1315U - (8GB/512GB SSD/Intel UHD Graphics) Thin and Light Business Laptop/15.6&amp;quot; (39.62cm)/Ash Grey/1.57 kg&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 31,380&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.8&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/HP-Laptop-250R-Intel-1315U/dp/B0DKGB5V4T/ref=sr_1_19?dib=eyJ2IjoiMSJ9.a4qAvWV0Ww-fh7H_SaQlEnvoThkJ_rfLqh4vBHRQLfucrG2XRK7RJkXzMszHC6oxH2-cF346Dd3MdVCq3QcdX_SsUEZ-DGKm8iXoyDzzUakfrNJ3c6gq4Nu8N1K1cVGFQvXyrbu45GpUZ6ySS5vjVezPFxY_P5L-zGxwsdynDHgtXSLHO1mr_NgEEzCXgGaJVPd-9aiuoynSxuHWqPsGO8o0XkWhKWAOGNY4oOZ_woY.rSftu-lyVdR-gR3sukiRh1INLzCCfahU78sHm30ofug&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230633&amp;amp;sr=8-19&amp;amp;xpid=JpWNsomoVnDpq&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 9: {&amp;#x27;Name&amp;#x27;: &amp;#x27;HP 15S AMD Ryzen 5000 (16GB Ram/512GB SSD/Fhd/Windows 11/Ms Office 21/Backlit Keyboard/ 15.6&amp;quot; (39.6 Cm)/Silver/2.21 Kg) Eq2305Au/Eq2182Au Laptop&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 42,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/HP-Windows-Keyboard-eq2305AU-eq2182au/dp/B0B4N77Y34/ref=sr_1_20?dib=eyJ2IjoiMSJ9.a4qAvWV0Ww-fh7H_SaQlEnvoThkJ_rfLqh4vBHRQLfucrG2XRK7RJkXzMszHC6oxH2-cF346Dd3MdVCq3QcdX_SsUEZ-DGKm8iXoyDzzUakfrNJ3c6gq4Nu8N1K1cVGFQvXyrbu45GpUZ6ySS5vjVezPFxY_P5L-zGxwsdynDHgtXSLHO1mr_NgEEzCXgGaJVPd-9aiuoynSxuHWqPsGO8o0XkWhKWAOGNY4oOZ_woY.rSftu-lyVdR-gR3sukiRh1INLzCCfahU78sHm30ofug&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230633&amp;amp;sr=8-20&amp;amp;xpid=JpWNsomoVnDpq&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 10: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Apple MacBook Air Laptop: Apple M1 chip, 13.3-inch/33.74 cm Retina Display, 8GB RAM, 256GB SSD Storage, Backlit Keyboard, FaceTime HD Camera, Touch ID. Works with iPhone/iPad; Space Grey&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 67,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.5&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Apple-MacBook-Chip-13-inch-256GB/dp/B08N5W4NNB/ref=sr_1_21?dib=eyJ2IjoiMSJ9.a4qAvWV0Ww-fh7H_SaQlEnvoThkJ_rfLqh4vBHRQLfucrG2XRK7RJkXzMszHC6oxH2-cF346Dd3MdVCq3QcdX_SsUEZ-DGKm8iXoyDzzUakfrNJ3c6gq4Nu8N1K1cVGFQvXyrbu45GpUZ6ySS5vjVezPFxY_P5L-zGxwsdynDHgtXSLHO1mr_NgEEzCXgGaJVPd-9aiuoynSxuHWqPsGO8o0XkWhKWAOGNY4oOZ_woY.rSftu-lyVdR-gR3sukiRh1INLzCCfahU78sHm30ofug&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230633&amp;amp;sr=8-21&amp;amp;xpid=JpWNsomoVnDpq&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 11: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Lenovo IdeaPad Slim 3 AMD Ryzen\u2122 5 7520U 14&amp;quot; FHD (1920x1080) Anti-Glare Thin and Light Laptop (8 GB/512GB SDD/Windows 11 Home/1Yr Warranty/Arctic Grey/1.37Kg), 82XN006TIN&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 36,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.5&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo2MTA3NzMwMDMzMDAyOTgyOjE3MzgyMzA2MzM6c3BfbXRmOjMwMDQ1NzU4MzEwODYzMjo6MDo6&amp;amp;url=%2FLenovo-1920x1080-Anti-Glare-Warranty-82XN006TIN%2Fdp%2FB0DR9663P7%2Fref%3Dsr_1_22_sspa%3Fdib%3DeyJ2IjoiMSJ9.bQYUqa25t_wNRc_HPu4meQdWXFoQHAA0So0coMEGS4KRmuwfWbwVuAAMUIxQDi1xOWcl4-_9GXW1iLO3c_qmKmb7ewrNw9Z9vy0cMVElKVrnMKRDU0FN0slSfbqbOHP605t0MFjTm1viRly0wQJBEiQNIvjNT9sQbl2cIYEIzgBvEP5QcCElGafu4IZcc_Qh.P6eFC8fyFaXHl9ZNgq14nzXuAFNNHnPJtIpVyWpgX2M%26dib_tag%3Dse%26keywords%3Dlaptop%26qid%3D1738230633%26sr%3D8-22-spons%26xpid%3DJpWNsomoVnDpq%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9tdGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 12: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Lenovo IdeaPad Slim 3 12th Gen Intel Core i5-12450H (16GB RAM/512GB SSD/FHD/14 (35.5cm)/Windows 11/Office Home 2024/Alexa Built-in/3 mon. Game Pass/Grey/1.37Kg), 83EQ0072IN Laptop&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 53,559&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.9&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo2MTA3NzMwMDMzMDAyOTgyOjE3MzgyMzA2MzM6c3BfbXRmOjMwMDQyNjMwNTI0MTEzMjo6MDo6&amp;amp;url=%2FLenovo-IdeaPad-i5-12450H-Windows-83EQ0072IN%2Fdp%2FB0DP7BZ8FD%2Fref%3Dsr_1_23_sspa%3Fdib%3DeyJ2IjoiMSJ9.bQYUqa25t_wNRc_HPu4meQdWXFoQHAA0So0coMEGS4KRmuwfWbwVuAAMUIxQDi1xOWcl4-_9GXW1iLO3c_qmKmb7ewrNw9Z9vy0cMVElKVrnMKRDU0FN0slSfbqbOHP605t0MFjTm1viRly0wQJBEiQNIvjNT9sQbl2cIYEIzgBvEP5QcCElGafu4IZcc_Qh.P6eFC8fyFaXHl9ZNgq14nzXuAFNNHnPJtIpVyWpgX2M%26dib_tag%3Dse%26keywords%3Dlaptop%26qid%3D1738230633%26sr%3D8-23-spons%26xpid%3DJpWNsomoVnDpq%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9tdGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 13: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Dell [Smartchoice] Windows 11 Home, Intel Core i3-1215U, 12Th Gen (8GB RAM/512GB SSD/FHD/Window 11/Ms Office\\&amp;#x27; 21/15&amp;quot;(38 Cm)/15 Month Mcafee/Black/1.69Kg Laptop&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 34,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.6&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Dell-Smartchoice-i3-1215U-Processor-Spill-Resistant/dp/B0BQJ68HHC/ref=sr_1_24?dib=eyJ2IjoiMSJ9.a4qAvWV0Ww-fh7H_SaQlEnvoThkJ_rfLqh4vBHRQLfucrG2XRK7RJkXzMszHC6oxH2-cF346Dd3MdVCq3QcdX_SsUEZ-DGKm8iXoyDzzUakfrNJ3c6gq4Nu8N1K1cVGFQvXyrbu45GpUZ6ySS5vjVezPFxY_P5L-zGxwsdynDHgtXSLHO1mr_NgEEzCXgGaJVPd-9aiuoynSxuHWqPsGO8o0XkWhKWAOGNY4oOZ_woY.rSftu-lyVdR-gR3sukiRh1INLzCCfahU78sHm30ofug&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230633&amp;amp;sr=8-24&amp;amp;xpid=JpWNsomoVnDpq&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 14: {&amp;#x27;Name&amp;#x27;: &amp;#x27;D\u1971ll Latitude E7480 6th Gen Int\u1971l Core i7 Thin &amp;amp; Light HD Laptop (8 GB DDR4 RAM|256 GB SSD|14&amp;quot; (35.6 cm) HD|Windows 11|MS Office|WiFi|BT|Int\u1971l HD Graphics) (R\u1971furbish\u1971d)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 17,995&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Latitude-Laptop-Windows-Graphics-R%E1%A5%B1furbish%E1%A5%B1d/dp/B0DT4JHL33/ref=sr_1_25?dib=eyJ2IjoiMSJ9.a4qAvWV0Ww-fh7H_SaQlEnvoThkJ_rfLqh4vBHRQLfucrG2XRK7RJkXzMszHC6oxH2-cF346Dd3MdVCq3QcdX_SsUEZ-DGKm8iXoyDzzUakfrNJ3c6gq4Nu8N1K1cVGFQvXyrbu45GpUZ6ySS5vjVezPFxY_P5L-zGxwsdynDHgtXSLHO1mr_NgEEzCXgGaJVPd-9aiuoynSxuHWqPsGO8o0XkWhKWAOGNY4oOZ_woY.rSftu-lyVdR-gR3sukiRh1INLzCCfahU78sHm30ofug&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230633&amp;amp;sr=8-25&amp;amp;xpid=JpWNsomoVnDpq&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 15: {&amp;#x27;Name&amp;#x27;: &amp;#x27;ASUS VivoBook 15 (2022), Intel\u00aeCore\u2122 i3-1215U 12th Gen, 15.6&amp;quot; (39.62 cm) FHD, Thin and Light Laptop (8GB/512 SSD//Windows 11/Office 2021/Backlit KB/Cool Silver/1.7 kg), X1504ZA-NJ322WS&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 31,789&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.1&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/ASUS-Vivobook-Intel%C2%AECoreTM-i3-1215U-15-6-inch/dp/B0CCKPTMYX/ref=sr_1_26?dib=eyJ2IjoiMSJ9.a4qAvWV0Ww-fh7H_SaQlEnvoThkJ_rfLqh4vBHRQLfucrG2XRK7RJkXzMszHC6oxH2-cF346Dd3MdVCq3QcdX_SsUEZ-DGKm8iXoyDzzUakfrNJ3c6gq4Nu8N1K1cVGFQvXyrbu45GpUZ6ySS5vjVezPFxY_P5L-zGxwsdynDHgtXSLHO1mr_NgEEzCXgGaJVPd-9aiuoynSxuHWqPsGO8o0XkWhKWAOGNY4oOZ_woY.rSftu-lyVdR-gR3sukiRh1INLzCCfahU78sHm30ofug&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230633&amp;amp;sr=8-26&amp;amp;xpid=JpWNsomoVnDpq&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 16: {&amp;#x27;Name&amp;#x27;: &amp;#x27;HP 15, 13th Gen Intel Core i3-1315U, 8GB DDR4, 512GB SSD, (Win 11, Office 21, Grey, 1.59kg), Anti-Glare, Micro-Edge,15.6-inch(39.6cm), FHD Laptop, Intel UHD Graphics, 1080p FHD Camera, fd0006TU&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 39,970&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.2&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/HP-i3-1315U-Anti-Glare-Micro-Edge-15-6-inch/dp/B0C3RF3HT3/ref=sr_1_27?dib=eyJ2IjoiMSJ9.a4qAvWV0Ww-fh7H_SaQlEnvoThkJ_rfLqh4vBHRQLfucrG2XRK7RJkXzMszHC6oxH2-cF346Dd3MdVCq3QcdX_SsUEZ-DGKm8iXoyDzzUakfrNJ3c6gq4Nu8N1K1cVGFQvXyrbu45GpUZ6ySS5vjVezPFxY_P5L-zGxwsdynDHgtXSLHO1mr_NgEEzCXgGaJVPd-9aiuoynSxuHWqPsGO8o0XkWhKWAOGNY4oOZ_woY.rSftu-lyVdR-gR3sukiRh1INLzCCfahU78sHm30ofug&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230633&amp;amp;sr=8-27&amp;amp;xpid=JpWNsomoVnDpq&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 17: {&amp;#x27;Name&amp;#x27;: &amp;#x27;ASUS TUF Gaming A15, AMD Ryzen 7 7435Hs, 15.6-Inch, FHD 144Hz, Gaming Laptop (16GB RAM/512GB SSD/NVIDIA Geforce RTX 3050/Windows 11/48WHR/Graphite Black/2.3 Kg), FA506NCR-HN054W&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 71,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/ASUS-15-6-inch-GeForce-Graphite-FA506NCR-HN054W/dp/B0D5DFR78J/ref=sr_1_28?dib=eyJ2IjoiMSJ9.a4qAvWV0Ww-fh7H_SaQlEnvoThkJ_rfLqh4vBHRQLfucrG2XRK7RJkXzMszHC6oxH2-cF346Dd3MdVCq3QcdX_SsUEZ-DGKm8iXoyDzzUakfrNJ3c6gq4Nu8N1K1cVGFQvXyrbu45GpUZ6ySS5vjVezPFxY_P5L-zGxwsdynDHgtXSLHO1mr_NgEEzCXgGaJVPd-9aiuoynSxuHWqPsGO8o0XkWhKWAOGNY4oOZ_woY.rSftu-lyVdR-gR3sukiRh1INLzCCfahU78sHm30ofug&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230633&amp;amp;sr=8-28&amp;amp;xpid=JpWNsomoVnDpq&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 18: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Lenovo IdeaPad Slim 3 12th Gen Intel Core i5-12450H 15.6&amp;quot; (39.6cm) FHD IPS Thin &amp;amp; Light Laptop (16GB/512GB SSD/Intel UHD Graphics/Win 11/MSO 21/Backlit KB/1 Yr ADP Free/Grey/1.6Kg), 83ER008DIN&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 50,130&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.4&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Lenovo-IdeaPad-i5-12450H-Warranty-83ER008DIN/dp/B0CNVH114V/ref=sr_1_29?dib=eyJ2IjoiMSJ9.a4qAvWV0Ww-fh7H_SaQlEnvoThkJ_rfLqh4vBHRQLfucrG2XRK7RJkXzMszHC6oxH2-cF346Dd3MdVCq3QcdX_SsUEZ-DGKm8iXoyDzzUakfrNJ3c6gq4Nu8N1K1cVGFQvXyrbu45GpUZ6ySS5vjVezPFxY_P5L-zGxwsdynDHgtXSLHO1mr_NgEEzCXgGaJVPd-9aiuoynSxuHWqPsGO8o0XkWhKWAOGNY4oOZ_woY.rSftu-lyVdR-gR3sukiRh1INLzCCfahU78sHm30ofug&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230633&amp;amp;sr=8-29&amp;amp;xpid=JpWNsomoVnDpq&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 19: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Lenovo IdeaPad Slim 3 Intel Core i3 12th Gen 15.6 inch (39.62cm) FHD Thin &amp;amp; Light Laptop (8GB/512GB SSD/Windows 11/Office 2021/3months Game Pass/Arctic Grey/1.63Kg), 82RK00VWIN&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 32,900&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.1&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Lenovo-IdeaPad-39-62cm-Windows-82RK00VWIN/dp/B0CR7WG86N/ref=sr_1_30?dib=eyJ2IjoiMSJ9.a4qAvWV0Ww-fh7H_SaQlEnvoThkJ_rfLqh4vBHRQLfucrG2XRK7RJkXzMszHC6oxH2-cF346Dd3MdVCq3QcdX_SsUEZ-DGKm8iXoyDzzUakfrNJ3c6gq4Nu8N1K1cVGFQvXyrbu45GpUZ6ySS5vjVezPFxY_P5L-zGxwsdynDHgtXSLHO1mr_NgEEzCXgGaJVPd-9aiuoynSxuHWqPsGO8o0XkWhKWAOGNY4oOZ_woY.rSftu-lyVdR-gR3sukiRh1INLzCCfahU78sHm30ofug&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230633&amp;amp;sr=8-30&amp;amp;xpid=JpWNsomoVnDpq&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 20: {&amp;#x27;Name&amp;#x27;: &amp;#x27;HP 15s, 12th Gen Intel Core i3-1215U, 8GB DDR4, 512GB SSD, (Win 11, Office 21, Silver, 1.69kg), Anti-Glare, 15.6-inch (39.6cm) FHD Laptop, Intel UHD Graphics, HD Camera, Dual Speakers, fy5011TU&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 37,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/HP-i3-1215U-Anti-Glare-15-6-inch-Graphics/dp/B0D4LZMJ5Z/ref=sr_1_31?dib=eyJ2IjoiMSJ9.a4qAvWV0Ww-fh7H_SaQlEnvoThkJ_rfLqh4vBHRQLfucrG2XRK7RJkXzMszHC6oxH2-cF346Dd3MdVCq3QcdX_SsUEZ-DGKm8iXoyDzzUakfrNJ3c6gq4Nu8N1K1cVGFQvXyrbu45GpUZ6ySS5vjVezPFxY_P5L-zGxwsdynDHgtXSLHO1mr_NgEEzCXgGaJVPd-9aiuoynSxuHWqPsGO8o0XkWhKWAOGNY4oOZ_woY.rSftu-lyVdR-gR3sukiRh1INLzCCfahU78sHm30ofug&amp;amp;dib_tag=se&amp;amp;keywords=laptop&amp;amp;qid=1738230633&amp;amp;sr=8-31&amp;amp;xpid=JpWNsomoVnDpq&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 21: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Chuwi GemiBook Plus 15.6&amp;quot; Laptop, 8GB RAM 256GB SSD, Windows 11, Intel N100 (Upto 3.4GHz), WIFI 6, USB-A 3.0, Webcam, Bluetooth 5.2, HDMI Port, 38Wh, 1.7kg (Iron Gray)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 21,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.8&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo2MTA3NzMwMDMzMDAyOTgyOjE3MzgyMzA2MzM6c3BfYnRmOjMwMDE0NjU2MDYzODIzMjo6MDo6&amp;amp;url=%2FChuwi-GemiBook-Plus-Windows-Bluetooth%2Fdp%2FB0CP98WK8J%2Fref%3Dsr_1_32_sspa%3Fdib%3DeyJ2IjoiMSJ9.bQYUqa25t_wNRc_HPu4meQdWXFoQHAA0So0coMEGS4KRmuwfWbwVuAAMUIxQDi1xOWcl4-_9GXW1iLO3c_qmKmb7ewrNw9Z9vy0cMVElKVrnMKRDU0FN0slSfbqbOHP605t0MFjTm1viRly0wQJBEiQNIvjNT9sQbl2cIYEIzgBvEP5QcCElGafu4IZcc_Qh.P6eFC8fyFaXHl9ZNgq14nzXuAFNNHnPJtIpVyWpgX2M%26dib_tag%3Dse%26keywords%3Dlaptop%26qid%3D1738230633%26sr%3D8-32-spons%26xpid%3DJpWNsomoVnDpq%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9idGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 22: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Lenovo IdeaPad Slim 5 12th Gen Intel Core i5 12450H 14&amp;quot; (36cm) WUXGA IPS 300Nits Thin and Light Laptop (16GB/1TB SSD/Win 11/Office 21/BacklitKB/FHD Camera/Alexa/3 Mon Game Pass/Grey/1.46Kg),83BF0043IN&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 61,990&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.1&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo2MTA3NzMwMDMzMDAyOTgyOjE3MzgyMzA2MzM6c3BfYnRmOjMwMDEwMzQ0MzMzOTQzMjo6MDo6&amp;amp;url=%2FLenovo-IdeaPad-300Nits-BacklitKB-83BF0043IN%2Fdp%2FB0CNK1VTZW%2Fref%3Dsr_1_33_sspa%3Fdib%3DeyJ2IjoiMSJ9.bQYUqa25t_wNRc_HPu4meQdWXFoQHAA0So0coMEGS4KRmuwfWbwVuAAMUIxQDi1xOWcl4-_9GXW1iLO3c_qmKmb7ewrNw9Z9vy0cMVElKVrnMKRDU0FN0slSfbqbOHP605t0MFjTm1viRly0wQJBEiQNIvjNT9sQbl2cIYEIzgBvEP5QcCElGafu4IZcc_Qh.P6eFC8fyFaXHl9ZNgq14nzXuAFNNHnPJtIpVyWpgX2M%26dib_tag%3Dse%26keywords%3Dlaptop%26qid%3D1738230633%26sr%3D8-33-spons%26xpid%3DJpWNsomoVnDpq%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9idGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Finished extracting product information.\nINFO     root:search_result_page.py:31 chrome :: Saving product information for laptop.\nINFO     root:search_result_page.py:31 chrome :: Product information for laptop saved successfully to D:\\Interview Assignment\\Four_Junctions\\four_junctions_selenium_assignment\\test_data\\product_info.csv.\n\n&#34;}], &#34;test_cases/test_basic_crawling.py::TestBasicCrawling::test_amazon_product_search_and_export[chrome-headphones]&#34;: [{&#34;extras&#34;: [{&#34;name&#34;: null, &#34;format_type&#34;: &#34;html&#34;, &#34;content&#34;: &#34;&lt;div&gt;&lt;img src=\&#34;\\Reports\\2025_01_30\\30_01_2025_15_20_44_441530012025.png\&#34; alt=\&#34;screenshot\&#34; style=\&#34;width:304px;height:228px;\&#34; onclick=\&#34;window.open(this.src)\&#34; align=\&#34;right\&#34;/&gt;&lt;/div&gt;&#34;, &#34;mime_type&#34;: null, &#34;extension&#34;: null}], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;test_cases/test_basic_crawling.py::TestBasicCrawling::test_amazon_product_search_and_export[chrome-headphones]&#34;, &#34;duration&#34;: &#34;00:00:10&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;test_cases/test_basic_crawling.py::TestBasicCrawling::test_amazon_product_search_and_export[chrome-headphones]&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:10&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nINFO     root:home_page.py:25 Info :: chrome :: Navigating to Amazon home page.\nINFO     root:home_page.py:25 Info :: chrome :: Amazon home page loaded successfully.\n\n------------------------------ Captured log call -------------------------------\nINFO     root:home_page.py:25 Info :: chrome :: Attempting to search for: headphones\nINFO     root:home_page.py:25 Info :: chrome :: Search executed successfully.\nINFO     root:search_result_page.py:31 chrome :: Starting to extract product information.\nINFO     root:search_result_page.py:31 chrome :: Found product details in the search results.\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 1: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Noise Newly Launched Airwave Max 5 Wireless Over-Ear Headphones with Adaptive Hybrid ANC (up to 50dB), HFA Tech, 80H Playtime, Dual Pairing(Calm Beige)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 4,699&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo0NTYzNzg4MzA1ODE0Nzk2OjE3MzgyMzA2Mzg6c3BfYXRmOjMwMDQ2NzQwNjY1NDczMjo6MDo6&amp;amp;url=%2FNoise-Launched-Wireless-Over-Ear-Headphones%2Fdp%2FB0DGV6TB8D%2Fref%3Dsr_1_1_sspa%3Fdib%3DeyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g%26dib_tag%3Dse%26keywords%3Dheadphones%26qid%3D1738230638%26sr%3D8-1-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9hdGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 2: {&amp;#x27;Name&amp;#x27;: &amp;#x27;soundcore by Anker Q20i Wireless Bluetooth Over-Ear Headphones with Hybrid Active Noise Cancelling, 40h Playtime in ANC Mode, Hi-Res Audio, Deep Bass, Personalization via App (Black)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 4,499&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.4&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo0NTYzNzg4MzA1ODE0Nzk2OjE3MzgyMzA2Mzg6c3BfYXRmOjMwMDMyMTg1MjU5MDczMjo6MDo6&amp;amp;url=%2Fsoundcore-Bluetooth-Headphones-Cancelling-Personalization%2Fdp%2FB0C3HCD34R%2Fref%3Dsr_1_2_sspa%3Fdib%3DeyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g%26dib_tag%3Dse%26keywords%3Dheadphones%26qid%3D1738230638%26sr%3D8-2-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9hdGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 3: {&amp;#x27;Name&amp;#x27;: &amp;#x27;boAt Rockerz 480 w/RGB LEDs, 6 Light Modes, 40mm Drivers, Beast Mode, 60hrs Playback, ENx Tech, BT v5.3, Adaptive Fit &amp;amp; Easy Access Controls, Bluetooth Headphones(Black Sabre)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,799&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.9&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/boAt-Rockerz-480-Bluetooth-Headphones/dp/B0DGTSRX3R/ref=sr_1_3?dib=eyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230638&amp;amp;sr=8-3&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 4: {&amp;#x27;Name&amp;#x27;: &amp;#x27;boAt Bassheads 900 Pro Wired Headphones with 40Mm Drivers, Lightweight Foldable Design, Over Ear, Remote Control, Unidirectional Retractable Mic, Adjustable Headband &amp;amp; USB Type-A Compatibility(Black)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 898&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.2&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/boAt-Bassheads-900-Pro-Unidirectional/dp/B0DHDDF5J2/ref=sr_1_4?dib=eyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230638&amp;amp;sr=8-4&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 5: {&amp;#x27;Name&amp;#x27;: &amp;#x27;boAt Rockerz 450, 15 HRS Battery, 40mm Drivers, Padded Ear Cushions, Integrated Controls, Dual Modes, Bluetooth Headphones, Wireless Headphone with Mic (Aqua Blue)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,499&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Boat-Rockerz-450-Lightweight-Compatibility/dp/B08667772G/ref=sr_1_5?dib=eyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230638&amp;amp;sr=8-5&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 6: {&amp;#x27;Name&amp;#x27;: &amp;#x27;boAt Rockerz 450, 15 HRS Battery, 40mm Drivers, Padded Ear Cushions, Integrated Controls, Dual Modes, Bluetooth Headphones, Wireless Headphone with Mic (Luscious Black)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,499&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.9&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Rockerz-450-Wireless-Bluetooth-Headphone/dp/B07PR1CL3S/ref=sr_1_6?dib=eyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230638&amp;amp;sr=8-6&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 7: {&amp;#x27;Name&amp;#x27;: &amp;#x27;boAt Bassheads 100 in Ear Wired Earphones with Mic(Black)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 299&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/boAt-BassHeads-100-Headphones-Black/dp/B071Z8M4KX/ref=sr_1_7?dib=eyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230638&amp;amp;sr=8-7&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 8: {&amp;#x27;Name&amp;#x27;: &amp;#x27;boAt Airdopes 91 Prime, 45HRS Battery, 13mm Drivers, Metallic Finish, Low Latency,ENx Tech, Fast Charge, v5.3 Bluetooth TWS in Ear Earbuds Wireless Earphones with mic (Midnight Black)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 799&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.1&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/boAt-Airdopes-91-Prime-Bluetooth/dp/B0DPWL48Z5/ref=sr_1_8?dib=eyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230638&amp;amp;sr=8-8&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 9: {&amp;#x27;Name&amp;#x27;: &amp;#x27;boAt Rockerz 550 Over Ear Bluetooth Headphones with Upto 20 Hours Playback, 50MM Drivers, Soft Padded Ear Cushions and Physical Noise Isolation(Black)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,799&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.2&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Boat-Rockerz-550-Headphone-Aesthetics/dp/B0856HY85J/ref=sr_1_9?dib=eyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230638&amp;amp;sr=8-9&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 10: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Boult Newly Launched Q Over Ear Bluetooth Headphones with 70H Playtime, 40mm Bass Drivers, Zen\u2122 ENC Mic, Type-C Fast Charging, 4 EQ Modes, Bluetooth 5.4, AUX Option, IPX5 Wireless Headphones (Black)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,999&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.1&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Boult-Launched-Bluetooth-Headphones-Playtime/dp/B0DFHFH16K/ref=sr_1_10?dib=eyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230638&amp;amp;sr=8-10&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 11: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Portronics Muffs M2 Bluetooth Headphones Over Ear with Upto 40 Hrs Playtime, 40mm Dynamic Drivers, AUX 3.5mm, Powerful Bass, Laptop &amp;amp; PC Support,Type C Charging Port, Foldable Design(White)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 999&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.2&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo0NTYzNzg4MzA1ODE0Nzk2OjE3MzgyMzA2Mzg6c3BfbXRmOjMwMDI2NDgzMjU0OTEzMjo6MDo6&amp;amp;url=%2FPortronics-Bluetooth-Headphones-Playtime-Powerful%2Fdp%2FB0C4HDNDGN%2Fref%3Dsr_1_11_sspa%3Fdib%3DeyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g%26dib_tag%3Dse%26keywords%3Dheadphones%26qid%3D1738230638%26sr%3D8-11-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9tdGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 12: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Noise Two Wireless On-Ear Headphones with 50 Hours Playtime, Low Latency(up to 45ms), 4 Play Modes, Dual Pairing, BT v5.3 (Serene Blue)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,699&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.8&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo0NTYzNzg4MzA1ODE0Nzk2OjE3MzgyMzA2Mzg6c3BfbXRmOjIwMDkxOTU5MjY5Nzk4OjowOjo&amp;amp;url=%2FLaunched-Noise-Headphones-Playtime-Latency%2Fdp%2FB0B1PXM75C%2Fref%3Dsr_1_12_sspa%3Fdib%3DeyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g%26dib_tag%3Dse%26keywords%3Dheadphones%26qid%3D1738230638%26sr%3D8-12-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9tdGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 13: {&amp;#x27;Name&amp;#x27;: &amp;#x27;boAt Rockerz 480 w/RGB LEDs, 6 Light Modes, 40mm Drivers, Beast Mode, 60hrs Playback, ENx Tech, BT v5.3, Adaptive Fit &amp;amp; Easy Access Controls, Bluetooth Headphones(White Sabre)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,799&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.4&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/boAt-Rockerz-480-Bluetooth-Headphones/dp/B0DGTTKCJX/ref=sr_1_13?dib=eyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230638&amp;amp;sr=8-13&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 14: {&amp;#x27;Name&amp;#x27;: &amp;#x27;ZEBRONICS Thunder Bluetooth 5.3 Wireless Over Ear Headphones with 60H Backup, Gaming Mode, Dual Pairing, Enc, Aux, Micro Sd, Voice Assistant, Comfortable Earcups, Call Function (Sea Green)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 799&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.9&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/ZEBRONICS-Zeb-Thunder-Connectivity-Sea-Green/dp/B09B5CPV71/ref=sr_1_14?dib=eyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230638&amp;amp;sr=8-14&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 15: {&amp;#x27;Name&amp;#x27;: &amp;#x27;boAt Rockerz 430 w/ 40mm Drivers, Beast Mode w/ 40ms Latency, 40hrs Playback, ENx Tech, Voice Assistant, BTv5.4, Adaptive Fit &amp;amp; Easy Access Controls, Bluetooth Over Ear Headphones(Black Sabre)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,298&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.8&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/boAt-Rockerz-430-Assistant-Headphones/dp/B0DGTSTQWL/ref=sr_1_15?dib=eyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230638&amp;amp;sr=8-15&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 16: {&amp;#x27;Name&amp;#x27;: &amp;#x27;ZEBRONICS THUNDER Bluetooth 5.3 Wireless Headphones with 60H Backup, Gaming Mode, Dual Pairing, ENC, AUX, Micro SD, Voice assistant, Comfortable Earcups, Call Function(Black)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 799&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.3&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/ZEBRONICS-Bluetooth-Headphones-assistant-Comfortable/dp/B07L8KNP5F/ref=sr_1_16?dib=eyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230638&amp;amp;sr=8-16&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 17: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Boult Newly Launched Q Over Ear Bluetooth Headphones with 70H Playtime, 40mm Bass Drivers, Zen\u2122 ENC Mic, Type-C Fast Charging, 4 EQ Modes, Bluetooth 5.4, AUX Option, IPX5 Wireless Headphones (Beige)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,899&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.8&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Boult-Launched-Bluetooth-Headphones-Playtime/dp/B0DFHGX8R3/ref=sr_1_17?dib=eyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230638&amp;amp;sr=8-17&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 18: {&amp;#x27;Name&amp;#x27;: &amp;#x27;JBL Tune 510BT, On Ear Wireless Headphones with Mic, up to 40 Hours Playtime, Pure Bass, Quick Charging, Dual Pairing, Bluetooth 5.0 &amp;amp; Voice Assistant Support for Mobile Phones (Black)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 2,799&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.2&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/JBL-Wireless-Headphones-Bluetooth-Assistant/dp/B08QTYYNDN/ref=sr_1_18?dib=eyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230638&amp;amp;sr=8-18&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 19: {&amp;#x27;Name&amp;#x27;: &amp;#x27;boAt Rockerz 255 Touch in Ear Neckband with Full Touch Controls, Spatial Audio, Up to 30H Playtime, ASAP Charge, Beast Mode, Enx Technology(Teal Green)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,099&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/boAt-Rockerz-255-Touch-Technology/dp/B0BZ89R65G/ref=sr_1_19?dib=eyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230638&amp;amp;sr=8-19&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 20: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Zebronics Zeb-Storm Wired On Ear Headphone with 3.5mm Jack, Built-in Microphone for Calling, 1.5 Meter Cable, Soft Ear Cushion, Adjustable Headband, Foldable Ear Cups and Lightweight Design (Black)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 499&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/ZEBRONICS-Zeb-Storm-Microphone-Adjustable-Lightweight/dp/B0B4G44RFS/ref=sr_1_20?dib=eyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230638&amp;amp;sr=8-20&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 21: {&amp;#x27;Name&amp;#x27;: &amp;#x27;EDYELL A1 Truly Wireless Bluetooth in Ear Earbuds with Upto 35Db Active Noise Cancellation, 13 mm Dynamic Drivers, Type-C Fast Charging with Upto 48Hrs Music Playback (Black)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,699&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.7&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo0NTYzNzg4MzA1ODE0Nzk2OjE3MzgyMzA2Mzg6c3BfYnRmOjMwMDQyNjU4MjgxNzAzMjo6MDo6&amp;amp;url=%2FEDYELL-Wireless-Bluetooth-Cancellation-Black%2Fdp%2FB0DNSQQLLW%2Fref%3Dsr_1_21_sspa%3Fdib%3DeyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g%26dib_tag%3Dse%26keywords%3Dheadphones%26qid%3D1738230638%26sr%3D8-21-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9idGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 22: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Boult Audio Z20 Pro Truly Wireless Bluetooth Ear Buds with 60H Playtime, 4 Mics Clear Calling, 45ms Low Latency, Rich Bass Drivers, Touch Controls, IPX5 TWS Earbuds Bluetooth Wireless (Powder Blue)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,199&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.5&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo0NTYzNzg4MzA1ODE0Nzk2OjE3MzgyMzA2Mzg6c3BfYnRmOjMwMDMxMzIwOTAyNTMzMjo6MDo6&amp;amp;url=%2FBoult-Launched-Wireless-Bluetooth-Earbuds%2Fdp%2FB0D22QWQHR%2Fref%3Dsr_1_22_sspa%3Fdib%3DeyJ2IjoiMSJ9.7RtSy2GuYWANXUBiWcNqZGDcMONBIyAKRzK-_AAj2jfPHIwf6GCJtGtJ3U-Vw_XfxngK6hKIDnloVkBxzZ0Aoi0jUxiNtwOBynYVPozjgtKH4h3b0zd1qgPr2813wnuodL4WPaezTASs24Dim3l43BfhcuHQlyS8QwvmXg5yXI7I4UKCjim_KDg_1iD221es1DYNDzsq-NOV-yX_uu0rG_xiQxJ8J-zWWxZwQq2fwvY.TOgWXj2VdvcD6DTO6wYeNII7heTGR2LzbP32lvlUm1g%26dib_tag%3Dse%26keywords%3Dheadphones%26qid%3D1738230638%26sr%3D8-22-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9idGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Finished extracting product information.\nINFO     root:search_result_page.py:31 chrome :: Attempting to click the Next Page link.\nINFO     root:search_result_page.py:31 chrome :: Successfully clicked the Next Page link.\nINFO     root:search_result_page.py:31 chrome :: Starting to extract product information.\nINFO     root:search_result_page.py:31 chrome :: Found product details in the search results.\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 1: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Noise Newly Launched Airwave Max 5 Wireless Over-Ear Headphones with Adaptive Hybrid ANC (up to 50dB), HFA Tech, 80H Playtime, Dual Pairing(Calm White)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 4,699&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo1NTk4NjU1NjI1MDM3Nzk1OjE3MzgyMzA2NDE6c3BfYXRmX25leHQ6MzAwNDY3NDcwMDA5MjMyOjowOjo&amp;amp;url=%2FNoise-Launched-Wireless-Over-Ear-Headphones%2Fdp%2FB0DGV46CN1%2Fref%3Dsr_1_17_sspa%3Fdib%3DeyJ2IjoiMSJ9.OuvONE2DtyJnxkYZuO9eZ9MomcbXGJZvYgD9hdIZclXGjHj071QN20LucGBJIEps.BbSkVRAxoMMm2CfF-D_3YT2tZG4d8yJoLdHRwWHyI9o%26dib_tag%3Dse%26keywords%3Dheadphones%26qid%3D1738230641%26sr%3D8-17-spons%26xpid%3D1THyIdVx43_cv%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9hdGZfbmV4dA%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 2: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Portronics Muffs M2 Bluetooth Headphones On Ear with Upto 40 Hrs Playtime, 40mm Dynamic Drivers, AUX 3.5mm, Powerful Bass, Laptop &amp;amp; PC Support, Type C Charging Port, Foldable Design(Black)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 859&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.8&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo1NTk4NjU1NjI1MDM3Nzk1OjE3MzgyMzA2NDE6c3BfYXRmX25leHQ6MzAwMjY0ODMyNTQ4OTMyOjowOjo&amp;amp;url=%2FPortronics-Bluetooth-Headphones-Playtime-Powerful%2Fdp%2FB0C4HBW653%2Fref%3Dsr_1_18_sspa%3Fdib%3DeyJ2IjoiMSJ9.OuvONE2DtyJnxkYZuO9eZ9MomcbXGJZvYgD9hdIZclXGjHj071QN20LucGBJIEps.BbSkVRAxoMMm2CfF-D_3YT2tZG4d8yJoLdHRwWHyI9o%26dib_tag%3Dse%26keywords%3Dheadphones%26qid%3D1738230641%26sr%3D8-18-spons%26xpid%3D1THyIdVx43_cv%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9hdGZfbmV4dA%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 3: {&amp;#x27;Name&amp;#x27;: &amp;#x27;boAt Rockerz 450, 15 HRS Battery, 40mm Drivers, Padded Ear Cushions, Integrated Controls, Dual Modes, Bluetooth Headphones, Wireless Headphone with Mic (Hazel Beige)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,499&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Boat-Rockerz-450-Lightweight-Compatibility/dp/B086671ZSR/ref=sr_1_19?dib=eyJ2IjoiMSJ9.OuvONE2DtyJnxkYZuO9eZ9MomcbXGJZvYgD9hdIZclW3054th0siYWz-O0bj0X9B_9sEwBmMRmPW2HnEfDKYDLKz7t3qvmhowz9i1c2jdMRg5aXhuvh9C62HipoPst8avCmrxIrfMH9PKH6i6czEiA3mRlerI2Ha-ia5foTX-LIw0iVFQLeP0yMMf48VCE_giqZ_hKszDMAwZASl5Lp4D_bI5DpfCGi9ZA6TMfrjeE0.QmnEIukR5GwIxP3ppr1yhejOO4yXm6ded6AQBMZSNlA&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230641&amp;amp;sr=8-19&amp;amp;xpid=1THyIdVx43_cv&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 4: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Sony WH-CH520 Wireless Bluetooth Headphones with Mic, Up to 50Hrs Battery-Blue&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 4,140&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.1&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Sony-Bluetooth-Headphones-Multipoint-Connectivity/dp/B0BS1RT9S2/ref=sr_1_20?dib=eyJ2IjoiMSJ9.OuvONE2DtyJnxkYZuO9eZ9MomcbXGJZvYgD9hdIZclW3054th0siYWz-O0bj0X9B_9sEwBmMRmPW2HnEfDKYDLKz7t3qvmhowz9i1c2jdMRg5aXhuvh9C62HipoPst8avCmrxIrfMH9PKH6i6czEiA3mRlerI2Ha-ia5foTX-LIw0iVFQLeP0yMMf48VCE_giqZ_hKszDMAwZASl5Lp4D_bI5DpfCGi9ZA6TMfrjeE0.QmnEIukR5GwIxP3ppr1yhejOO4yXm6ded6AQBMZSNlA&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230641&amp;amp;sr=8-20&amp;amp;xpid=1THyIdVx43_cv&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 5: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Noise Two Wireless On-Ear Headphones with 50 Hours Playtime, Low Latency(up to 45ms), 4 Play Modes, Dual Pairing, BT v5.3 (Serene Blue)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,699&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.4&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Launched-Noise-Headphones-Playtime-Latency/dp/B0B1PXM75C/ref=sr_1_21?dib=eyJ2IjoiMSJ9.OuvONE2DtyJnxkYZuO9eZ9MomcbXGJZvYgD9hdIZclW3054th0siYWz-O0bj0X9B_9sEwBmMRmPW2HnEfDKYDLKz7t3qvmhowz9i1c2jdMRg5aXhuvh9C62HipoPst8avCmrxIrfMH9PKH6i6czEiA3mRlerI2Ha-ia5foTX-LIw0iVFQLeP0yMMf48VCE_giqZ_hKszDMAwZASl5Lp4D_bI5DpfCGi9ZA6TMfrjeE0.QmnEIukR5GwIxP3ppr1yhejOO4yXm6ded6AQBMZSNlA&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230641&amp;amp;sr=8-21&amp;amp;xpid=1THyIdVx43_cv&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 6: {&amp;#x27;Name&amp;#x27;: &amp;#x27;boAt Rockerz 425 Bluetooth Wireless Over Ear Headphones with Mic Signature Sound, Beast Mode for Gaming, Enx Tech, ASAP Charge, 25H Playtime, Bluetooth V5.2 (Active Black)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,299&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.7&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Rockerz-425-Bluetooth-Headphones-Signature/dp/B09QL3NQHX/ref=sr_1_17?dib=eyJ2IjoiMSJ9.OuvONE2DtyJnxkYZuO9eZ9MomcbXGJZvYgD9hdIZclW3054th0siYWz-O0bj0X9B_9sEwBmMRmPW2HnEfDKYDLKz7t3qvmhowz9i1c2jdMRg5aXhuvh9C62HipoPst8avCmrxIrfMH9PKH6i6czEiA3mRlerI2Ha-ia5foTX-LIw0iVFQLeP0yMMf48VCE_giqZ_hKszDMAwZASl5Lp4D_bI5DpfCGi9ZA6TMfrjeE0.QmnEIukR5GwIxP3ppr1yhejOO4yXm6ded6AQBMZSNlA&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230641&amp;amp;sr=8-17&amp;amp;xpid=1THyIdVx43_cv&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 7: {&amp;#x27;Name&amp;#x27;: &amp;#x27;boAt Rockerz 550 Bluetooth Wireless Over Ear Headphones with Upto 20 Hours Playback, 50MM Drivers, Soft Padded Ear Cushions and Physical Noise Isolation with Mic (Black Symphony)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,799&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/boAt-Rockerz-550-Headphone-Aesthetics/dp/B08R7M1JM5/ref=sr_1_18?dib=eyJ2IjoiMSJ9.OuvONE2DtyJnxkYZuO9eZ9MomcbXGJZvYgD9hdIZclW3054th0siYWz-O0bj0X9B_9sEwBmMRmPW2HnEfDKYDLKz7t3qvmhowz9i1c2jdMRg5aXhuvh9C62HipoPst8avCmrxIrfMH9PKH6i6czEiA3mRlerI2Ha-ia5foTX-LIw0iVFQLeP0yMMf48VCE_giqZ_hKszDMAwZASl5Lp4D_bI5DpfCGi9ZA6TMfrjeE0.QmnEIukR5GwIxP3ppr1yhejOO4yXm6ded6AQBMZSNlA&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230641&amp;amp;sr=8-18&amp;amp;xpid=1THyIdVx43_cv&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 8: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Sony MDR-ZX310AP Wired Headphones with Mic for Calls- Blue&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 949&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.9&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Sony-Mdr-Zx310Ap-Wired-Headphones-Blue/dp/B00K0AMYFO/ref=sr_1_19?dib=eyJ2IjoiMSJ9.OuvONE2DtyJnxkYZuO9eZ9MomcbXGJZvYgD9hdIZclW3054th0siYWz-O0bj0X9B_9sEwBmMRmPW2HnEfDKYDLKz7t3qvmhowz9i1c2jdMRg5aXhuvh9C62HipoPst8avCmrxIrfMH9PKH6i6czEiA3mRlerI2Ha-ia5foTX-LIw0iVFQLeP0yMMf48VCE_giqZ_hKszDMAwZASl5Lp4D_bI5DpfCGi9ZA6TMfrjeE0.QmnEIukR5GwIxP3ppr1yhejOO4yXm6ded6AQBMZSNlA&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230641&amp;amp;sr=8-19&amp;amp;xpid=1THyIdVx43_cv&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 9: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Sony WH-CH520 Wireless Bluetooth Headphones with Mic, Up to 50Hrs Battery-Black&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 4,269&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.1&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Sony-Bluetooth-Headphones-Multipoint-Connectivity/dp/B0BS1PRC4L/ref=sr_1_20?dib=eyJ2IjoiMSJ9.OuvONE2DtyJnxkYZuO9eZ9MomcbXGJZvYgD9hdIZclW3054th0siYWz-O0bj0X9B_9sEwBmMRmPW2HnEfDKYDLKz7t3qvmhowz9i1c2jdMRg5aXhuvh9C62HipoPst8avCmrxIrfMH9PKH6i6czEiA3mRlerI2Ha-ia5foTX-LIw0iVFQLeP0yMMf48VCE_giqZ_hKszDMAwZASl5Lp4D_bI5DpfCGi9ZA6TMfrjeE0.QmnEIukR5GwIxP3ppr1yhejOO4yXm6ded6AQBMZSNlA&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230641&amp;amp;sr=8-20&amp;amp;xpid=1THyIdVx43_cv&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 10: {&amp;#x27;Name&amp;#x27;: &amp;#x27;JBL Tune 510BT, On Ear Wireless Headphones with Mic, up to 40 Hours Playtime, Pure Bass, Quick Charging, Dual Pairing, Bluetooth 5.0 &amp;amp; Voice Assistant Support for Mobile Phones (Blue)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 2,799&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/JBL-Wireless-Headphones-Bluetooth-Assistant/dp/B08QTVL6C5/ref=sr_1_21?dib=eyJ2IjoiMSJ9.OuvONE2DtyJnxkYZuO9eZ9MomcbXGJZvYgD9hdIZclW3054th0siYWz-O0bj0X9B_9sEwBmMRmPW2HnEfDKYDLKz7t3qvmhowz9i1c2jdMRg5aXhuvh9C62HipoPst8avCmrxIrfMH9PKH6i6czEiA3mRlerI2Ha-ia5foTX-LIw0iVFQLeP0yMMf48VCE_giqZ_hKszDMAwZASl5Lp4D_bI5DpfCGi9ZA6TMfrjeE0.QmnEIukR5GwIxP3ppr1yhejOO4yXm6ded6AQBMZSNlA&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230641&amp;amp;sr=8-21&amp;amp;xpid=1THyIdVx43_cv&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 11: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Boult Audio W20 Truly Wireless in Ear Earbuds with 35H Playtime, Zen\u2122 ENC Mic, 45ms Low Latency, 13mm Bass Drivers, Type-C Fast Charging, Made in India,Touch Controls, IPX5 Ear Buds TWS (Pine Green)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,099&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.1&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo1NTk4NjU1NjI1MDM3Nzk1OjE3MzgyMzA2NDE6c3BfbXRmOjMwMDMxNDQ4MzUwNjgzMjo6MDo6&amp;amp;url=%2FBoult-Wireless-Earbuds-Playtime-Charging%2Fdp%2FB0D3R61C1L%2Fref%3Dsr_1_22_sspa%3Fdib%3DeyJ2IjoiMSJ9.TIjmogX6rqik-djToXNAdgGrgadZlGKSqgZgKVmhE_ikg4dVqwimjOSMMfD3F929S3llauiVYYa5ZuAb4ne3rE2uWQBoTfkFITuYJ8y3vBppnjhjQ_yGI0zZIGuXE-GJilN8k_62yI_1Gw3ocs0nDuLuLAbWuCIUpbO60Vuu4iM9jujM7VkLqxZEKeG_15rF.bxd9Y53xujagpQYTCTqQryJ_8BVMC6v4juC8toksfCc%26dib_tag%3Dse%26keywords%3Dheadphones%26qid%3D1738230641%26sr%3D8-22-spons%26xpid%3D1THyIdVx43_cv%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9tdGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 12: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Boult Audio Z40 Ultra Truly Wireless in Ear Earbuds with 32dB Active Noise Cancellation, 100H Playtime, Dual Device Pairing, Quad Mic ENC, 45ms Low Latency, Metallic Finish ANC Ear Buds (Silver)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,599&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.8&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo1NTk4NjU1NjI1MDM3Nzk1OjE3MzgyMzA2NDE6c3BfbXRmOjMwMDQ2NjI1OTU1NTAzMjo6MDo6&amp;amp;url=%2FBoult-Wireless-Cancellation-Playtime-Metallic%2Fdp%2FB0DRJYMXRJ%2Fref%3Dsr_1_23_sspa%3Fdib%3DeyJ2IjoiMSJ9.TIjmogX6rqik-djToXNAdgGrgadZlGKSqgZgKVmhE_ikg4dVqwimjOSMMfD3F929S3llauiVYYa5ZuAb4ne3rE2uWQBoTfkFITuYJ8y3vBppnjhjQ_yGI0zZIGuXE-GJilN8k_62yI_1Gw3ocs0nDuLuLAbWuCIUpbO60Vuu4iM9jujM7VkLqxZEKeG_15rF.bxd9Y53xujagpQYTCTqQryJ_8BVMC6v4juC8toksfCc%26dib_tag%3Dse%26keywords%3Dheadphones%26qid%3D1738230641%26sr%3D8-23-spons%26xpid%3D1THyIdVx43_cv%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9tdGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 13: {&amp;#x27;Name&amp;#x27;: &amp;#x27;boAt Rockerz 430, 40mm Drivers, Beast Mode (40ms Latency), 40hrs Playback, ENx Tech, Voice Assistant, BTv5.4, Adaptive Fit &amp;amp; Easy Access Controls, Bluetooth Over Ear Headphones(Bold Blue)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,298&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.3&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/boAt-Rockerz-430-Assistant-Headphones/dp/B0DGTVWCC4/ref=sr_1_24?dib=eyJ2IjoiMSJ9.OuvONE2DtyJnxkYZuO9eZ9MomcbXGJZvYgD9hdIZclW3054th0siYWz-O0bj0X9B_9sEwBmMRmPW2HnEfDKYDLKz7t3qvmhowz9i1c2jdMRg5aXhuvh9C62HipoPst8avCmrxIrfMH9PKH6i6czEiA3mRlerI2Ha-ia5foTX-LIw0iVFQLeP0yMMf48VCE_giqZ_hKszDMAwZASl5Lp4D_bI5DpfCGi9ZA6TMfrjeE0.QmnEIukR5GwIxP3ppr1yhejOO4yXm6ded6AQBMZSNlA&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230641&amp;amp;sr=8-24&amp;amp;xpid=1THyIdVx43_cv&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 14: {&amp;#x27;Name&amp;#x27;: &amp;#x27;boAt Rockerz 460 Wireless Over Ear Headphones w/Up to 30hrs Playtime, 40mm Drivers, Beast\u2122 Mode, ENx\u2122, Dual Pairing, BT v5.2, Instant Voice Assistant, Adaptive Fit(Active Black)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,399&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.9&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/boAt-Rockerz-460-Headphones-Assistant/dp/B0CC2G8L22/ref=sr_1_25?dib=eyJ2IjoiMSJ9.OuvONE2DtyJnxkYZuO9eZ9MomcbXGJZvYgD9hdIZclW3054th0siYWz-O0bj0X9B_9sEwBmMRmPW2HnEfDKYDLKz7t3qvmhowz9i1c2jdMRg5aXhuvh9C62HipoPst8avCmrxIrfMH9PKH6i6czEiA3mRlerI2Ha-ia5foTX-LIw0iVFQLeP0yMMf48VCE_giqZ_hKszDMAwZASl5Lp4D_bI5DpfCGi9ZA6TMfrjeE0.QmnEIukR5GwIxP3ppr1yhejOO4yXm6ded6AQBMZSNlA&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230641&amp;amp;sr=8-25&amp;amp;xpid=1THyIdVx43_cv&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 15: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Sony WH-CH520 Wireless Bluetooth Headphones with Mic, Up to 50Hrs Battery-Beige&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 4,399&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.1&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Sony-WH-CH520-Headphones-Multipoint-Connectivity/dp/B0BZPK3XFQ/ref=sr_1_26?dib=eyJ2IjoiMSJ9.OuvONE2DtyJnxkYZuO9eZ9MomcbXGJZvYgD9hdIZclW3054th0siYWz-O0bj0X9B_9sEwBmMRmPW2HnEfDKYDLKz7t3qvmhowz9i1c2jdMRg5aXhuvh9C62HipoPst8avCmrxIrfMH9PKH6i6czEiA3mRlerI2Ha-ia5foTX-LIw0iVFQLeP0yMMf48VCE_giqZ_hKszDMAwZASl5Lp4D_bI5DpfCGi9ZA6TMfrjeE0.QmnEIukR5GwIxP3ppr1yhejOO4yXm6ded6AQBMZSNlA&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230641&amp;amp;sr=8-26&amp;amp;xpid=1THyIdVx43_cv&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 16: {&amp;#x27;Name&amp;#x27;: &amp;#x27;JBL C100SI Wired In Ear Headphones with Mic, JBL Pure Bass Sound, One Button Multi-function Remote, Premium Metallic Finish, Angled Buds for Comfort fit (Black)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 599&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.1&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/JBL-C100SI-Ear-Headphones-Black/dp/B01DEWVZ2C/ref=sr_1_27?dib=eyJ2IjoiMSJ9.OuvONE2DtyJnxkYZuO9eZ9MomcbXGJZvYgD9hdIZclW3054th0siYWz-O0bj0X9B_9sEwBmMRmPW2HnEfDKYDLKz7t3qvmhowz9i1c2jdMRg5aXhuvh9C62HipoPst8avCmrxIrfMH9PKH6i6czEiA3mRlerI2Ha-ia5foTX-LIw0iVFQLeP0yMMf48VCE_giqZ_hKszDMAwZASl5Lp4D_bI5DpfCGi9ZA6TMfrjeE0.QmnEIukR5GwIxP3ppr1yhejOO4yXm6ded6AQBMZSNlA&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230641&amp;amp;sr=8-27&amp;amp;xpid=1THyIdVx43_cv&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 17: {&amp;#x27;Name&amp;#x27;: &amp;#x27;ZEBRONICS Thunder Bluetooth 5.3 Wireless Over Ear Headphones with 60H Backup, Gaming Mode, Dual Pairing, Enc, Aux, Micro Sd, Voice Assistant, Comfortable Earcups, Call Function (Teal Green)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 799&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.8&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/ZEBRONICS-Zeb-Thunder-Bluetooth-Teal-Green/dp/B09B5BS6G4/ref=sr_1_28?dib=eyJ2IjoiMSJ9.OuvONE2DtyJnxkYZuO9eZ9MomcbXGJZvYgD9hdIZclW3054th0siYWz-O0bj0X9B_9sEwBmMRmPW2HnEfDKYDLKz7t3qvmhowz9i1c2jdMRg5aXhuvh9C62HipoPst8avCmrxIrfMH9PKH6i6czEiA3mRlerI2Ha-ia5foTX-LIw0iVFQLeP0yMMf48VCE_giqZ_hKszDMAwZASl5Lp4D_bI5DpfCGi9ZA6TMfrjeE0.QmnEIukR5GwIxP3ppr1yhejOO4yXm6ded6AQBMZSNlA&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230641&amp;amp;sr=8-28&amp;amp;xpid=1THyIdVx43_cv&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 18: {&amp;#x27;Name&amp;#x27;: &amp;#x27;boAt Rockerz 430 w/ 40mm Drivers, Beast Mode w/ 40ms Latency, 40hrs Playback, ENx Tech, Voice Assistant, BTv5.4, Adaptive Fit &amp;amp; Easy Access Controls, Bluetooth Headphones(Sage Green)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,299&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.3&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/boAt-Rockerz-430-Assistant-Headphones/dp/B0DGTVVCG8/ref=sr_1_29?dib=eyJ2IjoiMSJ9.OuvONE2DtyJnxkYZuO9eZ9MomcbXGJZvYgD9hdIZclW3054th0siYWz-O0bj0X9B_9sEwBmMRmPW2HnEfDKYDLKz7t3qvmhowz9i1c2jdMRg5aXhuvh9C62HipoPst8avCmrxIrfMH9PKH6i6czEiA3mRlerI2Ha-ia5foTX-LIw0iVFQLeP0yMMf48VCE_giqZ_hKszDMAwZASl5Lp4D_bI5DpfCGi9ZA6TMfrjeE0.QmnEIukR5GwIxP3ppr1yhejOO4yXm6ded6AQBMZSNlA&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230641&amp;amp;sr=8-29&amp;amp;xpid=1THyIdVx43_cv&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 19: {&amp;#x27;Name&amp;#x27;: &amp;#x27;boAt Airdopes 311 Pro, 50HRS Battery, Fast Charge, Dual Mics ENx Tech, Transparent LID, Low Latency, IPX4, IWP Tech, v5.3 Bluetooth Earbuds, TWS Ear Buds Wireless Earphones with mic (Active Black)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 899&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.7&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/boAt-Airdopes-311-Pro-Low-Latency/dp/B0CZ3ZPD8B/ref=sr_1_30?dib=eyJ2IjoiMSJ9.OuvONE2DtyJnxkYZuO9eZ9MomcbXGJZvYgD9hdIZclW3054th0siYWz-O0bj0X9B_9sEwBmMRmPW2HnEfDKYDLKz7t3qvmhowz9i1c2jdMRg5aXhuvh9C62HipoPst8avCmrxIrfMH9PKH6i6czEiA3mRlerI2Ha-ia5foTX-LIw0iVFQLeP0yMMf48VCE_giqZ_hKszDMAwZASl5Lp4D_bI5DpfCGi9ZA6TMfrjeE0.QmnEIukR5GwIxP3ppr1yhejOO4yXm6ded6AQBMZSNlA&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230641&amp;amp;sr=8-30&amp;amp;xpid=1THyIdVx43_cv&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 20: {&amp;#x27;Name&amp;#x27;: &amp;#x27;boAt Rockerz 550 Bluetooth Wireless Over Ear Headphones with Mic Upto 20 Hours Playback, 50MM Drivers, Soft Padded Ear Cushions and Physical Noise Isolation (Red)&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,799&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.1&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/Boat-Rockerz-550-Headphone-Aesthetics/dp/B0856HNLDK/ref=sr_1_31?dib=eyJ2IjoiMSJ9.OuvONE2DtyJnxkYZuO9eZ9MomcbXGJZvYgD9hdIZclW3054th0siYWz-O0bj0X9B_9sEwBmMRmPW2HnEfDKYDLKz7t3qvmhowz9i1c2jdMRg5aXhuvh9C62HipoPst8avCmrxIrfMH9PKH6i6czEiA3mRlerI2Ha-ia5foTX-LIw0iVFQLeP0yMMf48VCE_giqZ_hKszDMAwZASl5Lp4D_bI5DpfCGi9ZA6TMfrjeE0.QmnEIukR5GwIxP3ppr1yhejOO4yXm6ded6AQBMZSNlA&amp;amp;dib_tag=se&amp;amp;keywords=headphones&amp;amp;qid=1738230641&amp;amp;sr=8-31&amp;amp;xpid=1THyIdVx43_cv&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 21: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Portronics Muffs M3 Over Ear Headphones with ANC Enabled, Upto 40 Hours Playtime, in-Built Mic, 40mm Driver, Powerful Bass, Soft Ear Cushion, BT 5.3V, AUX in, Foldable Design, Type C Fast Charging&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,499&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;3.8&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo1NTk4NjU1NjI1MDM3Nzk1OjE3MzgyMzA2NDE6c3BfYnRmOjMwMDMxNTMxNDg1OTQzMjo6MDo6&amp;amp;url=%2FPortronics-Headphones-Playtime-Powerful-Foldable%2Fdp%2FB0DCFTMCN8%2Fref%3Dsr_1_32_sspa%3Fdib%3DeyJ2IjoiMSJ9.TIjmogX6rqik-djToXNAdgGrgadZlGKSqgZgKVmhE_ikg4dVqwimjOSMMfD3F929S3llauiVYYa5ZuAb4ne3rE2uWQBoTfkFITuYJ8y3vBppnjhjQ_yGI0zZIGuXE-GJilN8k_62yI_1Gw3ocs0nDuLuLAbWuCIUpbO60Vuu4iM9jujM7VkLqxZEKeG_15rF.bxd9Y53xujagpQYTCTqQryJ_8BVMC6v4juC8toksfCc%26dib_tag%3Dse%26keywords%3Dheadphones%26qid%3D1738230641%26sr%3D8-32-spons%26xpid%3D1THyIdVx43_cv%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9idGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Extracted info for product 22: {&amp;#x27;Name&amp;#x27;: &amp;#x27;Boult x Mustang Torq Wireless in Ear Earbuds with 50H Playtime, App Support, Quad Mic ENC, 45ms Low Latency, Breathing LEDs, 13mm Drivers, Touch Control, Made in India IPX5 Ear Buds TWS Bluetooth 5.4&amp;#x27;, &amp;#x27;Price&amp;#x27;: &amp;#x27;Rs. 1,799&amp;#x27;, &amp;#x27;Rating&amp;#x27;: &amp;#x27;4.0&amp;#x27;, &amp;#x27;URL&amp;#x27;: &amp;#x27;https://www.amazon.in/sspa/click?ie=UTF8&amp;amp;spc=MTo1NTk4NjU1NjI1MDM3Nzk1OjE3MzgyMzA2NDE6c3BfYnRmOjMwMDIyOTg2NzI0MDEzMjo6MDo6&amp;amp;url=%2FBoult-Wireless-Earbuds-Breathing-Bluetooth%2Fdp%2FB0D63CNLJ9%2Fref%3Dsr_1_33_sspa%3Fdib%3DeyJ2IjoiMSJ9.TIjmogX6rqik-djToXNAdgGrgadZlGKSqgZgKVmhE_ikg4dVqwimjOSMMfD3F929S3llauiVYYa5ZuAb4ne3rE2uWQBoTfkFITuYJ8y3vBppnjhjQ_yGI0zZIGuXE-GJilN8k_62yI_1Gw3ocs0nDuLuLAbWuCIUpbO60Vuu4iM9jujM7VkLqxZEKeG_15rF.bxd9Y53xujagpQYTCTqQryJ_8BVMC6v4juC8toksfCc%26dib_tag%3Dse%26keywords%3Dheadphones%26qid%3D1738230641%26sr%3D8-33-spons%26xpid%3D1THyIdVx43_cv%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9idGY%26psc%3D1&amp;#x27;}\nINFO     root:search_result_page.py:31 chrome :: Finished extracting product information.\nINFO     root:search_result_page.py:31 chrome :: Saving product information for headphones.\nINFO     root:search_result_page.py:31 chrome :: Product information for headphones saved successfully to D:\\Interview Assignment\\Four_Junctions\\four_junctions_selenium_assignment\\test_data\\product_info.csv.\n\n---------------------------- Captured log teardown -----------------------------\nINFO     root:conftest.py:151 Closing the Chrome Browser&#34;}], &#34;test_cases/test_functional_testing.py::TestFunctionalTesting::test_amazon_product_search_and_export[chrome-mobile]&#34;: [{&#34;extras&#34;: [{&#34;name&#34;: null, &#34;format_type&#34;: &#34;html&#34;, &#34;content&#34;: &#34;&lt;div&gt;&lt;img src=\&#34;\\Reports\\2025_01_30\\30_01_2025_15_21_11_111530012025.png\&#34; alt=\&#34;screenshot\&#34; style=\&#34;width:304px;height:228px;\&#34; onclick=\&#34;window.open(this.src)\&#34; align=\&#34;right\&#34;/&gt;&lt;/div&gt;&#34;, &#34;mime_type&#34;: null, &#34;extension&#34;: null}], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;test_cases/test_functional_testing.py::TestFunctionalTesting::test_amazon_product_search_and_export[chrome-mobile]&#34;, &#34;duration&#34;: &#34;00:00:25&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;test_cases/test_functional_testing.py::TestFunctionalTesting::test_amazon_product_search_and_export[chrome-mobile]&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:25&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nINFO     WDM:logger.py:11 ====== WebDriver manager ======\nINFO     WDM:logger.py:11 Get LATEST chromedriver version for google-chrome\nINFO     WDM:logger.py:11 Get LATEST chromedriver version for google-chrome\nINFO     WDM:logger.py:11 Driver [C:\\Users\\Gokul Dev P\\.wdm\\drivers\\chromedriver\\win64\\132.0.6834.159\\chromedriver-win32/chromedriver.exe] found in cache\nINFO     root:conftest.py:144 Launching Chrome Browser\nINFO     root:home_page.py:25 Info :: chrome :: Navigating to Amazon home page.\nINFO     root:home_page.py:25 Info :: chrome :: Amazon home page loaded successfully.\n\n------------------------------ Captured log call -------------------------------\nINFO     root:home_page.py:25 Info :: chrome :: Attempting to search for: mobile\nINFO     root:home_page.py:25 Info :: chrome :: Search executed successfully.\nINFO     root:search_result_page.py:31 chrome :: Attempting to retrieve the name of the first product.\nINFO     root:search_result_page.py:31 chrome :: First product name retrieved successfully\nINFO     root:search_result_page.py:31 chrome :: Attempting to click the first product.\nINFO     root:search_result_page.py:31 chrome :: First product link clicked successfully.\nINFO     root:search_result_page.py:31 chrome :: Switched to the new tab successfully.\nINFO     root:product_detailed_page.py:23 chrome :: Attempting to verify product page is loaded for iQOO Z9x 5G (Tornado Green, 6GB RAM, 128GB Storage) | Snapdragon 6 Gen 1 with 560k+ AnTuTu Score | 6000mAh Battery with 7.99mm Slim Design | 44W FlashCharge.\nINFO     root:product_detailed_page.py:23 chrome :: Product page loaded successfully.\nINFO     root:product_detailed_page.py:23 chrome :: Attempting to verify presence of add to cart in the product details page.\nINFO     root:product_detailed_page.py:23 chrome :: Product page loaded successfully.\nINFO     root:product_detailed_page.py:23 chrome :: Attempting to verify presence of product overview.\nINFO     root:product_detailed_page.py:23 chrome :: Product overview section is present.\nINFO     root:product_detailed_page.py:23 chrome :: Attempting to verify presence of product details.\nINFO     root:product_detailed_page.py:23 chrome :: Product details section is present.\n\n&#34;}], &#34;test_cases/test_functional_testing.py::TestFunctionalTesting::test_amazon_product_search_and_export[chrome-laptop]&#34;: [{&#34;extras&#34;: [{&#34;name&#34;: null, &#34;format_type&#34;: &#34;html&#34;, &#34;content&#34;: &#34;&lt;div&gt;&lt;img src=\&#34;\\Reports\\2025_01_30\\30_01_2025_15_21_23_231530012025.png\&#34; alt=\&#34;screenshot\&#34; style=\&#34;width:304px;height:228px;\&#34; onclick=\&#34;window.open(this.src)\&#34; align=\&#34;right\&#34;/&gt;&lt;/div&gt;&#34;, &#34;mime_type&#34;: null, &#34;extension&#34;: null}], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;test_cases/test_functional_testing.py::TestFunctionalTesting::test_amazon_product_search_and_export[chrome-laptop]&#34;, &#34;duration&#34;: &#34;00:00:11&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;test_cases/test_functional_testing.py::TestFunctionalTesting::test_amazon_product_search_and_export[chrome-laptop]&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:11&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nINFO     root:home_page.py:25 Info :: chrome :: Navigating to Amazon home page.\nINFO     root:home_page.py:25 Info :: chrome :: Amazon home page loaded successfully.\n\n------------------------------ Captured log call -------------------------------\nINFO     root:home_page.py:25 Info :: chrome :: Attempting to search for: laptop\nINFO     root:home_page.py:25 Info :: chrome :: Search executed successfully.\nINFO     root:search_result_page.py:31 chrome :: Attempting to retrieve the name of the first product.\nINFO     root:search_result_page.py:31 chrome :: First product name retrieved successfully\nINFO     root:search_result_page.py:31 chrome :: Attempting to click the first product.\nINFO     root:search_result_page.py:31 chrome :: First product link clicked successfully.\nINFO     root:search_result_page.py:31 chrome :: Switched to the new tab successfully.\nINFO     root:product_detailed_page.py:23 chrome :: Attempting to verify product page is loaded for Lenovo IdeaPad Slim 3 12th Gen Intel Core i5-12450H 15.6&amp;quot; (39.6cm) FHD IPS Thin &amp;amp; Light Laptop (16GB/512GB SSD/Intel UHD Graphics/Win 11/MSO 21/Backlit KB/1 Yr ADP Free/Grey/1.6Kg), 83ER008DIN.\nINFO     root:product_detailed_page.py:23 chrome :: Product page loaded successfully.\nINFO     root:product_detailed_page.py:23 chrome :: Attempting to verify presence of add to cart in the product details page.\nINFO     root:product_detailed_page.py:23 chrome :: Product page loaded successfully.\nINFO     root:product_detailed_page.py:23 chrome :: Attempting to verify presence of product overview.\nINFO     root:product_detailed_page.py:23 chrome :: Product overview section is present.\nINFO     root:product_detailed_page.py:23 chrome :: Attempting to verify presence of product details.\nINFO     root:product_detailed_page.py:23 chrome :: Product details section is present.\n\n&#34;}], &#34;test_cases/test_functional_testing.py::TestFunctionalTesting::test_amazon_product_search_and_export[chrome-headphones]&#34;: [{&#34;extras&#34;: [{&#34;name&#34;: null, &#34;format_type&#34;: &#34;html&#34;, &#34;content&#34;: &#34;&lt;div&gt;&lt;img src=\&#34;\\Reports\\2025_01_30\\30_01_2025_15_21_35_351530012025.png\&#34; alt=\&#34;screenshot\&#34; style=\&#34;width:304px;height:228px;\&#34; onclick=\&#34;window.open(this.src)\&#34; align=\&#34;right\&#34;/&gt;&lt;/div&gt;&#34;, &#34;mime_type&#34;: null, &#34;extension&#34;: null}], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;test_cases/test_functional_testing.py::TestFunctionalTesting::test_amazon_product_search_and_export[chrome-headphones]&#34;, &#34;duration&#34;: &#34;00:00:14&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;test_cases/test_functional_testing.py::TestFunctionalTesting::test_amazon_product_search_and_export[chrome-headphones]&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:14&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nINFO     root:home_page.py:25 Info :: chrome :: Navigating to Amazon home page.\nINFO     root:home_page.py:25 Info :: chrome :: Amazon home page loaded successfully.\n\n------------------------------ Captured log call -------------------------------\nINFO     root:home_page.py:25 Info :: chrome :: Attempting to search for: headphones\nINFO     root:home_page.py:25 Info :: chrome :: Search executed successfully.\nINFO     root:search_result_page.py:31 chrome :: Attempting to retrieve the name of the first product.\nINFO     root:search_result_page.py:31 chrome :: First product name retrieved successfully\nINFO     root:search_result_page.py:31 chrome :: Attempting to click the first product.\nINFO     root:search_result_page.py:31 chrome :: First product link clicked successfully.\nINFO     root:search_result_page.py:31 chrome :: Switched to the new tab successfully.\nINFO     root:product_detailed_page.py:23 chrome :: Attempting to verify product page is loaded for Noise Newly Launched Airwave Max 5 Wireless Over-Ear Headphones with Adaptive Hybrid ANC (up to 50dB), HFA Tech, 80H Playtime, Dual Pairing(Calm Beige).\nINFO     root:product_detailed_page.py:23 chrome :: Product page loaded successfully.\nINFO     root:product_detailed_page.py:23 chrome :: Attempting to verify presence of add to cart in the product details page.\nINFO     root:product_detailed_page.py:23 chrome :: Product page loaded successfully.\nINFO     root:product_detailed_page.py:23 chrome :: Attempting to verify presence of product overview.\nINFO     root:product_detailed_page.py:23 chrome :: Product overview section is present.\nINFO     root:product_detailed_page.py:23 chrome :: Attempting to verify presence of product details.\nINFO     root:product_detailed_page.py:23 chrome :: Product details section is present.\n\n---------------------------- Captured log teardown -----------------------------\nINFO     root:conftest.py:151 Closing the Chrome Browser&#34;}]}, &#34;renderCollapsed&#34;: [&#34;passed&#34;], &#34;initialSort&#34;: &#34;result&#34;, &#34;title&#34;: &#34;Automation Report&#34;}"></div>
+    <script>
+      (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+const { getCollapsedCategory, setCollapsedIds } = require('./storage.js')
+
+class DataManager {
+    setManager(data) {
+        const collapsedCategories = [...getCollapsedCategory(data.renderCollapsed)]
+        const collapsedIds = []
+        const tests = Object.values(data.tests).flat().map((test, index) => {
+            const collapsed = collapsedCategories.includes(test.result.toLowerCase())
+            const id = `test_${index}`
+            if (collapsed) {
+                collapsedIds.push(id)
+            }
+            return {
+                ...test,
+                id,
+                collapsed,
+            }
+        })
+        const dataBlob = { ...data, tests }
+        this.data = { ...dataBlob }
+        this.renderData = { ...dataBlob }
+        setCollapsedIds(collapsedIds)
+    }
+
+    get allData() {
+        return { ...this.data }
+    }
+
+    resetRender() {
+        this.renderData = { ...this.data }
+    }
+
+    setRender(data) {
+        this.renderData.tests = [...data]
+    }
+
+    toggleCollapsedItem(id) {
+        this.renderData.tests = this.renderData.tests.map((test) =>
+            test.id === id ? { ...test, collapsed: !test.collapsed } : test,
+        )
+    }
+
+    set allCollapsed(collapsed) {
+        this.renderData = { ...this.renderData, tests: [...this.renderData.tests.map((test) => (
+            { ...test, collapsed }
+        ))] }
+    }
+
+    get testSubset() {
+        return [...this.renderData.tests]
+    }
+
+    get environment() {
+        return this.renderData.environment
+    }
+
+    get initialSort() {
+        return this.data.initialSort
+    }
+}
+
+module.exports = {
+    manager: new DataManager(),
+}
+
+},{"./storage.js":8}],2:[function(require,module,exports){
+const mediaViewer = require('./mediaviewer.js')
+const templateEnvRow = document.getElementById('template_environment_row')
+const templateResult = document.getElementById('template_results-table__tbody')
+
+function htmlToElements(html) {
+    const temp = document.createElement('template')
+    temp.innerHTML = html
+    return temp.content.childNodes
+}
+
+const find = (selector, elem) => {
+    if (!elem) {
+        elem = document
+    }
+    return elem.querySelector(selector)
+}
+
+const findAll = (selector, elem) => {
+    if (!elem) {
+        elem = document
+    }
+    return [...elem.querySelectorAll(selector)]
+}
+
+const dom = {
+    getStaticRow: (key, value) => {
+        const envRow = templateEnvRow.content.cloneNode(true)
+        const isObj = typeof value === 'object' && value !== null
+        const values = isObj ? Object.keys(value).map((k) => `${k}: ${value[k]}`) : null
+
+        const valuesElement = htmlToElements(
+            values ? `<ul>${values.map((val) => `<li>${val}</li>`).join('')}<ul>` : `<div>${value}</div>`)[0]
+        const td = findAll('td', envRow)
+        td[0].textContent = key
+        td[1].appendChild(valuesElement)
+
+        return envRow
+    },
+    getResultTBody: ({ testId, id, log, extras, resultsTableRow, tableHtml, result, collapsed }) => {
+        const resultBody = templateResult.content.cloneNode(true)
+        resultBody.querySelector('tbody').classList.add(result.toLowerCase())
+        resultBody.querySelector('tbody').id = testId
+        resultBody.querySelector('.collapsible').dataset.id = id
+
+        resultsTableRow.forEach((html) => {
+            const t = document.createElement('template')
+            t.innerHTML = html
+            resultBody.querySelector('.collapsible').appendChild(t.content)
+        })
+
+        if (log) {
+            // Wrap lines starting with "E" with span.error to color those lines red
+            const wrappedLog = log.replace(/^E.*$/gm, (match) => `<span class="error">${match}</span>`)
+            resultBody.querySelector('.log').innerHTML = wrappedLog
+        } else {
+            resultBody.querySelector('.log').remove()
+        }
+
+        if (collapsed) {
+            resultBody.querySelector('.collapsible > td')?.classList.add('collapsed')
+            resultBody.querySelector('.extras-row').classList.add('hidden')
+        } else {
+            resultBody.querySelector('.collapsible > td')?.classList.remove('collapsed')
+        }
+
+        const media = []
+        extras?.forEach(({ name, format_type, content }) => {
+            if (['image', 'video'].includes(format_type)) {
+                media.push({ path: content, name, format_type })
+            }
+
+            if (format_type === 'html') {
+                resultBody.querySelector('.extraHTML').insertAdjacentHTML('beforeend', `<div>${content}</div>`)
+            }
+        })
+        mediaViewer.setup(resultBody, media)
+
+        // Add custom html from the pytest_html_results_table_html hook
+        tableHtml?.forEach((item) => {
+            resultBody.querySelector('td[class="extra"]').insertAdjacentHTML('beforeend', item)
+        })
+
+        return resultBody
+    },
+}
+
+module.exports = {
+    dom,
+    htmlToElements,
+    find,
+    findAll,
+}
+
+},{"./mediaviewer.js":6}],3:[function(require,module,exports){
+const { manager } = require('./datamanager.js')
+const { doSort } = require('./sort.js')
+const storageModule = require('./storage.js')
+
+const getFilteredSubSet = (filter) =>
+    manager.allData.tests.filter(({ result }) => filter.includes(result.toLowerCase()))
+
+const doInitFilter = () => {
+    const currentFilter = storageModule.getVisible()
+    const filteredSubset = getFilteredSubSet(currentFilter)
+    manager.setRender(filteredSubset)
+}
+
+const doFilter = (type, show) => {
+    if (show) {
+        storageModule.showCategory(type)
+    } else {
+        storageModule.hideCategory(type)
+    }
+
+    const currentFilter = storageModule.getVisible()
+    const filteredSubset = getFilteredSubSet(currentFilter)
+    manager.setRender(filteredSubset)
+
+    const sortColumn = storageModule.getSort()
+    doSort(sortColumn, true)
+}
+
+module.exports = {
+    doFilter,
+    doInitFilter,
+}
+
+},{"./datamanager.js":1,"./sort.js":7,"./storage.js":8}],4:[function(require,module,exports){
+const { redraw, bindEvents, renderStatic } = require('./main.js')
+const { doInitFilter } = require('./filter.js')
+const { doInitSort } = require('./sort.js')
+const { manager } = require('./datamanager.js')
+const data = JSON.parse(document.getElementById('data-container').dataset.jsonblob)
+
+function init() {
+    manager.setManager(data)
+    doInitFilter()
+    doInitSort()
+    renderStatic()
+    redraw()
+    bindEvents()
+}
+
+init()
+
+},{"./datamanager.js":1,"./filter.js":3,"./main.js":5,"./sort.js":7}],5:[function(require,module,exports){
+const { dom, find, findAll } = require('./dom.js')
+const { manager } = require('./datamanager.js')
+const { doSort } = require('./sort.js')
+const { doFilter } = require('./filter.js')
+const {
+    getVisible,
+    getCollapsedIds,
+    setCollapsedIds,
+    getSort,
+    getSortDirection,
+    possibleFilters,
+} = require('./storage.js')
+
+const removeChildren = (node) => {
+    while (node.firstChild) {
+        node.removeChild(node.firstChild)
+    }
+}
+
+const renderStatic = () => {
+    const renderEnvironmentTable = () => {
+        const environment = manager.environment
+        const rows = Object.keys(environment).map((key) => dom.getStaticRow(key, environment[key]))
+        const table = document.getElementById('environment')
+        removeChildren(table)
+        rows.forEach((row) => table.appendChild(row))
+    }
+    renderEnvironmentTable()
+}
+
+const addItemToggleListener = (elem) => {
+    elem.addEventListener('click', ({ target }) => {
+        const id = target.parentElement.dataset.id
+        manager.toggleCollapsedItem(id)
+
+        const collapsedIds = getCollapsedIds()
+        if (collapsedIds.includes(id)) {
+            const updated = collapsedIds.filter((item) => item !== id)
+            setCollapsedIds(updated)
+        } else {
+            collapsedIds.push(id)
+            setCollapsedIds(collapsedIds)
+        }
+        redraw()
+    })
+}
+
+const renderContent = (tests) => {
+    const sortAttr = getSort(manager.initialSort)
+    const sortAsc = JSON.parse(getSortDirection())
+    const rows = tests.map(dom.getResultTBody)
+    const table = document.getElementById('results-table')
+    const tableHeader = document.getElementById('results-table-head')
+
+    const newTable = document.createElement('table')
+    newTable.id = 'results-table'
+
+    // remove all sorting classes and set the relevant
+    findAll('.sortable', tableHeader).forEach((elem) => elem.classList.remove('asc', 'desc'))
+    tableHeader.querySelector(`.sortable[data-column-type="${sortAttr}"]`)?.classList.add(sortAsc ? 'desc' : 'asc')
+    newTable.appendChild(tableHeader)
+
+    if (!rows.length) {
+        const emptyTable = document.getElementById('template_results-table__body--empty').content.cloneNode(true)
+        newTable.appendChild(emptyTable)
+    } else {
+        rows.forEach((row) => {
+            if (!!row) {
+                findAll('.collapsible td:not(.col-links', row).forEach(addItemToggleListener)
+                find('.logexpander', row).addEventListener('click',
+                    (evt) => evt.target.parentNode.classList.toggle('expanded'),
+                )
+                newTable.appendChild(row)
+            }
+        })
+    }
+
+    table.replaceWith(newTable)
+}
+
+const renderDerived = () => {
+    const currentFilter = getVisible()
+    possibleFilters.forEach((result) => {
+        const input = document.querySelector(`input[data-test-result="${result}"]`)
+        input.checked = currentFilter.includes(result)
+    })
+}
+
+const bindEvents = () => {
+    const filterColumn = (evt) => {
+        const { target: element } = evt
+        const { testResult } = element.dataset
+
+        doFilter(testResult, element.checked)
+        const collapsedIds = getCollapsedIds()
+        const updated = manager.renderData.tests.map((test) => {
+            return {
+                ...test,
+                collapsed: collapsedIds.includes(test.id),
+            }
+        })
+        manager.setRender(updated)
+        redraw()
+    }
+
+    const header = document.getElementById('environment-header')
+    header.addEventListener('click', () => {
+        const table = document.getElementById('environment')
+        table.classList.toggle('hidden')
+        header.classList.toggle('collapsed')
+    })
+
+    findAll('input[name="filter_checkbox"]').forEach((elem) => {
+        elem.addEventListener('click', filterColumn)
+    })
+
+    findAll('.sortable').forEach((elem) => {
+        elem.addEventListener('click', (evt) => {
+            const { target: element } = evt
+            const { columnType } = element.dataset
+            doSort(columnType)
+            redraw()
+        })
+    })
+
+    document.getElementById('show_all_details').addEventListener('click', () => {
+        manager.allCollapsed = false
+        setCollapsedIds([])
+        redraw()
+    })
+    document.getElementById('hide_all_details').addEventListener('click', () => {
+        manager.allCollapsed = true
+        const allIds = manager.renderData.tests.map((test) => test.id)
+        setCollapsedIds(allIds)
+        redraw()
+    })
+}
+
+const redraw = () => {
+    const { testSubset } = manager
+
+    renderContent(testSubset)
+    renderDerived()
+}
+
+module.exports = {
+    redraw,
+    bindEvents,
+    renderStatic,
+}
+
+},{"./datamanager.js":1,"./dom.js":2,"./filter.js":3,"./sort.js":7,"./storage.js":8}],6:[function(require,module,exports){
+class MediaViewer {
+    constructor(assets) {
+        this.assets = assets
+        this.index = 0
+    }
+
+    nextActive() {
+        this.index = this.index === this.assets.length - 1 ? 0 : this.index + 1
+        return [this.activeFile, this.index]
+    }
+
+    prevActive() {
+        this.index = this.index === 0 ? this.assets.length - 1 : this.index -1
+        return [this.activeFile, this.index]
+    }
+
+    get currentIndex() {
+        return this.index
+    }
+
+    get activeFile() {
+        return this.assets[this.index]
+    }
+}
+
+
+const setup = (resultBody, assets) => {
+    if (!assets.length) {
+        resultBody.querySelector('.media').classList.add('hidden')
+        return
+    }
+
+    const mediaViewer = new MediaViewer(assets)
+    const container = resultBody.querySelector('.media-container')
+    const leftArrow = resultBody.querySelector('.media-container__nav--left')
+    const rightArrow = resultBody.querySelector('.media-container__nav--right')
+    const mediaName = resultBody.querySelector('.media__name')
+    const counter = resultBody.querySelector('.media__counter')
+    const imageEl = resultBody.querySelector('img')
+    const sourceEl = resultBody.querySelector('source')
+    const videoEl = resultBody.querySelector('video')
+
+    const setImg = (media, index) => {
+        if (media?.format_type === 'image') {
+            imageEl.src = media.path
+
+            imageEl.classList.remove('hidden')
+            videoEl.classList.add('hidden')
+        } else if (media?.format_type === 'video') {
+            sourceEl.src = media.path
+
+            videoEl.classList.remove('hidden')
+            imageEl.classList.add('hidden')
+        }
+
+        mediaName.innerText = media?.name
+        counter.innerText = `${index + 1} / ${assets.length}`
+    }
+    setImg(mediaViewer.activeFile, mediaViewer.currentIndex)
+
+    const moveLeft = () => {
+        const [media, index] = mediaViewer.prevActive()
+        setImg(media, index)
+    }
+    const doRight = () => {
+        const [media, index] = mediaViewer.nextActive()
+        setImg(media, index)
+    }
+    const openImg = () => {
+        window.open(mediaViewer.activeFile.path, '_blank')
+    }
+    if (assets.length === 1) {
+        container.classList.add('media-container--fullscreen')
+    } else {
+        leftArrow.addEventListener('click', moveLeft)
+        rightArrow.addEventListener('click', doRight)
+    }
+    imageEl.addEventListener('click', openImg)
+}
+
+module.exports = {
+    setup,
+}
+
+},{}],7:[function(require,module,exports){
+const { manager } = require('./datamanager.js')
+const storageModule = require('./storage.js')
+
+const genericSort = (list, key, ascending, customOrder) => {
+    let sorted
+    if (customOrder) {
+        sorted = list.sort((a, b) => {
+            const aValue = a.result.toLowerCase()
+            const bValue = b.result.toLowerCase()
+
+            const aIndex = customOrder.findIndex((item) => item.toLowerCase() === aValue)
+            const bIndex = customOrder.findIndex((item) => item.toLowerCase() === bValue)
+
+            // Compare the indices to determine the sort order
+            return aIndex - bIndex
+        })
+    } else {
+        sorted = list.sort((a, b) => a[key] === b[key] ? 0 : a[key] > b[key] ? 1 : -1)
+    }
+
+    if (ascending) {
+        sorted.reverse()
+    }
+    return sorted
+}
+
+const durationSort = (list, ascending) => {
+    const parseDuration = (duration) => {
+        if (duration.includes(':')) {
+            // If it's in the format "HH:mm:ss"
+            const [hours, minutes, seconds] = duration.split(':').map(Number)
+            return (hours * 3600 + minutes * 60 + seconds) * 1000
+        } else {
+            // If it's in the format "nnn ms"
+            return parseInt(duration)
+        }
+    }
+    const sorted = list.sort((a, b) => parseDuration(a['duration']) - parseDuration(b['duration']))
+    if (ascending) {
+        sorted.reverse()
+    }
+    return sorted
+}
+
+const doInitSort = () => {
+    const type = storageModule.getSort(manager.initialSort)
+    const ascending = storageModule.getSortDirection()
+    const list = manager.testSubset
+    const initialOrder = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed', 'Skipped', 'Passed']
+
+    storageModule.setSort(type)
+    storageModule.setSortDirection(ascending)
+
+    if (type?.toLowerCase() === 'original') {
+        manager.setRender(list)
+    } else {
+        let sortedList
+        switch (type) {
+        case 'duration':
+            sortedList = durationSort(list, ascending)
+            break
+        case 'result':
+            sortedList = genericSort(list, type, ascending, initialOrder)
+            break
+        default:
+            sortedList = genericSort(list, type, ascending)
+            break
+        }
+        manager.setRender(sortedList)
+    }
+}
+
+const doSort = (type, skipDirection) => {
+    const newSortType = storageModule.getSort(manager.initialSort) !== type
+    const currentAsc = storageModule.getSortDirection()
+    let ascending
+    if (skipDirection) {
+        ascending = currentAsc
+    } else {
+        ascending = newSortType ? false : !currentAsc
+    }
+    storageModule.setSort(type)
+    storageModule.setSortDirection(ascending)
+
+    const list = manager.testSubset
+    const sortedList = type === 'duration' ? durationSort(list, ascending) : genericSort(list, type, ascending)
+    manager.setRender(sortedList)
+}
+
+module.exports = {
+    doInitSort,
+    doSort,
+}
+
+},{"./datamanager.js":1,"./storage.js":8}],8:[function(require,module,exports){
+const possibleFilters = [
+    'passed',
+    'skipped',
+    'failed',
+    'error',
+    'xfailed',
+    'xpassed',
+    'rerun',
+]
+
+const getVisible = () => {
+    const url = new URL(window.location.href)
+    const settings = new URLSearchParams(url.search).get('visible')
+    const lower = (item) => {
+        const lowerItem = item.toLowerCase()
+        if (possibleFilters.includes(lowerItem)) {
+            return lowerItem
+        }
+        return null
+    }
+    return settings === null ?
+        possibleFilters :
+        [...new Set(settings?.split(',').map(lower).filter((item) => item))]
+}
+
+const hideCategory = (categoryToHide) => {
+    const url = new URL(window.location.href)
+    const visibleParams = new URLSearchParams(url.search).get('visible')
+    const currentVisible = visibleParams ? visibleParams.split(',') : [...possibleFilters]
+    const settings = [...new Set(currentVisible)].filter((f) => f !== categoryToHide).join(',')
+
+    url.searchParams.set('visible', settings)
+    window.history.pushState({}, null, unescape(url.href))
+}
+
+const showCategory = (categoryToShow) => {
+    if (typeof window === 'undefined') {
+        return
+    }
+    const url = new URL(window.location.href)
+    const currentVisible = new URLSearchParams(url.search).get('visible')?.split(',').filter(Boolean) ||
+        [...possibleFilters]
+    const settings = [...new Set([categoryToShow, ...currentVisible])]
+    const noFilter = possibleFilters.length === settings.length || !settings.length
+
+    noFilter ? url.searchParams.delete('visible') : url.searchParams.set('visible', settings.join(','))
+    window.history.pushState({}, null, unescape(url.href))
+}
+
+const getSort = (initialSort) => {
+    const url = new URL(window.location.href)
+    let sort = new URLSearchParams(url.search).get('sort')
+    if (!sort) {
+        sort = initialSort || 'result'
+    }
+    return sort
+}
+
+const setSort = (type) => {
+    const url = new URL(window.location.href)
+    url.searchParams.set('sort', type)
+    window.history.pushState({}, null, unescape(url.href))
+}
+
+const getCollapsedCategory = (renderCollapsed) => {
+    let categories
+    if (typeof window !== 'undefined') {
+        const url = new URL(window.location.href)
+        const collapsedItems = new URLSearchParams(url.search).get('collapsed')
+        switch (true) {
+        case !renderCollapsed && collapsedItems === null:
+            categories = ['passed']
+            break
+        case collapsedItems?.length === 0 || /^["']{2}$/.test(collapsedItems):
+            categories = []
+            break
+        case /^all$/.test(collapsedItems) || collapsedItems === null && /^all$/.test(renderCollapsed):
+            categories = [...possibleFilters]
+            break
+        default:
+            categories = collapsedItems?.split(',').map((item) => item.toLowerCase()) || renderCollapsed
+            break
+        }
+    } else {
+        categories = []
+    }
+    return categories
+}
+
+const getSortDirection = () => JSON.parse(sessionStorage.getItem('sortAsc')) || false
+const setSortDirection = (ascending) => sessionStorage.setItem('sortAsc', ascending)
+
+const getCollapsedIds = () => JSON.parse(sessionStorage.getItem('collapsedIds')) || []
+const setCollapsedIds = (list) => sessionStorage.setItem('collapsedIds', JSON.stringify(list))
+
+module.exports = {
+    getVisible,
+    hideCategory,
+    showCategory,
+    getCollapsedIds,
+    setCollapsedIds,
+    getSort,
+    setSort,
+    getSortDirection,
+    setSortDirection,
+    getCollapsedCategory,
+    possibleFilters,
+}
+
+},{}]},{},[4]);
+    </script>
+  </footer>
+</html>

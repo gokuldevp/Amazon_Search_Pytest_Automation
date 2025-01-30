@@ -41,10 +41,10 @@ run.bat
 ```
 
 ## Tools and Frameworks Used
-Selenium: For automating the web crawling and functional testing.
-Python: Primary language used for scripting.
-pytest: For running the tests.
-CSV: For storing extracted product details.
+* Selenium: For automating the web crawling and functional testing.
+* Python: Primary language used for scripting.
+* pytest: For running the tests.
+* CSV: For storing extracted product details.
 
 ## Steps to Execute the Script
 1. Step 1: Clone the Repository
@@ -66,7 +66,7 @@ Double-click the install_package.bat file or run the following command from the 
 install_package.bat
 ```
 
-3. Run the tests
+3. Step 3: Run the tests
 There are two ways to run the test for this project:
 * Option 1: Using Terminal (Manual Method)
 ```cmd
@@ -86,6 +86,6 @@ Double-click the run.bat file or run the following command from the terminal or 
 ```cmd
 run.bat
 ```
-4. Check the Output
+4. Step 4: Check the Output
 * The extracted product information will be saved in product_info.csv located in the test_data/ folder
 * Logs and screenshots will be stored in the Reports/2025_01_30/ folder

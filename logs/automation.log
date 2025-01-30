@@ -283,3 +283,157 @@
 01/30/2025 03:51:55 PM: INFO: chrome :: Product details section is present.
 01/30/2025 03:51:59 PM: INFO: Closing the Chrome Browser
 01/30/2025 03:51:59 PM: INFO: Closing the Chrome Browser
+01/30/2025 04:02:42 PM: INFO: Launching Chrome Browser
+01/30/2025 04:02:42 PM: INFO: Info :: chrome :: Navigating to Amazon home page.
+01/30/2025 04:02:50 PM: INFO: Info :: chrome :: Amazon home page loaded successfully.
+01/30/2025 04:02:50 PM: INFO: Info :: chrome :: Attempting to search for: mobile
+01/30/2025 04:02:55 PM: INFO: Info :: chrome :: Search executed successfully.
+01/30/2025 04:02:55 PM: INFO: chrome :: Starting to extract product information.
+01/30/2025 04:02:55 PM: INFO: chrome :: Found product details in the search results.
+01/30/2025 04:02:55 PM: INFO: chrome :: Finished extracting product information.
+01/30/2025 04:02:55 PM: INFO: chrome :: Attempting to click the Next Page link.
+01/30/2025 04:02:56 PM: INFO: chrome :: Successfully clicked the Next Page link.
+01/30/2025 04:02:56 PM: INFO: chrome :: Starting to extract product information.
+01/30/2025 04:02:58 PM: INFO: chrome :: Found product details in the search results.
+01/30/2025 04:02:59 PM: INFO: chrome :: Finished extracting product information.
+01/30/2025 04:02:59 PM: INFO: chrome :: Saving product information for mobile.
+01/30/2025 04:02:59 PM: INFO: chrome :: Product information for mobile saved successfully to D:\Interview Assignment\Four_Junctions\four_junctions_selenium_assignment\test_data\product_info.csv.
+01/30/2025 04:02:59 PM: INFO: Info :: chrome :: Navigating to Amazon home page.
+01/30/2025 04:03:01 PM: INFO: Info :: chrome :: Amazon home page loaded successfully.
+01/30/2025 04:03:01 PM: INFO: Info :: chrome :: Attempting to search for: laptop
+01/30/2025 04:03:04 PM: INFO: Info :: chrome :: Search executed successfully.
+01/30/2025 04:03:04 PM: INFO: chrome :: Starting to extract product information.
+01/30/2025 04:03:04 PM: INFO: chrome :: Found product details in the search results.
+01/30/2025 04:03:05 PM: INFO: chrome :: Finished extracting product information.
+01/30/2025 04:03:05 PM: INFO: chrome :: Attempting to click the Next Page link.
+01/30/2025 04:03:05 PM: INFO: chrome :: Successfully clicked the Next Page link.
+01/30/2025 04:03:05 PM: INFO: chrome :: Starting to extract product information.
+01/30/2025 04:03:07 PM: INFO: chrome :: Found product details in the search results.
+01/30/2025 04:03:07 PM: INFO: chrome :: Finished extracting product information.
+01/30/2025 04:03:07 PM: INFO: chrome :: Saving product information for laptop.
+01/30/2025 04:03:07 PM: INFO: chrome :: Product information for laptop saved successfully to D:\Interview Assignment\Four_Junctions\four_junctions_selenium_assignment\test_data\product_info.csv.
+01/30/2025 04:03:07 PM: INFO: Info :: chrome :: Navigating to Amazon home page.
+01/30/2025 04:03:09 PM: INFO: Info :: chrome :: Amazon home page loaded successfully.
+01/30/2025 04:03:09 PM: INFO: Info :: chrome :: Attempting to search for: headphones
+01/30/2025 04:03:12 PM: INFO: Info :: chrome :: Search executed successfully.
+01/30/2025 04:03:12 PM: INFO: chrome :: Starting to extract product information.
+01/30/2025 04:03:12 PM: INFO: chrome :: Found product details in the search results.
+01/30/2025 04:03:13 PM: INFO: chrome :: Finished extracting product information.
+01/30/2025 04:03:13 PM: INFO: chrome :: Attempting to click the Next Page link.
+01/30/2025 04:03:13 PM: INFO: chrome :: Successfully clicked the Next Page link.
+01/30/2025 04:03:13 PM: INFO: chrome :: Starting to extract product information.
+01/30/2025 04:03:15 PM: INFO: chrome :: Found product details in the search results.
+01/30/2025 04:03:16 PM: INFO: chrome :: Finished extracting product information.
+01/30/2025 04:03:16 PM: INFO: chrome :: Saving product information for headphones.
+01/30/2025 04:03:16 PM: INFO: chrome :: Product information for headphones saved successfully to D:\Interview Assignment\Four_Junctions\four_junctions_selenium_assignment\test_data\product_info.csv.
+01/30/2025 04:03:18 PM: INFO: Closing the Chrome Browser
+01/30/2025 04:03:18 PM: INFO: ====== WebDriver manager ======
+01/30/2025 04:03:19 PM: INFO: Get LATEST chromedriver version for google-chrome
+01/30/2025 04:03:19 PM: INFO: Get LATEST chromedriver version for google-chrome
+01/30/2025 04:03:19 PM: INFO: Driver [C:\Users\Gokul Dev P\.wdm\drivers\chromedriver\win64\132.0.6834.159\chromedriver-win32/chromedriver.exe] found in cache
+01/30/2025 04:03:21 PM: INFO: Launching Chrome Browser
+01/30/2025 04:03:21 PM: INFO: Launching Chrome Browser
+01/30/2025 04:03:21 PM: INFO: Info :: chrome :: Navigating to Amazon home page.
+01/30/2025 04:03:21 PM: INFO: Info :: chrome :: Navigating to Amazon home page.
+01/30/2025 04:03:31 PM: INFO: Info :: chrome :: Amazon home page loaded successfully.
+01/30/2025 04:03:31 PM: INFO: Info :: chrome :: Amazon home page loaded successfully.
+01/30/2025 04:03:31 PM: INFO: Info :: chrome :: Attempting to search for: mobile
+01/30/2025 04:03:31 PM: INFO: Info :: chrome :: Attempting to search for: mobile
+01/30/2025 04:03:35 PM: INFO: Info :: chrome :: Search executed successfully.
+01/30/2025 04:03:35 PM: INFO: Info :: chrome :: Search executed successfully.
+01/30/2025 04:03:35 PM: INFO: chrome :: Attempting to retrieve the name of the first product.
+01/30/2025 04:03:35 PM: INFO: chrome :: Attempting to retrieve the name of the first product.
+01/30/2025 04:03:35 PM: INFO: chrome :: First product name retrieved successfully
+01/30/2025 04:03:35 PM: INFO: chrome :: First product name retrieved successfully
+01/30/2025 04:03:35 PM: INFO: chrome :: Attempting to click the first product.
+01/30/2025 04:03:35 PM: INFO: chrome :: Attempting to click the first product.
+01/30/2025 04:03:35 PM: INFO: chrome :: First product link clicked successfully.
+01/30/2025 04:03:35 PM: INFO: chrome :: First product link clicked successfully.
+01/30/2025 04:03:36 PM: INFO: chrome :: Switched to the new tab successfully.
+01/30/2025 04:03:36 PM: INFO: chrome :: Switched to the new tab successfully.
+01/30/2025 04:03:36 PM: INFO: chrome :: Attempting to verify product page is loaded for iQOO Z9x 5G (Tornado Green, 6GB RAM, 128GB Storage) | Snapdragon 6 Gen 1 with 560k+ AnTuTu Score | 6000mAh Battery with 7.99mm Slim Design | 44W FlashCharge.
+01/30/2025 04:03:36 PM: INFO: chrome :: Attempting to verify product page is loaded for iQOO Z9x 5G (Tornado Green, 6GB RAM, 128GB Storage) | Snapdragon 6 Gen 1 with 560k+ AnTuTu Score | 6000mAh Battery with 7.99mm Slim Design | 44W FlashCharge.
+01/30/2025 04:03:42 PM: INFO: chrome :: Product page loaded successfully.
+01/30/2025 04:03:42 PM: INFO: chrome :: Product page loaded successfully.
+01/30/2025 04:03:42 PM: INFO: chrome :: Attempting to verify presence of add to cart in the product details page.
+01/30/2025 04:03:42 PM: INFO: chrome :: Attempting to verify presence of add to cart in the product details page.
+01/30/2025 04:03:42 PM: INFO: chrome :: Product page loaded successfully.
+01/30/2025 04:03:42 PM: INFO: chrome :: Product page loaded successfully.
+01/30/2025 04:03:42 PM: INFO: chrome :: Attempting to verify presence of product overview.
+01/30/2025 04:03:42 PM: INFO: chrome :: Attempting to verify presence of product overview.
+01/30/2025 04:03:42 PM: INFO: chrome :: Product overview section is present.
+01/30/2025 04:03:42 PM: INFO: chrome :: Product overview section is present.
+01/30/2025 04:03:42 PM: INFO: chrome :: Attempting to verify presence of product details.
+01/30/2025 04:03:42 PM: INFO: chrome :: Attempting to verify presence of product details.
+01/30/2025 04:03:42 PM: INFO: chrome :: Product details section is present.
+01/30/2025 04:03:42 PM: INFO: chrome :: Product details section is present.
+01/30/2025 04:03:42 PM: INFO: Info :: chrome :: Navigating to Amazon home page.
+01/30/2025 04:03:42 PM: INFO: Info :: chrome :: Navigating to Amazon home page.
+01/30/2025 04:03:44 PM: INFO: Info :: chrome :: Amazon home page loaded successfully.
+01/30/2025 04:03:44 PM: INFO: Info :: chrome :: Amazon home page loaded successfully.
+01/30/2025 04:03:44 PM: INFO: Info :: chrome :: Attempting to search for: laptop
+01/30/2025 04:03:44 PM: INFO: Info :: chrome :: Attempting to search for: laptop
+01/30/2025 04:03:47 PM: INFO: Info :: chrome :: Search executed successfully.
+01/30/2025 04:03:47 PM: INFO: Info :: chrome :: Search executed successfully.
+01/30/2025 04:03:47 PM: INFO: chrome :: Attempting to retrieve the name of the first product.
+01/30/2025 04:03:47 PM: INFO: chrome :: Attempting to retrieve the name of the first product.
+01/30/2025 04:03:47 PM: INFO: chrome :: First product name retrieved successfully
+01/30/2025 04:03:47 PM: INFO: chrome :: First product name retrieved successfully
+01/30/2025 04:03:47 PM: INFO: chrome :: Attempting to click the first product.
+01/30/2025 04:03:47 PM: INFO: chrome :: Attempting to click the first product.
+01/30/2025 04:03:47 PM: INFO: chrome :: First product link clicked successfully.
+01/30/2025 04:03:47 PM: INFO: chrome :: First product link clicked successfully.
+01/30/2025 04:03:48 PM: INFO: chrome :: Switched to the new tab successfully.
+01/30/2025 04:03:48 PM: INFO: chrome :: Switched to the new tab successfully.
+01/30/2025 04:03:48 PM: INFO: chrome :: Attempting to verify product page is loaded for Lenovo IdeaPad Slim 3 12th Gen Intel Core i5-12450H 15.6" (39.6cm) FHD IPS Thin & Light Laptop (16GB/512GB SSD/Intel UHD Graphics/Win 11/MSO 21/Backlit KB/1 Yr ADP Free/Grey/1.6Kg), 83ER008DIN.
+01/30/2025 04:03:48 PM: INFO: chrome :: Attempting to verify product page is loaded for Lenovo IdeaPad Slim 3 12th Gen Intel Core i5-12450H 15.6" (39.6cm) FHD IPS Thin & Light Laptop (16GB/512GB SSD/Intel UHD Graphics/Win 11/MSO 21/Backlit KB/1 Yr ADP Free/Grey/1.6Kg), 83ER008DIN.
+01/30/2025 04:03:54 PM: INFO: chrome :: Product page loaded successfully.
+01/30/2025 04:03:54 PM: INFO: chrome :: Product page loaded successfully.
+01/30/2025 04:03:54 PM: INFO: chrome :: Attempting to verify presence of add to cart in the product details page.
+01/30/2025 04:03:54 PM: INFO: chrome :: Attempting to verify presence of add to cart in the product details page.
+01/30/2025 04:03:54 PM: INFO: chrome :: Product page loaded successfully.
+01/30/2025 04:03:54 PM: INFO: chrome :: Product page loaded successfully.
+01/30/2025 04:03:54 PM: INFO: chrome :: Attempting to verify presence of product overview.
+01/30/2025 04:03:54 PM: INFO: chrome :: Attempting to verify presence of product overview.
+01/30/2025 04:03:54 PM: INFO: chrome :: Product overview section is present.
+01/30/2025 04:03:54 PM: INFO: chrome :: Product overview section is present.
+01/30/2025 04:03:54 PM: INFO: chrome :: Attempting to verify presence of product details.
+01/30/2025 04:03:54 PM: INFO: chrome :: Attempting to verify presence of product details.
+01/30/2025 04:03:54 PM: INFO: chrome :: Product details section is present.
+01/30/2025 04:03:54 PM: INFO: chrome :: Product details section is present.
+01/30/2025 04:03:54 PM: INFO: Info :: chrome :: Navigating to Amazon home page.
+01/30/2025 04:03:54 PM: INFO: Info :: chrome :: Navigating to Amazon home page.
+01/30/2025 04:03:56 PM: INFO: Info :: chrome :: Amazon home page loaded successfully.
+01/30/2025 04:03:56 PM: INFO: Info :: chrome :: Amazon home page loaded successfully.
+01/30/2025 04:03:56 PM: INFO: Info :: chrome :: Attempting to search for: headphones
+01/30/2025 04:03:56 PM: INFO: Info :: chrome :: Attempting to search for: headphones
+01/30/2025 04:03:59 PM: INFO: Info :: chrome :: Search executed successfully.
+01/30/2025 04:03:59 PM: INFO: Info :: chrome :: Search executed successfully.
+01/30/2025 04:03:59 PM: INFO: chrome :: Attempting to retrieve the name of the first product.
+01/30/2025 04:03:59 PM: INFO: chrome :: Attempting to retrieve the name of the first product.
+01/30/2025 04:03:59 PM: INFO: chrome :: First product name retrieved successfully
+01/30/2025 04:03:59 PM: INFO: chrome :: First product name retrieved successfully
+01/30/2025 04:03:59 PM: INFO: chrome :: Attempting to click the first product.
+01/30/2025 04:03:59 PM: INFO: chrome :: Attempting to click the first product.
+01/30/2025 04:03:59 PM: INFO: chrome :: First product link clicked successfully.
+01/30/2025 04:03:59 PM: INFO: chrome :: First product link clicked successfully.
+01/30/2025 04:03:59 PM: INFO: chrome :: Switched to the new tab successfully.
+01/30/2025 04:03:59 PM: INFO: chrome :: Switched to the new tab successfully.
+01/30/2025 04:03:59 PM: INFO: chrome :: Attempting to verify product page is loaded for Noise Newly Launched Airwave Max 5 Wireless Over-Ear Headphones with Adaptive Hybrid ANC (up to 50dB), HFA Tech, 80H Playtime, Dual Pairing(Calm Beige).
+01/30/2025 04:03:59 PM: INFO: chrome :: Attempting to verify product page is loaded for Noise Newly Launched Airwave Max 5 Wireless Over-Ear Headphones with Adaptive Hybrid ANC (up to 50dB), HFA Tech, 80H Playtime, Dual Pairing(Calm Beige).
+01/30/2025 04:04:05 PM: INFO: chrome :: Product page loaded successfully.
+01/30/2025 04:04:05 PM: INFO: chrome :: Product page loaded successfully.
+01/30/2025 04:04:05 PM: INFO: chrome :: Attempting to verify presence of add to cart in the product details page.
+01/30/2025 04:04:05 PM: INFO: chrome :: Attempting to verify presence of add to cart in the product details page.
+01/30/2025 04:04:05 PM: INFO: chrome :: Product page loaded successfully.
+01/30/2025 04:04:05 PM: INFO: chrome :: Product page loaded successfully.
+01/30/2025 04:04:05 PM: INFO: chrome :: Attempting to verify presence of product overview.
+01/30/2025 04:04:05 PM: INFO: chrome :: Attempting to verify presence of product overview.
+01/30/2025 04:04:05 PM: INFO: chrome :: Product overview section is present.
+01/30/2025 04:04:05 PM: INFO: chrome :: Product overview section is present.
+01/30/2025 04:04:05 PM: INFO: chrome :: Attempting to verify presence of product details.
+01/30/2025 04:04:05 PM: INFO: chrome :: Attempting to verify presence of product details.
+01/30/2025 04:04:05 PM: INFO: chrome :: Product details section is present.
+01/30/2025 04:04:05 PM: INFO: chrome :: Product details section is present.
+01/30/2025 04:04:07 PM: INFO: Closing the Chrome Browser
+01/30/2025 04:04:07 PM: INFO: Closing the Chrome Browser

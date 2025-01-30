@@ -62,7 +62,6 @@ class SearchResultPage:
                         "URL": urls[i].get_attribute("href") if i < len(urls) else "N/A"
                     }
                     products_info.append(product_info)
-                    self._handle_logger(f"Extracted info for product {i + 1}: {product_info}")
                 except IndexError as e:
                     self._handle_error(f"Missing data for product {i + 1}.")
                     raise e
@@ -127,39 +126,6 @@ class SearchResultPage:
         except Exception as e:
             self._handle_error(f"Error saving product information. Error: {str(e)}")
             raise e
-
-
-    # def save_product_information_to_csv(self, product_name, product_info):
-    #     """
-    #     Saves extracted product information to a CSV file.
-
-    #     Args:
-    #         product_name (str): The name of the product.
-    #         product_info (list): List of dictionaries containing product details.
-    #     """
-    #     self._handle_logger(f"Saving product information for {product_name}.")
-
-    #     try:
-    #         file_path = os.path.join(os.path.dirname(os.path.abspath(__file__).replace('page_objects\\', '')),
-    #                                  'test_data', 'product_info.csv')
-
-    #         file_exists = os.path.isfile(file_path)
-
-    #         with open(file_path, 'a', newline='', encoding='utf-8') as csvfile:
-    #             csvfile.write(f'\nProduct Name: {product_name}\n')
-    #             fieldnames = ['Name', 'Price', 'Rating', 'URL']
-    #             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-    #             if not file_exists:
-    #                 writer.writeheader()
-
-    #             for product in product_info:
-    #                 writer.writerow(product)
-
-    #         self._handle_logger(f"Product information for {product_name} saved successfully to {file_path}.")
-    #     except Exception as e:
-    #         self._handle_error(f"Error saving product information. Error: {str(e)}")
-    #         raise e
 
     def click_next_page(self):
         """

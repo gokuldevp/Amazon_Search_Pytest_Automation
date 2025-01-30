@@ -1,0 +1,9 @@
+pytest
+selenium
+webdriver-manager
+pytest-xdist
+pytest-html
+pytest-dependency
+pytest-selenium
+pytest-ordering
+pandas

@@ -39,6 +39,17 @@ install_package.bat
 requirements.txt
 run.bat
 ```
+## Features
+* Automated Crawling: Automates the crawling of product pages on the sample e-commerce website (Amazon India).
+* Product Information Extraction: Extracts key product details such as name, price, ratings, and availability from each product page.
+* Functional Testing: Validates if the expected elements like product title, price, etc., are present on the product detail page.
+* CSV Output: Stores the extracted product details in a structured CSV format (product_info.csv).
+
+## Prerequisites
+* Python 3.8+
+* Required Python Libraries listed in requirements.txt
+* Pip
+* Google Chrome or any other supported browser
 
 ## Tools and Frameworks Used
 * Selenium: For automating the web crawling and functional testing.
@@ -89,3 +100,5 @@ run.bat
 4. Step 4: Check the Output
 * The extracted product information will be saved in product_info.csv located in the test_data/ folder
 * Logs and screenshots will be stored in the Reports/2025_01_30/ folder
+
+##

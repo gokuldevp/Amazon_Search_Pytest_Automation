@@ -1,4 +1,6 @@
 # Automated Crawling and Testing for a Sample Ecommerce Website
+
+## Project Structure
 ```markdown
 Reports/
   ├── 2025_01_30/

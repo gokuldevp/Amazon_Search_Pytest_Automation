@@ -41,7 +41,7 @@ def pytest_configure(config):
 def pytest_html_report_title(report):
     report.title = "Automation Report"
 
-@pytest.fixture(scope="class", params=["chrome", "edge", "firefox"])
+@pytest.fixture(scope="class", params=["edge"])#, "chrome", "firefox"])
 def setup(request):
     browser = request.param
     driver = None

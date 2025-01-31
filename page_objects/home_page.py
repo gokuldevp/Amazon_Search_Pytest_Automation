@@ -19,75 +19,49 @@ class HomePage:
         self.logger = logger
         self.browser_name = self.driver.capabilities.get('browserName', 'Unknown')
 
-    # Logger functions
-    def _handle_logger(self, info):
-        """Log general information messages."""
-        self.logger.info(f"Info :: {self.browser_name} :: {info}")
-
-    def _handle_error(self, error):
-        """Log error messages."""
-        self.logger.error(f"Error :: {self.browser_name} :: {error}")
+    def _log(self, message, is_error=False):
+        """Log messages with appropriate severity."""
+        log_method = self.logger.error if is_error else self.logger.info
+        log_method(f"{'Error' if is_error else 'Info'} :: {self.browser_name} :: {message}")
 
     def open_amazon_website(self, device='desktop'):
         """
         Opens the Amazon home page and verifies essential elements.
 
-        :parameter:
-            device (str): Name of the device under test (e.g., desktop, tablet, mobile)
-
-        :returns:
-            bool: True if both the logo and banner are displayed, False otherwise.
-
-        :raises:
-            TimeoutException: If loading the page or elements times out.
-            WebDriverException: If there is a WebDriver-related error.
-            Exception: For any unexpected errors.
+        :param device: Name of the device under test (e.g., desktop, tablet, mobile)
+        :returns: bool: True if both the logo and banner are displayed, False otherwise.
+        :raises: TimeoutException, WebDriverException, Exception
         """
-        self._handle_logger("Navigating to Amazon home page.")
+        self._log("Navigating to Amazon home page.")
 
         try:
-            # Set the window size based on the device
-            self.driver.set_window_size(width=SCREEN_SIZES[device][0], height=SCREEN_SIZES[device][1])
-
-            # Navigate to the Amazon home page
+            self.driver.set_window_size(*SCREEN_SIZES[device])
             self.driver.get(BASE_URL)
 
-            # Verify the essential elements
             logo_displayed = self.wait.until(EC.presence_of_element_located((By.ID, self.LOGO_ID))).is_displayed()
             banner_displayed = self.wait.until(EC.presence_of_element_located((By.ID, self.DESKTOP_BANNER_ID))).is_displayed()
 
-            # Check if both elements are displayed
             if logo_displayed and banner_displayed:
-                self._handle_logger("Amazon home page loaded successfully.")
+                self._log("Amazon home page loaded successfully.")
                 return True
 
-        except TimeoutException as e:
-            self._handle_error(f"Timeout while loading Amazon home page")
+        except (TimeoutException, WebDriverException) as e:
+            self._log("Error while loading Amazon home page", is_error=True)
             raise e
-        
-        except WebDriverException as e:
-            self._handle_error(f"WebDriver error")
-            raise e
-        
         except Exception as e:
-            self._handle_error(f"Unexpected error while opening Amazon")
+            self._log("Unexpected error while opening Amazon", is_error=True)
             raise e
 
         return False
 
-
-    # Perform a product search
     def search_product(self, search):
         """
         Searches for a product on Amazon.
 
-        Args:
-            search (str): The search query.
-
-        Returns:
-            bool: True if search was performed successfully, False otherwise.
+        :param search: The search query.
+        :returns: bool: True if search was performed successfully, False otherwise.
         """
-        self._handle_logger(f"Attempting to search for: {search}")
+        self._log(f"Attempting to search for: {search}")
 
         try:
             search_box = self.wait.until(EC.element_to_be_clickable((By.ID, self.INPUT_SEARCH_ID)))
@@ -97,16 +71,12 @@ class HomePage:
             search_button = self.wait.until(EC.element_to_be_clickable((By.ID, self.BUTTON_SEARCH_ID)))
             search_button.click()
 
-            self._handle_logger("Search executed successfully.")
+            self._log("Search executed successfully.")
             return True
 
-        except TimeoutException as e:
-            self._handle_error("Search box or search button not found.")
-
-        except NoSuchElementException as e:
-            self._handle_error("Search elements not present on the page.")
-
+        except (TimeoutException, NoSuchElementException) as e:
+            self._log("Search elements not found on the page.", is_error=True)
         except Exception as e:
-            self._handle_error(f"Unexpected error during search: {str(e)}")
+            self._log(f"Unexpected error during search: {str(e)}", is_error=True)
 
         return False

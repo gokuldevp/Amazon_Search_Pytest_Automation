@@ -5733,3 +5733,874 @@
 01/31/2025 09:32:30 PM: WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001F8ADAE3020>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/3b75914418277a207315e22c87f76bfe/screenshot
 01/31/2025 09:32:30 PM: WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001F8ADAE3020>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/3b75914418277a207315e22c87f76bfe/screenshot
 01/31/2025 09:32:30 PM: WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001F8ADAE3020>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/3b75914418277a207315e22c87f76bfe/screenshot
+01/31/2025 10:32:43 PM: INFO: Launching Edge Browser
+01/31/2025 10:32:43 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:32:46 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:32:46 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: mobile
+01/31/2025 10:32:49 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:32:49 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:32:49 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:32:49 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:32:49 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:32:50 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:32:50 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for Samsung Galaxy S23 5G AI Smartphone (Green, 8GB, 128GB Storage).
+01/31/2025 10:32:55 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:32:55 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:33:11 PM: ERROR: Error :: MicrosoftEdge :: Error verifying presence of Add to Cart button: Message: 
+Stacktrace:
+	GetHandleVerifier [0x00007FF692800AF5+13637]
+	Microsoft::Applications::Events::EventProperty::empty [0x00007FF692A8BC04+2078868]
+	Microsoft::Applications::Events::EventProperty::empty [0x00007FF6929E66E6+1401718]
+	(No symbol) [0x00007FF6925BD83C]
+	(No symbol) [0x00007FF6925BD9FB]
+	(No symbol) [0x00007FF6925FB027]
+	(No symbol) [0x00007FF6925DDE0F]
+	(No symbol) [0x00007FF6925B3DA7]
+	(No symbol) [0x00007FF6925F88FD]
+	(No symbol) [0x00007FF6925DDA33]
+	(No symbol) [0x00007FF6925B32F4]
+	(No symbol) [0x00007FF6925B2626]
+	(No symbol) [0x00007FF6925B2EE1]
+	(No symbol) [0x00007FF69263E194]
+	(No symbol) [0x00007FF6926E607F]
+	(No symbol) [0x00007FF692641B83]
+	Microsoft::Applications::Events::EventProperty::to_string [0x00007FF692B481F9+269801]
+	Microsoft::Applications::Events::ILogConfiguration::operator* [0x00007FF6927971B1+519377]
+	Microsoft::Applications::Events::ILogConfiguration::operator* [0x00007FF6927924A4+499652]
+	Microsoft::Applications::Events::ILogConfiguration::operator* [0x00007FF6927925E9+499977]
+	Microsoft::Applications::Events::ILogConfiguration::operator* [0x00007FF692787566+454790]
+	BaseThreadInitThunk [0x00007FFFDFCF259D+29]
+	RtlUserThreadStart [0x00007FFFE14EAF38+40]
+
+01/31/2025 10:33:12 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:33:14 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:33:14 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: mobile
+01/31/2025 10:33:16 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:33:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:33:16 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:33:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:33:17 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:33:17 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:33:17 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for Samsung Galaxy S23 5G AI Smartphone (Green, 8GB, 128GB Storage).
+01/31/2025 10:33:22 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:33:22 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:33:38 PM: ERROR: Error :: MicrosoftEdge :: Error verifying presence of Add to Cart button: Message: 
+Stacktrace:
+	GetHandleVerifier [0x00007FF692800AF5+13637]
+	Microsoft::Applications::Events::EventProperty::empty [0x00007FF692A8BC04+2078868]
+	Microsoft::Applications::Events::EventProperty::empty [0x00007FF6929E66E6+1401718]
+	(No symbol) [0x00007FF6925BD83C]
+	(No symbol) [0x00007FF6925BD9FB]
+	(No symbol) [0x00007FF6925FB027]
+	(No symbol) [0x00007FF6925DDE0F]
+	(No symbol) [0x00007FF6925B3DA7]
+	(No symbol) [0x00007FF6925F88FD]
+	(No symbol) [0x00007FF6925DDA33]
+	(No symbol) [0x00007FF6925B32F4]
+	(No symbol) [0x00007FF6925B2626]
+	(No symbol) [0x00007FF6925B2EE1]
+	(No symbol) [0x00007FF69263E194]
+	(No symbol) [0x00007FF6926E607F]
+	(No symbol) [0x00007FF692641B83]
+	Microsoft::Applications::Events::EventProperty::to_string [0x00007FF692B481F9+269801]
+	Microsoft::Applications::Events::ILogConfiguration::operator* [0x00007FF6927971B1+519377]
+	Microsoft::Applications::Events::ILogConfiguration::operator* [0x00007FF6927924A4+499652]
+	Microsoft::Applications::Events::ILogConfiguration::operator* [0x00007FF6927925E9+499977]
+	Microsoft::Applications::Events::ILogConfiguration::operator* [0x00007FF692787566+454790]
+	BaseThreadInitThunk [0x00007FFFDFCF259D+29]
+	RtlUserThreadStart [0x00007FFFE14EAF38+40]
+
+01/31/2025 10:33:38 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:33:40 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:33:40 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: mobile
+01/31/2025 10:33:43 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:33:43 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:33:43 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:33:43 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:33:43 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:33:43 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:33:43 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for Samsung Galaxy S23 5G AI Smartphone (Green, 8GB, 128GB Storage).
+01/31/2025 10:33:49 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:33:49 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:34:05 PM: ERROR: Error :: MicrosoftEdge :: Error verifying presence of Add to Cart button: Message: 
+Stacktrace:
+	GetHandleVerifier [0x00007FF692800AF5+13637]
+	Microsoft::Applications::Events::EventProperty::empty [0x00007FF692A8BC04+2078868]
+	Microsoft::Applications::Events::EventProperty::empty [0x00007FF6929E66E6+1401718]
+	(No symbol) [0x00007FF6925BD83C]
+	(No symbol) [0x00007FF6925BD9FB]
+	(No symbol) [0x00007FF6925FB027]
+	(No symbol) [0x00007FF6925DDE0F]
+	(No symbol) [0x00007FF6925B3DA7]
+	(No symbol) [0x00007FF6925F88FD]
+	(No symbol) [0x00007FF6925DDA33]
+	(No symbol) [0x00007FF6925B32F4]
+	(No symbol) [0x00007FF6925B2626]
+	(No symbol) [0x00007FF6925B2EE1]
+	(No symbol) [0x00007FF69263E194]
+	(No symbol) [0x00007FF6926E607F]
+	(No symbol) [0x00007FF692641B83]
+	Microsoft::Applications::Events::EventProperty::to_string [0x00007FF692B481F9+269801]
+	Microsoft::Applications::Events::ILogConfiguration::operator* [0x00007FF6927971B1+519377]
+	Microsoft::Applications::Events::ILogConfiguration::operator* [0x00007FF6927924A4+499652]
+	Microsoft::Applications::Events::ILogConfiguration::operator* [0x00007FF6927925E9+499977]
+	Microsoft::Applications::Events::ILogConfiguration::operator* [0x00007FF692787566+454790]
+	BaseThreadInitThunk [0x00007FFFDFCF259D+29]
+	RtlUserThreadStart [0x00007FFFE14EAF38+40]
+
+01/31/2025 10:34:05 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:34:07 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:34:07 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: laptop
+01/31/2025 10:34:12 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:34:12 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:34:12 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:34:12 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:34:13 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:34:13 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:34:13 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for HP Victus, 13th Gen Intel Core i5-13420H, 6GB NVIDIA RTX 4050, 16GB DDR4, 512GB SSD (Win11, Office 21, Silver, 2.29kg) 144Hz, 9MS, IPS, 15.6-inch(39.6cm) FHD Gaming Laptop, Enhanced Cooling, fa1319TX.
+01/31/2025 10:34:20 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:34:20 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:34:20 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:34:20 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:34:20 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:34:20 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:34:20 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:34:20 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:34:20 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:34:20 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:34:24 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:34:24 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: laptop
+01/31/2025 10:34:32 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:34:32 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:34:32 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:34:32 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:34:32 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:34:32 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:34:32 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for HP Victus, 13th Gen Intel Core i5-13420H, 6GB NVIDIA RTX 4050, 16GB DDR4, 512GB SSD (Win11, Office 21, Silver, 2.29kg) 144Hz, 9MS, IPS, 15.6-inch(39.6cm) FHD Gaming Laptop, Enhanced Cooling, fa1319TX.
+01/31/2025 10:34:40 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:34:40 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:34:40 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:34:40 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:34:40 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:34:40 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:34:40 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:34:40 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:34:40 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:34:40 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:34:44 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:34:44 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: laptop
+01/31/2025 10:34:52 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:34:52 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:34:52 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:34:52 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:34:52 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:34:52 PM: ERROR: Error :: MicrosoftEdge :: Failed to switch to the new tab.
+01/31/2025 10:34:55 PM: INFO: Closing the Edge Browser
+01/31/2025 10:35:14 PM: INFO: Launching Edge Browser
+01/31/2025 10:35:14 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:35:18 PM: INFO: Launching Edge Browser
+01/31/2025 10:35:18 PM: INFO: Launching Edge Browser
+01/31/2025 10:35:18 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:35:18 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:35:24 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:35:24 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: mobile
+01/31/2025 10:35:28 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:35:28 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: mobile
+01/31/2025 10:35:28 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:35:28 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: mobile
+01/31/2025 10:35:30 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:35:30 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:35:30 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:35:30 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:35:31 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:35:32 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:35:32 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for Samsung Galaxy S23 5G AI Smartphone (Green, 8GB, 128GB Storage).
+01/31/2025 10:35:33 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:35:33 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:35:33 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:35:33 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:35:33 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:35:33 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:35:33 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:35:33 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:35:34 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:35:34 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:35:35 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:35:35 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for Samsung Galaxy S23 5G AI Smartphone (Green, 8GB, 128GB Storage).
+01/31/2025 10:35:35 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:35:35 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for Samsung Galaxy S23 5G AI Smartphone (Green, 8GB, 128GB Storage).
+01/31/2025 10:35:44 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:35:44 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:35:45 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:35:45 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:35:46 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:35:46 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:35:46 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:35:46 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:35:46 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:35:47 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:35:47 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:35:47 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:35:47 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:35:47 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:35:47 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:35:47 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:35:48 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:35:48 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:35:48 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:35:48 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:35:50 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:35:50 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:35:50 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:35:50 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:35:50 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:35:50 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:35:50 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:35:50 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:35:50 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:35:50 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:35:54 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:35:54 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: laptop
+01/31/2025 10:35:54 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:35:54 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: laptop
+01/31/2025 10:35:56 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:35:56 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: laptop
+01/31/2025 10:36:00 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:36:00 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:36:00 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:36:00 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:36:01 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:36:02 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:36:02 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for HP Victus, 13th Gen Intel Core i5-13420H, 6GB NVIDIA RTX 4050, 16GB DDR4, 512GB SSD (Win11, Office 21, Silver, 2.29kg) 144Hz, 9MS, IPS, 15.6-inch(39.6cm) FHD Gaming Laptop, Enhanced Cooling, fa1319TX.
+01/31/2025 10:36:02 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:36:02 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:36:02 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:36:02 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:36:03 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:36:03 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:36:03 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:36:03 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:36:03 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for HP Victus, 13th Gen Intel Core i5-13420H, 6GB NVIDIA RTX 4050, 16GB DDR4, 512GB SSD (Win11, Office 21, Silver, 2.29kg) 144Hz, 9MS, IPS, 15.6-inch(39.6cm) FHD Gaming Laptop, Enhanced Cooling, fa1319TX.
+01/31/2025 10:36:03 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:36:03 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:36:05 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:36:05 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:36:05 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for HP Victus, 13th Gen Intel Core i5-13420H, 6GB NVIDIA RTX 4050, 16GB DDR4, 512GB SSD (Win11, Office 21, Silver, 2.29kg) 144Hz, 9MS, IPS, 15.6-inch(39.6cm) FHD Gaming Laptop, Enhanced Cooling, fa1319TX.
+01/31/2025 10:36:13 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:36:13 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:36:13 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:36:13 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:36:13 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:36:13 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:36:13 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:36:13 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:36:13 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:36:13 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:36:14 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:36:14 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:36:15 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:36:15 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:36:15 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:36:15 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:36:15 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:36:15 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:36:15 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:36:15 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:36:16 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:36:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:36:16 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:36:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:36:16 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:36:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:36:16 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:36:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:36:16 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:36:16 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:36:22 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:36:22 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: headphones
+01/31/2025 10:36:24 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:36:24 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: headphones
+01/31/2025 10:36:25 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:36:25 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: headphones
+01/31/2025 10:36:33 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:36:34 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:36:34 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:36:34 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:36:34 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:36:34 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:36:34 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:36:34 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:36:35 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:36:35 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:36:35 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:36:35 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:36:35 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:36:35 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:36:36 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:36:36 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for boAt Rockerz 430 w/ 40mm Drivers, Beast Mode w/ 40ms Latency, 40hrs Playback, ENx Tech, Voice Assistant, BTv5.4, Adaptive Fit & Easy Access Controls, Bluetooth Over Ear Headphones(Black Sabre).
+01/31/2025 10:36:36 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:36:36 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for boAt Rockerz 430 w/ 40mm Drivers, Beast Mode w/ 40ms Latency, 40hrs Playback, ENx Tech, Voice Assistant, BTv5.4, Adaptive Fit & Easy Access Controls, Bluetooth Over Ear Headphones(Black Sabre).
+01/31/2025 10:36:36 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:36:37 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:36:37 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for boAt Rockerz 430 w/ 40mm Drivers, Beast Mode w/ 40ms Latency, 40hrs Playback, ENx Tech, Voice Assistant, BTv5.4, Adaptive Fit & Easy Access Controls, Bluetooth Over Ear Headphones(Black Sabre).
+01/31/2025 10:36:43 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:36:43 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:36:43 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:36:43 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:36:43 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:36:43 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:36:43 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:36:43 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:36:43 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:36:45 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:36:45 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:36:45 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:36:45 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:36:45 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:36:45 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:36:45 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:36:45 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:36:45 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:36:46 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:36:46 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:36:46 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:36:46 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:36:46 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:36:46 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:36:46 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:36:46 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:36:46 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:36:48 PM: INFO: Closing the Edge Browser
+01/31/2025 10:36:48 PM: INFO: Closing the Edge Browser
+01/31/2025 10:36:49 PM: INFO: Closing the Edge Browser
+01/31/2025 10:40:49 PM: INFO: Launching Edge Browser
+01/31/2025 10:40:49 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:40:52 PM: INFO: Launching Edge Browser
+01/31/2025 10:40:52 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:40:52 PM: INFO: Launching Edge Browser
+01/31/2025 10:40:53 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:40:58 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:40:58 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: mobile
+01/31/2025 10:41:00 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:41:00 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: laptop
+01/31/2025 10:41:01 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:41:01 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: mobile
+01/31/2025 10:41:06 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:41:06 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:41:06 PM: INFO: Info :: MicrosoftEdge :: Starting to extract product information.
+01/31/2025 10:41:06 PM: INFO: Info :: MicrosoftEdge :: Starting to extract product information.
+01/31/2025 10:41:06 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:41:06 PM: INFO: Info :: MicrosoftEdge :: Starting to extract product information.
+01/31/2025 10:41:06 PM: INFO: Info :: MicrosoftEdge :: Found product details in the search results.
+01/31/2025 10:41:06 PM: INFO: Info :: MicrosoftEdge :: Found product details in the search results.
+01/31/2025 10:41:06 PM: INFO: Info :: MicrosoftEdge :: Found product details in the search results.
+01/31/2025 10:41:08 PM: INFO: Info :: MicrosoftEdge :: Finished extracting product information.
+01/31/2025 10:41:08 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the Next Page link.
+01/31/2025 10:41:08 PM: INFO: Info :: MicrosoftEdge :: Finished extracting product information.
+01/31/2025 10:41:08 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the Next Page link.
+01/31/2025 10:41:08 PM: INFO: Info :: MicrosoftEdge :: Finished extracting product information.
+01/31/2025 10:41:08 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the Next Page link.
+01/31/2025 10:41:08 PM: INFO: Info :: MicrosoftEdge :: Successfully clicked the Next Page link.
+01/31/2025 10:41:08 PM: INFO: Info :: MicrosoftEdge :: Starting to extract product information.
+01/31/2025 10:41:09 PM: INFO: Info :: MicrosoftEdge :: Successfully clicked the Next Page link.
+01/31/2025 10:41:09 PM: INFO: Info :: MicrosoftEdge :: Starting to extract product information.
+01/31/2025 10:41:09 PM: INFO: Info :: MicrosoftEdge :: Successfully clicked the Next Page link.
+01/31/2025 10:41:09 PM: INFO: Info :: MicrosoftEdge :: Starting to extract product information.
+01/31/2025 10:41:10 PM: INFO: Info :: MicrosoftEdge :: Found product details in the search results.
+01/31/2025 10:41:10 PM: INFO: Info :: MicrosoftEdge :: Finished extracting product information.
+01/31/2025 10:41:10 PM: INFO: Info :: MicrosoftEdge :: Saving product information for mobile.
+01/31/2025 10:41:10 PM: INFO: Info :: MicrosoftEdge :: Product information for mobile saved successfully.
+01/31/2025 10:41:10 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:41:12 PM: INFO: Info :: MicrosoftEdge :: Found product details in the search results.
+01/31/2025 10:41:12 PM: INFO: Info :: MicrosoftEdge :: Found product details in the search results.
+01/31/2025 10:41:14 PM: INFO: Info :: MicrosoftEdge :: Finished extracting product information.
+01/31/2025 10:41:14 PM: INFO: Info :: MicrosoftEdge :: Saving product information for laptop.
+01/31/2025 10:41:14 PM: INFO: Info :: MicrosoftEdge :: Product information for laptop saved successfully.
+01/31/2025 10:41:14 PM: INFO: Info :: MicrosoftEdge :: Finished extracting product information.
+01/31/2025 10:41:14 PM: INFO: Info :: MicrosoftEdge :: Saving product information for mobile.
+01/31/2025 10:41:14 PM: INFO: Info :: MicrosoftEdge :: Product information for mobile saved successfully.
+01/31/2025 10:41:14 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:41:14 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:41:14 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:41:14 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: laptop
+01/31/2025 10:41:18 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:41:18 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: laptop
+01/31/2025 10:41:19 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:41:19 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: mobile
+01/31/2025 10:41:21 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:41:22 PM: INFO: Info :: MicrosoftEdge :: Starting to extract product information.
+01/31/2025 10:41:22 PM: INFO: Info :: MicrosoftEdge :: Found product details in the search results.
+01/31/2025 10:41:23 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:41:24 PM: INFO: Info :: MicrosoftEdge :: Starting to extract product information.
+01/31/2025 10:41:25 PM: INFO: Info :: MicrosoftEdge :: Finished extracting product information.
+01/31/2025 10:41:25 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the Next Page link.
+01/31/2025 10:41:25 PM: INFO: Info :: MicrosoftEdge :: Found product details in the search results.
+01/31/2025 10:41:25 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:41:25 PM: INFO: Info :: MicrosoftEdge :: Starting to extract product information.
+01/31/2025 10:41:26 PM: INFO: Info :: MicrosoftEdge :: Successfully clicked the Next Page link.
+01/31/2025 10:41:26 PM: INFO: Info :: MicrosoftEdge :: Starting to extract product information.
+01/31/2025 10:41:27 PM: INFO: Info :: MicrosoftEdge :: Found product details in the search results.
+01/31/2025 10:41:28 PM: INFO: Info :: MicrosoftEdge :: Finished extracting product information.
+01/31/2025 10:41:28 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the Next Page link.
+01/31/2025 10:41:28 PM: INFO: Info :: MicrosoftEdge :: Found product details in the search results.
+01/31/2025 10:41:28 PM: INFO: Info :: MicrosoftEdge :: Successfully clicked the Next Page link.
+01/31/2025 10:41:28 PM: INFO: Info :: MicrosoftEdge :: Starting to extract product information.
+01/31/2025 10:41:29 PM: INFO: Info :: MicrosoftEdge :: Finished extracting product information.
+01/31/2025 10:41:29 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the Next Page link.
+01/31/2025 10:41:30 PM: INFO: Info :: MicrosoftEdge :: Finished extracting product information.
+01/31/2025 10:41:30 PM: INFO: Info :: MicrosoftEdge :: Saving product information for laptop.
+01/31/2025 10:41:30 PM: INFO: Info :: MicrosoftEdge :: Product information for laptop saved successfully.
+01/31/2025 10:41:30 PM: INFO: Info :: MicrosoftEdge :: Successfully clicked the Next Page link.
+01/31/2025 10:41:30 PM: INFO: Info :: MicrosoftEdge :: Starting to extract product information.
+01/31/2025 10:41:31 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:41:33 PM: INFO: Info :: MicrosoftEdge :: Found product details in the search results.
+01/31/2025 10:41:34 PM: INFO: Info :: MicrosoftEdge :: Found product details in the search results.
+01/31/2025 10:41:34 PM: INFO: Info :: MicrosoftEdge :: Finished extracting product information.
+01/31/2025 10:41:34 PM: INFO: Info :: MicrosoftEdge :: Saving product information for mobile.
+01/31/2025 10:41:34 PM: INFO: Info :: MicrosoftEdge :: Product information for mobile saved successfully.
+01/31/2025 10:41:34 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:41:36 PM: INFO: Info :: MicrosoftEdge :: Finished extracting product information.
+01/31/2025 10:41:36 PM: INFO: Info :: MicrosoftEdge :: Saving product information for laptop.
+01/31/2025 10:41:36 PM: INFO: Info :: MicrosoftEdge :: Product information for laptop saved successfully.
+01/31/2025 10:41:36 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:41:36 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: headphones
+01/31/2025 10:41:36 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:41:39 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:41:39 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: headphones
+01/31/2025 10:41:40 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:41:40 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: headphones
+01/31/2025 10:41:41 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:41:42 PM: INFO: Info :: MicrosoftEdge :: Starting to extract product information.
+01/31/2025 10:41:43 PM: INFO: Info :: MicrosoftEdge :: Found product details in the search results.
+01/31/2025 10:41:44 PM: INFO: Info :: MicrosoftEdge :: Finished extracting product information.
+01/31/2025 10:41:44 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the Next Page link.
+01/31/2025 10:41:45 PM: INFO: Info :: MicrosoftEdge :: Successfully clicked the Next Page link.
+01/31/2025 10:41:45 PM: INFO: Info :: MicrosoftEdge :: Starting to extract product information.
+01/31/2025 10:41:45 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:41:45 PM: INFO: Info :: MicrosoftEdge :: Starting to extract product information.
+01/31/2025 10:41:45 PM: INFO: Info :: MicrosoftEdge :: Found product details in the search results.
+01/31/2025 10:41:46 PM: INFO: Info :: MicrosoftEdge :: Finished extracting product information.
+01/31/2025 10:41:46 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the Next Page link.
+01/31/2025 10:41:47 PM: INFO: Info :: MicrosoftEdge :: Successfully clicked the Next Page link.
+01/31/2025 10:41:47 PM: INFO: Info :: MicrosoftEdge :: Starting to extract product information.
+01/31/2025 10:41:48 PM: INFO: Info :: MicrosoftEdge :: Found product details in the search results.
+01/31/2025 10:41:49 PM: INFO: Info :: MicrosoftEdge :: Finished extracting product information.
+01/31/2025 10:41:49 PM: INFO: Info :: MicrosoftEdge :: Saving product information for headphones.
+01/31/2025 10:41:49 PM: INFO: Info :: MicrosoftEdge :: Product information for headphones saved successfully.
+01/31/2025 10:41:51 PM: INFO: Info :: MicrosoftEdge :: Found product details in the search results.
+01/31/2025 10:41:52 PM: INFO: Info :: MicrosoftEdge :: Finished extracting product information.
+01/31/2025 10:41:52 PM: INFO: Info :: MicrosoftEdge :: Saving product information for headphones.
+01/31/2025 10:41:52 PM: INFO: Info :: MicrosoftEdge :: Product information for headphones saved successfully.
+01/31/2025 10:41:52 PM: INFO: Closing the Edge Browser
+01/31/2025 10:41:52 PM: INFO: xdist worker is: gw1
+01/31/2025 10:41:52 PM: INFO: ====== WebDriver manager ======
+01/31/2025 10:41:52 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:41:52 PM: INFO: Info :: MicrosoftEdge :: Starting to extract product information.
+01/31/2025 10:41:53 PM: INFO: Info :: MicrosoftEdge :: Found product details in the search results.
+01/31/2025 10:41:54 PM: INFO: Info :: MicrosoftEdge :: Finished extracting product information.
+01/31/2025 10:41:54 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the Next Page link.
+01/31/2025 10:41:54 PM: INFO: Get LATEST chromedriver version for google-chrome
+01/31/2025 10:41:54 PM: INFO: Get LATEST chromedriver version for google-chrome
+01/31/2025 10:41:54 PM: INFO: Driver [C:\Users\Gokul Dev P\.wdm\gw1\drivers\chromedriver\win64\132.0.6834.159\chromedriver-win32/chromedriver.exe] found in cache
+01/31/2025 10:41:54 PM: INFO: xdist worker is: gw1
+01/31/2025 10:41:54 PM: INFO: ====== WebDriver manager ======
+01/31/2025 10:41:54 PM: INFO: Closing the Edge Browser
+01/31/2025 10:41:54 PM: INFO: xdist worker is: gw2
+01/31/2025 10:41:54 PM: INFO: ====== WebDriver manager ======
+01/31/2025 10:41:55 PM: INFO: Info :: MicrosoftEdge :: Successfully clicked the Next Page link.
+01/31/2025 10:41:55 PM: INFO: Info :: MicrosoftEdge :: Starting to extract product information.
+01/31/2025 10:41:56 PM: INFO: Get LATEST chromedriver version for google-chrome
+01/31/2025 10:41:56 PM: INFO: Get LATEST edgedriver version for Edge 132.0.2957
+01/31/2025 10:41:56 PM: INFO: Get LATEST chromedriver version for google-chrome
+01/31/2025 10:41:56 PM: INFO: Get LATEST edgedriver version for Edge 132.0.2957
+01/31/2025 10:41:56 PM: INFO: Driver [C:\Users\Gokul Dev P\.wdm\gw2\drivers\chromedriver\win64\132.0.6834.159\chromedriver-win32/chromedriver.exe] found in cache
+01/31/2025 10:41:56 PM: INFO: xdist worker is: gw2
+01/31/2025 10:41:56 PM: INFO: ====== WebDriver manager ======
+01/31/2025 10:41:56 PM: INFO: Driver [C:\Users\Gokul Dev P\.wdm\gw1\drivers\edgedriver\win64\132.0.2957.127\msedgedriver.exe] found in cache
+01/31/2025 10:41:56 PM: INFO: xdist worker is: gw1
+01/31/2025 10:41:56 PM: INFO: ====== WebDriver manager ======
+01/31/2025 10:41:57 PM: INFO: Info :: MicrosoftEdge :: Found product details in the search results.
+01/31/2025 10:41:58 PM: INFO: Get LATEST edgedriver version for Edge 132.0.2957
+01/31/2025 10:41:58 PM: INFO: Get LATEST geckodriver version for 134.0 firefox
+01/31/2025 10:41:58 PM: INFO: Get LATEST edgedriver version for Edge 132.0.2957
+01/31/2025 10:41:58 PM: INFO: Driver [C:\Users\Gokul Dev P\.wdm\gw2\drivers\edgedriver\win64\132.0.2957.127\msedgedriver.exe] found in cache
+01/31/2025 10:41:58 PM: INFO: xdist worker is: gw2
+01/31/2025 10:41:58 PM: INFO: ====== WebDriver manager ======
+01/31/2025 10:41:58 PM: INFO: Get LATEST geckodriver version for 134.0 firefox
+01/31/2025 10:41:58 PM: INFO: Driver [C:\Users\Gokul Dev P\.wdm\gw1\drivers\geckodriver\win64\v0.35.0\geckodriver.exe] found in cache
+01/31/2025 10:41:59 PM: INFO: Info :: MicrosoftEdge :: Finished extracting product information.
+01/31/2025 10:41:59 PM: INFO: Info :: MicrosoftEdge :: Saving product information for headphones.
+01/31/2025 10:41:59 PM: INFO: Info :: MicrosoftEdge :: Product information for headphones saved successfully.
+01/31/2025 10:42:00 PM: INFO: Get LATEST geckodriver version for 134.0 firefox
+01/31/2025 10:42:00 PM: INFO: Get LATEST geckodriver version for 134.0 firefox
+01/31/2025 10:42:00 PM: INFO: Driver [C:\Users\Gokul Dev P\.wdm\gw2\drivers\geckodriver\win64\v0.35.0\geckodriver.exe] found in cache
+01/31/2025 10:42:00 PM: INFO: Launching Edge Browser
+01/31/2025 10:42:00 PM: INFO: Launching Edge Browser
+01/31/2025 10:42:00 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:42:00 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:42:02 PM: INFO: Closing the Edge Browser
+01/31/2025 10:42:02 PM: INFO: xdist worker is: gw0
+01/31/2025 10:42:02 PM: INFO: ====== WebDriver manager ======
+01/31/2025 10:42:03 PM: INFO: Launching Edge Browser
+01/31/2025 10:42:03 PM: INFO: Launching Edge Browser
+01/31/2025 10:42:04 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:42:04 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:42:04 PM: INFO: Get LATEST chromedriver version for google-chrome
+01/31/2025 10:42:04 PM: INFO: Get LATEST chromedriver version for google-chrome
+01/31/2025 10:42:04 PM: INFO: Driver [C:\Users\Gokul Dev P\.wdm\gw0\drivers\chromedriver\win64\132.0.6834.159\chromedriver-win32/chromedriver.exe] found in cache
+01/31/2025 10:42:04 PM: INFO: xdist worker is: gw0
+01/31/2025 10:42:04 PM: INFO: ====== WebDriver manager ======
+01/31/2025 10:42:06 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:42:06 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:42:06 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: mobile
+01/31/2025 10:42:06 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: mobile
+01/31/2025 10:42:07 PM: INFO: Get LATEST edgedriver version for Edge 132.0.2957
+01/31/2025 10:42:07 PM: INFO: Get LATEST edgedriver version for Edge 132.0.2957
+01/31/2025 10:42:07 PM: INFO: Driver [C:\Users\Gokul Dev P\.wdm\gw0\drivers\edgedriver\win64\132.0.2957.127\msedgedriver.exe] found in cache
+01/31/2025 10:42:07 PM: INFO: xdist worker is: gw0
+01/31/2025 10:42:07 PM: INFO: ====== WebDriver manager ======
+01/31/2025 10:42:08 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:42:08 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:42:08 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: mobile
+01/31/2025 10:42:08 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: mobile
+01/31/2025 10:42:09 PM: INFO: Get LATEST geckodriver version for 134.0 firefox
+01/31/2025 10:42:09 PM: INFO: Get LATEST geckodriver version for 134.0 firefox
+01/31/2025 10:42:09 PM: INFO: Driver [C:\Users\Gokul Dev P\.wdm\gw0\drivers\geckodriver\win64\v0.35.0\geckodriver.exe] found in cache
+01/31/2025 10:42:11 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:42:11 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:42:11 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:42:11 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:42:11 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:42:11 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:42:11 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:42:11 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:42:12 PM: INFO: Launching Edge Browser
+01/31/2025 10:42:12 PM: INFO: Launching Edge Browser
+01/31/2025 10:42:12 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:42:12 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:42:13 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:42:13 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:42:13 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:42:13 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:42:13 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for Samsung Galaxy M05 (Mint Green, 4GB RAM, 64 GB Storage) | 50MP Dual Camera | Bigger 6.7" HD+ Display | 5000mAh Battery | 25W Fast Charging | 2 Gen OS Upgrade & 4 Year Security Update | Without Charger.
+01/31/2025 10:42:13 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for Samsung Galaxy M05 (Mint Green, 4GB RAM, 64 GB Storage) | 50MP Dual Camera | Bigger 6.7" HD+ Display | 5000mAh Battery | 25W Fast Charging | 2 Gen OS Upgrade & 4 Year Security Update | Without Charger.
+01/31/2025 10:42:14 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:42:14 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:42:14 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:42:14 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:42:14 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:42:14 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:42:14 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:42:14 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:42:16 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:42:16 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:42:16 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:42:16 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:42:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for Samsung Galaxy M05 (Mint Green, 4GB RAM, 64 GB Storage) | 50MP Dual Camera | Bigger 6.7" HD+ Display | 5000mAh Battery | 25W Fast Charging | 2 Gen OS Upgrade & 4 Year Security Update | Without Charger.
+01/31/2025 10:42:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for Samsung Galaxy M05 (Mint Green, 4GB RAM, 64 GB Storage) | 50MP Dual Camera | Bigger 6.7" HD+ Display | 5000mAh Battery | 25W Fast Charging | 2 Gen OS Upgrade & 4 Year Security Update | Without Charger.
+01/31/2025 10:42:19 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:42:19 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:42:19 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: mobile
+01/31/2025 10:42:19 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: mobile
+01/31/2025 10:42:23 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:42:23 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:42:23 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:42:23 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:42:24 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:42:24 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:42:25 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:42:25 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:42:25 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:42:25 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:42:25 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:42:25 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:42:25 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:42:25 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:42:25 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:42:25 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:42:25 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:42:25 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:42:25 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:42:25 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:42:25 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:42:25 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:42:26 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:42:26 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:42:26 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:42:26 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:42:26 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:42:26 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:42:27 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:42:27 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:42:27 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:42:27 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:42:27 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for Samsung Galaxy M05 (Mint Green, 4GB RAM, 64 GB Storage) | 50MP Dual Camera | Bigger 6.7" HD+ Display | 5000mAh Battery | 25W Fast Charging | 2 Gen OS Upgrade & 4 Year Security Update | Without Charger.
+01/31/2025 10:42:27 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for Samsung Galaxy M05 (Mint Green, 4GB RAM, 64 GB Storage) | 50MP Dual Camera | Bigger 6.7" HD+ Display | 5000mAh Battery | 25W Fast Charging | 2 Gen OS Upgrade & 4 Year Security Update | Without Charger.
+01/31/2025 10:42:29 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:42:29 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:42:29 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:42:29 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:42:30 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:42:30 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:42:30 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:42:30 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:42:30 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:42:30 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:42:30 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:42:30 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:42:30 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:42:30 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:42:30 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:42:30 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:42:30 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:42:30 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:42:30 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:42:30 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:42:33 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:42:33 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:42:33 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: laptop
+01/31/2025 10:42:33 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: laptop
+01/31/2025 10:42:35 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:42:35 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:42:35 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: laptop
+01/31/2025 10:42:35 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: laptop
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:42:38 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:42:40 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:42:40 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:42:40 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:42:40 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:42:41 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:42:41 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:42:41 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:42:41 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:42:41 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:42:41 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:42:42 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:42:42 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:42:42 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for HP Victus, 13th Gen Intel Core i5-13420H, 6GB NVIDIA RTX 4050, 16GB DDR4, 512GB SSD (Win11, Office 21, Silver, 2.29kg) 144Hz, 9MS, IPS, 15.6-inch(39.6cm) FHD Gaming Laptop, Enhanced Cooling, fa1319TX.
+01/31/2025 10:42:42 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for HP Victus, 13th Gen Intel Core i5-13420H, 6GB NVIDIA RTX 4050, 16GB DDR4, 512GB SSD (Win11, Office 21, Silver, 2.29kg) 144Hz, 9MS, IPS, 15.6-inch(39.6cm) FHD Gaming Laptop, Enhanced Cooling, fa1319TX.
+01/31/2025 10:42:42 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:42:42 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:42:42 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:42:42 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:42:42 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:42:42 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:42:42 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:42:42 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:42:43 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:42:43 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:42:43 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: laptop
+01/31/2025 10:42:43 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: laptop
+01/31/2025 10:42:43 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:42:43 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:42:43 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:42:43 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:42:43 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for HP Victus, 13th Gen Intel Core i5-13420H, 6GB NVIDIA RTX 4050, 16GB DDR4, 512GB SSD (Win11, Office 21, Silver, 2.29kg) 144Hz, 9MS, IPS, 15.6-inch(39.6cm) FHD Gaming Laptop, Enhanced Cooling, fa1319TX.
+01/31/2025 10:42:43 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for HP Victus, 13th Gen Intel Core i5-13420H, 6GB NVIDIA RTX 4050, 16GB DDR4, 512GB SSD (Win11, Office 21, Silver, 2.29kg) 144Hz, 9MS, IPS, 15.6-inch(39.6cm) FHD Gaming Laptop, Enhanced Cooling, fa1319TX.
+01/31/2025 10:42:50 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:42:50 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:42:50 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:42:50 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:42:50 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:42:50 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:42:50 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:42:50 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:42:51 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:42:51 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:42:52 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:42:52 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:42:52 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for HP Victus, 13th Gen Intel Core i5-13420H, 6GB NVIDIA RTX 4050, 16GB DDR4, 512GB SSD (Win11, Office 21, Silver, 2.29kg) 144Hz, 9MS, IPS, 15.6-inch(39.6cm) FHD Gaming Laptop, Enhanced Cooling, fa1319TX.
+01/31/2025 10:42:52 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for HP Victus, 13th Gen Intel Core i5-13420H, 6GB NVIDIA RTX 4050, 16GB DDR4, 512GB SSD (Win11, Office 21, Silver, 2.29kg) 144Hz, 9MS, IPS, 15.6-inch(39.6cm) FHD Gaming Laptop, Enhanced Cooling, fa1319TX.
+01/31/2025 10:42:52 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:42:52 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:42:52 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:42:52 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:42:53 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:42:53 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:42:53 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:42:53 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:42:53 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:42:53 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:42:53 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:42:53 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:42:53 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:42:53 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:42:53 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:42:53 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:42:53 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:42:53 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:42:53 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:42:53 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:42:55 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:42:55 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:42:55 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:42:55 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:42:55 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:42:55 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:42:55 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:42:55 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:42:56 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:42:56 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:42:56 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:42:56 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:42:56 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:42:56 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:42:56 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:42:56 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:42:56 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:42:56 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:42:56 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:42:56 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: headphones
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: headphones
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:42:58 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+01/31/2025 10:43:05 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:43:05 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:43:05 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: headphones
+01/31/2025 10:43:05 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: headphones
+01/31/2025 10:43:05 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:43:05 PM: INFO: Info :: MicrosoftEdge :: Amazon home page loaded successfully.
+01/31/2025 10:43:05 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: headphones
+01/31/2025 10:43:05 PM: INFO: Info :: MicrosoftEdge :: Attempting to search for: headphones
+01/31/2025 10:43:05 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:43:05 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:43:05 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:43:05 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:43:06 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:43:06 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:43:06 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:43:06 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:43:07 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:43:07 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:43:07 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:43:07 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:43:07 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for boAt Rockerz 430 w/ 40mm Drivers, Beast Mode w/ 40ms Latency, 40hrs Playback, ENx Tech, Voice Assistant, BTv5.4, Adaptive Fit & Easy Access Controls, Bluetooth Over Ear Headphones(Black Sabre).
+01/31/2025 10:43:07 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for boAt Rockerz 430 w/ 40mm Drivers, Beast Mode w/ 40ms Latency, 40hrs Playback, ENx Tech, Voice Assistant, BTv5.4, Adaptive Fit & Easy Access Controls, Bluetooth Over Ear Headphones(Black Sabre).
+01/31/2025 10:43:15 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:43:15 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:43:15 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:43:15 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:43:15 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:43:15 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:43:15 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:43:15 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Search executed successfully.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: First product name retrieved successfully
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to click the first product.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for boAt Rockerz 430 w/ 40mm Drivers, Beast Mode w/ 40ms Latency, 40hrs Playback, ENx Tech, Voice Assistant, BTv5.4, Adaptive Fit & Easy Access Controls, Bluetooth Over Ear Headphones(Black Sabre).
+01/31/2025 10:43:16 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for boAt Rockerz 430 w/ 40mm Drivers, Beast Mode w/ 40ms Latency, 40hrs Playback, ENx Tech, Voice Assistant, BTv5.4, Adaptive Fit & Easy Access Controls, Bluetooth Over Ear Headphones(Black Sabre).
+01/31/2025 10:43:17 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:43:17 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:43:17 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:43:17 PM: INFO: Info :: MicrosoftEdge :: First product link clicked successfully.
+01/31/2025 10:43:17 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:43:17 PM: INFO: Info :: MicrosoftEdge :: Switched to the new tab successfully.
+01/31/2025 10:43:17 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for boAt Rockerz 430 w/ 40mm Drivers, Beast Mode w/ 40ms Latency, 40hrs Playback, ENx Tech, Voice Assistant, BTv5.4, Adaptive Fit & Easy Access Controls, Bluetooth Over Ear Headphones(Black Sabre).
+01/31/2025 10:43:17 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify product page is loaded for boAt Rockerz 430 w/ 40mm Drivers, Beast Mode w/ 40ms Latency, 40hrs Playback, ENx Tech, Voice Assistant, BTv5.4, Adaptive Fit & Easy Access Controls, Bluetooth Over Ear Headphones(Black Sabre).
+01/31/2025 10:43:20 PM: INFO: Closing the Edge Browser
+01/31/2025 10:43:20 PM: INFO: Closing the Edge Browser
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Product page loaded successfully.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Add to Cart button is present.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Product overview section is present.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Product details section is present.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:43:26 PM: INFO: Info :: MicrosoftEdge :: Image gallery is present.
+01/31/2025 10:43:29 PM: INFO: Closing the Edge Browser
+01/31/2025 10:43:29 PM: INFO: Closing the Edge Browser
+01/31/2025 10:43:29 PM: INFO: Closing the Edge Browser
+01/31/2025 10:43:29 PM: INFO: Closing the Edge Browser

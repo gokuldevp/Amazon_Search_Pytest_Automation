@@ -1,3 +1,4 @@
+import tempfile
 from datetime import datetime
 from pathlib import Path
 import pytest
@@ -52,14 +53,30 @@ def setup(request):
         "firefox": (webdriver.FirefoxOptions(), FirefoxService(GeckoDriverManager().install()))
     }
 
+    # if browser in browser_options:
+    #     options, service = browser_options[browser]
+    #     driver = webdriver.Chrome(service=service, options=options) if browser == "chrome" else \
+    #              webdriver.Edge(service=service, options=options) if browser == "edge" else \
+    #              webdriver.Firefox(service=service, options=options)
+    # else:
+    #     raise ValueError(f"Browser '{browser}' is not supported.")
+        # Create a temporary directory for user data
+    user_data_dir = tempfile.mkdtemp()
     if browser in browser_options:
-        options, service = browser_options[browser]
-        driver = webdriver.Chrome(service=service, options=options) if browser == "chrome" else \
-                 webdriver.Edge(service=service, options=options) if browser == "edge" else \
-                 webdriver.Firefox(service=service, options=options)
+            options, service = browser_options[browser]
+            
+            if browser == "chrome":
+                options.add_argument(f"user-data-dir={user_data_dir}")
+                driver = webdriver.Chrome(service=service, options=options)
+            elif browser == "edge":
+                options.add_argument(f"user-data-dir={user_data_dir}")
+                driver = webdriver.Edge(service=service, options=options)
+            elif browser == "firefox":
+                # Firefox doesn't support user-data-dir directly, so we skip it here
+                driver = webdriver.Firefox(service=service, options=options)
     else:
-        raise ValueError(f"Browser '{browser}' is not supported.")
-
+            raise ValueError(f"Browser '{browser}' is not supported.")
+    
     logger = loggen()
     logger.info(f"Launching {browser.capitalize()} Browser")
     request.cls.driver = driver

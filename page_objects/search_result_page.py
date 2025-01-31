@@ -80,10 +80,10 @@ class SearchResultPage:
         """
         Constructs and returns the file path for the CSV file.
         """
-        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__).replace('page_objects\\', '')),'test_data', 'product_info.csv')
+        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__).replace('page_objects'+ os.sep, '')),'test_data', 'product_info.csv')
         return file_path
 
-    def write_product_info_to_csv(self, file_path, product_name, product_info):
+    def write_product_info_to_csv(self, file_path, product_name, device, product_info):
         """
         Writes the product information to the CSV file.
         """
@@ -91,7 +91,9 @@ class SearchResultPage:
             file_exists = os.path.isfile(file_path)
 
             with open(file_path, 'a', newline='', encoding='utf-8') as csvfile:
-                csvfile.write(f'\nProduct Name: {product_name}\n')
+                csvfile.write(f'Product Name: {product_name}\n')
+                csvfile.write(f'Browser Name: {self.browser_name}\n')
+                csvfile.write(f'Device Name: {device}\n')
                 fieldnames = ['Name', 'Price', 'Rating', 'URL']
                 writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
@@ -101,12 +103,12 @@ class SearchResultPage:
                 for product in product_info:
                     writer.writerow(product)
 
-            self._handle_logger(f"Product information for {product_name} saved successfully to {file_path}.")
+            self._handle_logger(f"Product information for {product_name} saved successfully.")
         except Exception as e:
-            self._handle_error(f"Error saving product information. Error: {str(e)}")
+            self._handle_error(f"Error saving product information.")
             raise e
 
-    def save_product_information_to_csv(self, product_name, product_info):
+    def save_product_information_to_csv(self, product_name, device, product_info):
         """
         Saves extracted product information to a CSV file.
 
@@ -121,10 +123,10 @@ class SearchResultPage:
             file_path = self.get_csv_file_path()
 
             # Write the product information to the CSV file
-            self.write_product_info_to_csv(file_path, product_name, product_info)
+            self.write_product_info_to_csv(file_path, product_name, device, product_info)
 
         except Exception as e:
-            self._handle_error(f"Error saving product information. Error: {str(e)}")
+            self._handle_error(f"Error saving product information.")
             raise e
 
     def click_next_page(self):

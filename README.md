@@ -1,10 +1,9 @@
-# Automated Crawling and Testing for a Sample Ecommerce Website
+# Automated Web Crawling and Functional Testing for E-Commerce Sites
 
-## Project Description
-### Objective
+## Objective
 This project aims to automate crawling and testing a sample e-commerce website (e.g., Amazon India) using Selenium. The script will focus on extracting product details from product pages and verifying specific elements on the website.
 
-### Limitations
+## Limitations
 CAPTCHA challenges may prevent automation of certain actions. These cannot be bypassed within this script.
 
 ## Project Structure
@@ -15,15 +14,12 @@ Reports/
       ├── report_150614.html
 configs/
   ├── configs.py
-  └── __pycache__/
 page_objects/
-  ├── __pycache__/
   ├── __init__.py
   ├── home_page.py
   ├── product_detailed_page.py
   ├── search_result_page.py
 test_cases/
-  ├── __pycache__/
   ├── __init__.py
   ├── conftest.py
   ├── test_basic_crawling.py
@@ -31,7 +27,6 @@ test_cases/
 test_data/
   └── product_info.csv
 utilities/
-  ├── __pycache__/
   ├── __init__.py
   └── utilities.py
 README.md
@@ -40,10 +35,34 @@ requirements.txt
 run.bat
 ```
 ## Features
-* Automated Crawling: Automates the crawling of product pages on the sample e-commerce website (Amazon India).
-* Product Information Extraction: Extracts key product details such as name, price, ratings, and availability from each product page.
-* Functional Testing: Validates if the expected elements like product title, price, etc., are present on the product detail page.
-* CSV Output: Stores the extracted product details in a structured CSV format (product_info.csv).
+### **Basic Crawling**
+1. Automate the process of opening the homepage.
+2. Search for a product
+3. Extract the following details from the search results:
+- Product Name
+- Price
+- Ratings
+- URL
+
+### **Functional Testing**
+1. Automate the process of opening the homepage.
+2. Search for a product
+3. Validate the following elements on the product page:
+- Presence of "Add to Cart" button.
+- Product details section (e.g., description, specifications).
+- Image gallery.
+
+### **Reporting**
+1. Store the extracted product information in a CSV file.
+2. Log test results (pass/fail) for each validation via pytest html report
+
+### **Additional**
+1. Crawl multiple pages of search results (part of Basic Crawling, Step 3).
+2. Test website responsiveness by simulating different screen sizes:
+- "desktop": 1920 x 1080
+- "tablet": 768 x 1024
+- "mobile": 375 x 667
+3. Parallel Execution using pytest-xdist
 
 ## Prerequisites
 * Python 3.8+
@@ -53,9 +72,9 @@ run.bat
 
 ## Tools and Frameworks Used
 * Selenium: For automating the web crawling and functional testing.
-* Python: Primary language used for scripting.
 * pytest: For running the tests.
 * CSV: For storing extracted product details.
+* pytest-xdist: Parallel Execution
 
 ## Steps to Execute the Script
 1. **Step 1**: Clone the Repository
@@ -88,7 +107,10 @@ pytest test_cases/test_basic_crawling.py
 pytest test_cases/test_functional_testing.py
 
 # whole suite
-pytest test_cases
+pytest
+
+# Parallel Execution
+pytest -n=3
 ```
 
 * Option 2: Using run.bat (Automated Method)
@@ -100,9 +122,6 @@ run.bat
 4. **Step 4**: Check the Output
 * The extracted product information will be saved in product_info.csv located in the test_data/ folder
 * Logs and screenshots will be stored in the Reports/2025_01_30/ folder
-
-## Test Execution
-You can view the test execution process and how to run the tests in this video:
 
 ## Test Execution
 

@@ -17,59 +17,54 @@ def pytest_runtest_makereport(item, call):
     outcome = yield
     report = outcome.get_result()
     extra = getattr(report, 'extra', [])
-    if report.when == 'call' or report.when == "setup":
-        # driver = getattr(item, 'driver', None) # scope function level
-        driver = getattr(item.instance, 'driver', None) # scope class level
+    
+    if report.when in ['call', 'setup']:
+        driver = getattr(item.instance, 'driver', None)
         if driver:
-            SS = ScreeShots(driver)
+            screenshot_handler = ScreeShots(driver)
             file_name = now.strftime("%S%H%d%m%Y")
-            file_name = SS.take_screenshots_as_png(file_name)
+            file_name = screenshot_handler.take_screenshots_as_png(file_name)
             if file_name:
-                html = '<div><img src="%s" alt="screenshot" style="width:304px;height:228px;" ' \
-                       'onclick="window.open(this.src)" align="right"/></div>' % file_name
+                html = f'<div><img src="{file_name}" alt="screenshot" style="width:304px;height:228px;" ' \
+                       'onclick="window.open(this.src)" align="right"/></div>'
                 extra.append(pytest_html.extras.html(html))
         report.extras = extra
-
 
 @pytest.hookimpl(tryfirst=True)
 def pytest_configure(config):
     now = datetime.now()
     report_dir = Path('Reports', get_current_date())
     report_dir.mkdir(parents=True, exist_ok=True)
-    pytest_html = report_dir / f"report_{now.strftime('%H%M%S')}.html"
-    config.option.htmlpath = pytest_html
+    config.option.htmlpath = report_dir / f"report_{now.strftime('%H%M%S')}.html"
     config.option.self_contained_html = True
 
 def pytest_html_report_title(report):
     report.title = "Automation Report"
 
-@pytest.fixture(scope="class", params=["chrome"])#(params=["chrome", "firefox", "edge"])
+@pytest.fixture(scope="class", params=["chrome", "edge", "firefox"])
 def setup(request):
     browser = request.param
+    driver = None
 
-    if browser == "chrome":
-        options = webdriver.ChromeOptions()
-        # options.add_argument('--headless')
-        service = ChromeService(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service, options=options)
-    elif browser == "edge":
-        options = webdriver.EdgeOptions()
-        # options.add_argument('--headless')
-        service = EdgeService(EdgeChromiumDriverManager().install())
-        driver = webdriver.Edge(service=service, options=options)
-    elif browser == "firefox":
-        options = webdriver.FirefoxOptions()
-        # options.add_argument('--headless')
-        service = FirefoxService(GeckoDriverManager().install())
-        driver = webdriver.Firefox(service=service, options=options)
+    browser_options = {
+        "chrome": (webdriver.ChromeOptions(), ChromeService(ChromeDriverManager().install())),
+        "edge": (webdriver.EdgeOptions(), EdgeService(EdgeChromiumDriverManager().install())),
+        "firefox": (webdriver.FirefoxOptions(), FirefoxService(GeckoDriverManager().install()))
+    }
+
+    if browser in browser_options:
+        options, service = browser_options[browser]
+        driver = webdriver.Chrome(service=service, options=options) if browser == "chrome" else \
+                 webdriver.Edge(service=service, options=options) if browser == "edge" else \
+                 webdriver.Firefox(service=service, options=options)
     else:
         raise ValueError(f"Browser '{browser}' is not supported.")
+
     logger = loggen()
-    driver.set_window_size(width=1980, height=1080)
     logger.info(f"Launching {browser.capitalize()} Browser")
     request.cls.driver = driver
     request.cls.logger = logger
-    # request.node.driver = driver
+
     yield driver, logger
 
     driver.quit()

@@ -3,7 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException, WebDriverException
 from utilities.utilities import ScreeShots
-from configs.configs import BASE_URL, TIMEOUT
+from configs.configs import BASE_URL, TIMEOUT, SCREEN_SIZES
 
 class HomePage:
     INPUT_SEARCH_ID = "twotabsearchtextbox"
@@ -28,33 +28,53 @@ class HomePage:
         """Log error messages."""
         self.logger.error(f"Error :: {self.browser_name} :: {error}")
 
-    # Open Amazon homepage and verify essential elements
-    def open_amazon_website(self):
+    def open_amazon_website(self, device='desktop'):
         """
         Opens the Amazon home page and verifies essential elements.
 
-        Returns:
+        :parameter:
+            device (str): Name of the device under test (e.g., desktop, tablet, mobile)
+
+        :returns:
             bool: True if both the logo and banner are displayed, False otherwise.
+
+        :raises:
+            TimeoutException: If loading the page or elements times out.
+            WebDriverException: If there is a WebDriver-related error.
+            Exception: For any unexpected errors.
         """
         self._handle_logger("Navigating to Amazon home page.")
 
         try:
+            # Set the window size based on the device
+            self.driver.set_window_size(width=SCREEN_SIZES[device][0], height=SCREEN_SIZES[device][1])
+
+            # Navigate to the Amazon home page
             self.driver.get(BASE_URL)
+
+            # Verify the essential elements
             logo_displayed = self.wait.until(EC.presence_of_element_located((By.ID, self.LOGO_ID))).is_displayed()
             banner_displayed = self.wait.until(EC.presence_of_element_located((By.ID, self.DESKTOP_BANNER_ID))).is_displayed()
 
+            # Check if both elements are displayed
             if logo_displayed and banner_displayed:
                 self._handle_logger("Amazon home page loaded successfully.")
                 return True
 
         except TimeoutException as e:
-            self._handle_error("Timeout while loading Amazon home page.")
+            self._handle_error(f"Timeout while loading Amazon home page")
+            raise e
+        
         except WebDriverException as e:
-            self._handle_error(f"WebDriver error: {str(e)}")
+            self._handle_error(f"WebDriver error")
+            raise e
+        
         except Exception as e:
-            self._handle_error(f"Unexpected error while opening Amazon: {str(e)}")
+            self._handle_error(f"Unexpected error while opening Amazon")
+            raise e
 
         return False
+
 
     # Perform a product search
     def search_product(self, search):
@@ -82,8 +102,11 @@ class HomePage:
 
         except TimeoutException as e:
             self._handle_error("Search box or search button not found.")
+
         except NoSuchElementException as e:
             self._handle_error("Search elements not present on the page.")
+
         except Exception as e:
             self._handle_error(f"Unexpected error during search: {str(e)}")
+
         return False

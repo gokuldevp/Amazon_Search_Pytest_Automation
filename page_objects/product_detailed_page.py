@@ -9,6 +9,7 @@ class TestProductDetailsPage:
     BUTTON_ADD_TO_CART_ID ='add-to-cart-button'
     TEXT_PRODUCT_OVERVIEW_ID = 'productOverview_feature_div'
     TEXT_PRODUCT_FEATURES_ID = 'featurebullets_feature_div'
+    IMAGE_GALLERY_ID = 'altImages'
     
 
     def __init__(self, driver, logger):
@@ -96,6 +97,14 @@ class TestProductDetailsPage:
         try:
             self._handle_logger(f"Attempting to verify product page is loaded for {product_name}.")
             is_page_loaded = self.wait.until(EC.title_contains(product_name))
+
+        except TimeoutException as e:
+            self._handle_error("Timeout Error: Product page is not loaded successfully.")
+            raise e
+
+        except NoSuchElementException as e:
+            self._handle_error("No such element found: : Product page is not loaded successfully.")
+            raise e
         
         except Exception as e:
             self._handle_error("Unexpected error while verifying product page is loaded.")
@@ -150,3 +159,19 @@ class TestProductDetailsPage:
             raise e
         assert is_present, "Product details are not present on the product details page"
         self._handle_logger("Product details section is present.")
+
+    def verify_presence_of_image_gallery(self):
+        """
+        Verify the presence of the image gallery on the page.
+        """
+        try:
+            self._handle_logger("Checking for the presence of the image gallery.")
+            is_present = self.wait.until(EC.presence_of_element_located((By.ID, self.IMAGE_GALLERY_ID)))
+            
+        except Exception as e:
+
+            self._handle_error(f"Error occurred while verifying presence of image gallery: {e}")
+            raise e
+        
+        assert is_present, "Image gallery is not present on the page."
+        self._handle_logger("Image gallery is present.")

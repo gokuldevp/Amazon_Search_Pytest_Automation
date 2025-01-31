@@ -14,7 +14,7 @@ def get_current_date():
     return current_date
 
 def loggen(): 
-    log_file = os.path.join(os.path.dirname(os.path.abspath(__file__).replace('utilities\\', '')), 'logs', 'automation.log') 
+    log_file = os.path.join(os.path.dirname(os.path.abspath(__file__).replace('utilities'+ os.sep, '')), 'logs', 'automation.log') 
     log_handler = logging.FileHandler(log_file) 
     log_handler.setFormatter( logging.Formatter("%(asctime)s: %(levelname)s: %(message)s", datefmt="%m/%d/%Y %I:%M:%S %p")) 
     logger = logging.getLogger() 
@@ -26,7 +26,7 @@ class ScreeShots:
     def __init__(self, driver):
         self.driver = driver
     def take_screenshots_as_png(self,screenshot_name):
-        dir_path = os.path.join(os.path.dirname(os.path.abspath(__file__).replace('utilities\\', '')),'Reports\\',datetime.date.today().strftime("%Y_%m_%d"))
+        dir_path = os.path.join(os.path.dirname(os.path.abspath(__file__).replace('utilities'+ os.sep, '')),'Reports'+ os.sep,datetime.date.today().strftime("%Y_%m_%d"))
         
         if not os.path.isdir(dir_path):
             os.mkdir(dir_path)
@@ -36,5 +36,5 @@ class ScreeShots:
         
         self.driver.save_screenshot(screenshot_file)
 
-        re_path = screenshot_file.replace(os.path.dirname(os.path.abspath(__file__).replace('utilities\\', '')),"")
+        re_path = screenshot_file.replace(os.path.dirname(os.path.abspath(__file__).replace('utilities'+ os.sep, '')),"")
         return re_path

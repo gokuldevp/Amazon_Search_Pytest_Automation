@@ -34,35 +34,35 @@ install_package.bat
 requirements.txt
 run.bat
 ```
-## Features
-### **Basic Crawling**
-1. Automate the process of opening the homepage.
-2. Search for a product
-3. Extract the following details from the search results:
-- Product Name
-- Price
-- Ratings
-- URL
 
-### **Functional Testing**
-1. Automate the process of opening the homepage.
-2. Search for a product
-3. Validate the following elements on the product page:
-- Presence of "Add to Cart" button.
-- Product details section (e.g., description, specifications).
-- Image gallery.
+## **Features**  
 
-### **Reporting**
-1. Store the extracted product information in a CSV file.
-2. Log test results (pass/fail) for each validation via pytest html report
+### **1. Basic Crawling**  
+- Automates the process of opening the homepage.  
+- Searches for a product.  
+- Extracts product details from search results, including:  
+  - **Product Name**  
+  - **Price**  
+  - **Ratings**  
+  - **URL**  
 
-### **Additional**
-1. Crawl multiple pages of search results (part of Basic Crawling, Step 3).
-2. Test website responsiveness by simulating different screen sizes:
-- "desktop": 1920 x 1080
-- "tablet": 768 x 1024
-- "mobile": 375 x 667
-3. Parallel Execution using pytest-xdist
+### **2. Functional Testing**  
+- Validates key elements on the product page:  
+  - **Presence of "Add to Cart" button**  
+  - **Product details section** (e.g., description, specifications)  
+  - **Image gallery**  
+
+### **3. Reporting**  
+- Stores extracted product information in a **CSV file**.  
+- Logs test results (pass/fail) in a **pytest HTML report**.  
+
+### **4. Additional Features**  
+- Crawls multiple pages of search results (**part of Basic Crawling, Step 3**).  
+- Tests website responsiveness by simulating different screen sizes:  
+  - **Desktop:** 1920 × 1080  
+  - **Tablet:** 768 × 1024  
+  - **Mobile:** 375 × 667  
+- Supports **parallel test execution** using **pytest-xdist**.
 
 ## Prerequisites
 * Python 3.8+

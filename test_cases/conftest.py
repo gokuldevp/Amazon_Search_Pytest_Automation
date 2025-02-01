@@ -42,13 +42,13 @@ def pytest_configure(config):
 def pytest_html_report_title(report):
     report.title = "Automation Report"
 
-@pytest.fixture(scope="class", params=["edge"])#, "chrome", "firefox"])
+@pytest.fixture(scope="class", params=["edge", "chrome", "firefox"])
 def setup(request):
     browser = request.param
     driver = None
     if browser == "chrome":
         options = webdriver.ChromeOptions()
-        # options.add_argument('--headless')
+        options.add_argument('--headless')
         service = ChromeService(ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service, options=options)
     elif browser == "edge":
@@ -58,7 +58,7 @@ def setup(request):
         driver = webdriver.Edge(service=service, options=options)
     elif browser == "firefox":
         options = webdriver.FirefoxOptions()
-        # options.add_argument('--headless')
+        options.add_argument('--headless')
         service = FirefoxService(GeckoDriverManager().install())
         driver = webdriver.Firefox(service=service, options=options)
     else:

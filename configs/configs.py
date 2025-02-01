@@ -1,6 +1,6 @@
 BASE_URL = "https://www.amazon.in/"
 SEARCH_ITEMS = ["mobile", "laptop", "headphones"]
-TIMEOUT = 15
+TIMEOUT = 30
 SCREEN_SIZES = {
     "desktop": (1920, 1080),
     "tablet": (768, 1024),

@@ -41,15 +41,8 @@ jobs:
         uses: actions/upload-artifact@v4
         if: success() || failure()
         with:
-          name: test-report
+          name: Reports
           path: Reports/*
-
-      # - name: Upload Screenshots
-      #   uses: actions/upload-artifact@v4
-      #   if: success() || failure()
-      #   with:
-      #     name: test-screenshots
-      #     path: Reports/**/*.png
 
       - name: Upload Test Data (CSV File)
         uses: actions/upload-artifact@v4

@@ -29,13 +29,13 @@ jobs:
       - name: Run Tests and Generate Report
         run: |
           mkdir -p Reports/screenshots  # Ensure directories exist
-          pytest -s -v --html=Reports/report.html --self-contained-html | true
+          pytest -s -v
 
       - name: Upload Test Report
         uses: actions/upload-artifact@v4
         with:
           name: test-report
-          path: Reports/report.html
+          path: Reports/**/*.html
 
       - name: Upload Screenshots
         uses: actions/upload-artifact@v4

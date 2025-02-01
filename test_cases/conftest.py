@@ -24,8 +24,7 @@ def pytest_runtest_makereport(item, call):
         if driver:
             screenshot_handler = ScreeShots(driver)
             file_name = now.strftime("%S%H%d%m%Y")
-            # file_name = screenshot_handler.take_screenshots_as_png(file_name)
-            screenshot_handler.take_screenshots_as_png(file_name)
+            file_name = screenshot_handler.take_screenshots_as_png(file_name)
             if file_name:
                 html = f'<div><img src="{file_name}" alt="screenshot" style="width:304px;height:228px;" ' \
                        'onclick="window.open(this.src)" align="right"/></div>'

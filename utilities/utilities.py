@@ -36,5 +36,5 @@ class ScreeShots:
         
         self.driver.save_screenshot(screenshot_file)
 
-        re_path = screenshot_file.replace(os.path.dirname(os.path.abspath(__file__).replace('utilities'+ os.sep, '')),"")
-        return re_path
+        # re_path = screenshot_file.replace(os.path.dirname(os.path.abspath(__file__).replace('utilities'+ os.sep, '')),"")
+        return screenshot_name

@@ -133,4 +133,4 @@ run.bat
 
 You can view the test execution process and how to run the tests in this video:
 
-[Watch Test Execution on YouTube](https://youtu.be/f8BHg7vmhxI)
+[Watch Test Execution on YouTube](https://youtu.be/x2gSy37OCPg)

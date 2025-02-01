@@ -4,7 +4,13 @@
 This project aims to automate crawling and testing a sample e-commerce website (e.g., Amazon India) using Selenium. The script will focus on extracting product details from product pages and verifying specific elements on the website.
 
 ## Limitations
-CAPTCHA challenges may prevent automation of certain actions. These cannot be bypassed within this script.
+1. **CAPTCHA Challenges**
+* **Description**: CAPTCHA challenges are designed to distinguish between human users and automated scripts. They can significantly hinder the automation of certain actions.
+* **Workaround**: Refreshing the page might help bypass a CAPTCHA in some cases, especially if it is triggered by temporary high traffic or session-related issues. However, this is not a guaranteed solution and may not be effective in all scenarios.
+* **Note**: Manual intervention may be required to solve CAPTCHAs, particularly for those that are persistent.
+2. **High Traffic Errors**
+* **Description**: High traffic or server load can result in errors while page inaccessibility, as seen in the "Oops! It's rush hour and traffic is piling up on that page" message from Amazon.in.
+* Note: This issue is challenging to handle entirely through an automation script
 
 ## Project Structure
 ```markdown

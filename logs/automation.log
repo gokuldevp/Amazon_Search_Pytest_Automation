@@ -7105,3 +7105,10 @@ Stacktrace:
 02/01/2025 10:17:55 AM: INFO: Closing the Edge Browser
 02/01/2025 10:17:56 AM: INFO: Closing the Edge Browser
 02/01/2025 10:17:56 AM: INFO: Closing the Edge Browser
+02/01/2025 02:17:06 PM: INFO: Launching Edge Browser
+02/01/2025 02:17:06 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+02/01/2025 02:17:09 PM: INFO: Launching Edge Browser
+02/01/2025 02:17:09 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.
+02/01/2025 02:17:10 PM: INFO: Info :: MicrosoftEdge :: Attempt 1 to check CAPTCHA.
+02/01/2025 02:17:15 PM: INFO: Launching Edge Browser
+02/01/2025 02:17:16 PM: INFO: Info :: MicrosoftEdge :: Navigating to Amazon home page.

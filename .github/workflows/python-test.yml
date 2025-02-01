@@ -28,22 +28,35 @@ jobs:
 
       - name: Run Tests and Generate Report
         run: |
-          pytest -s -v
+          pytest -s -v -n=2
+
+      - name: List Reports Directory
+        run: ls -R Reports
+
+      - name: Verify Report File
+        run: |
+          if [ -z "$(ls -A Reports/**/*.html)" ]; then
+            echo "No report file found!"
+            exit 1
+          fi
 
       - name: Upload Test Report
         uses: actions/upload-artifact@v4
+        if: success() || failure()
         with:
           name: test-report
           path: Reports/**/*.html
 
       - name: Upload Screenshots
         uses: actions/upload-artifact@v4
+        if: success() || failure()
         with:
           name: test-screenshots
           path: Reports/**/*.png
 
       - name: Upload Test Data (CSV File)
         uses: actions/upload-artifact@v4
+        if: success() || failure()
         with:
           name: product-info-csv
           path: test_data/product_info.csv

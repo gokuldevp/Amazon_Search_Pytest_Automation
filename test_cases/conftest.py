@@ -46,37 +46,24 @@ def pytest_html_report_title(report):
 def setup(request):
     browser = request.param
     driver = None
-
-    browser_options = {
-        "chrome": (webdriver.ChromeOptions(), ChromeService(ChromeDriverManager().install())),
-        "edge": (webdriver.EdgeOptions(), EdgeService(EdgeChromiumDriverManager().install())),
-        "firefox": (webdriver.FirefoxOptions(), FirefoxService(GeckoDriverManager().install()))
-    }
-
-    # if browser in browser_options:
-    #     options, service = browser_options[browser]
-    #     driver = webdriver.Chrome(service=service, options=options) if browser == "chrome" else \
-    #              webdriver.Edge(service=service, options=options) if browser == "edge" else \
-    #              webdriver.Firefox(service=service, options=options)
-    # else:
-    #     raise ValueError(f"Browser '{browser}' is not supported.")
-        # Create a temporary directory for user data
-    user_data_dir = tempfile.mkdtemp()
-    if browser in browser_options:
-            options, service = browser_options[browser]
-            
-            if browser == "chrome":
-                options.add_argument(f"user-data-dir={user_data_dir}")
-                driver = webdriver.Chrome(service=service, options=options)
-            elif browser == "edge":
-                options.add_argument(f"user-data-dir={user_data_dir}")
-                driver = webdriver.Edge(service=service, options=options)
-            elif browser == "firefox":
-                # Firefox doesn't support user-data-dir directly, so we skip it here
-                driver = webdriver.Firefox(service=service, options=options)
+    if browser == "chrome":
+        options = webdriver.ChromeOptions()
+        # options.add_argument('--headless')
+        service = ChromeService(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service, options=options)
+    elif browser == "edge":
+        options = webdriver.EdgeOptions()
+        # options.add_argument('--headless')
+        service = EdgeService(EdgeChromiumDriverManager().install())
+        driver = webdriver.Edge(service=service, options=options)
+    elif browser == "firefox":
+        options = webdriver.FirefoxOptions()
+        # options.add_argument('--headless')
+        service = FirefoxService(GeckoDriverManager().install())
+        driver = webdriver.Firefox(service=service, options=options)
     else:
-            raise ValueError(f"Browser '{browser}' is not supported.")
-    
+        raise ValueError(f"Browser '{browser}' is not supported.")
+        
     logger = loggen()
     logger.info(f"Launching {browser.capitalize()} Browser")
     request.cls.driver = driver

@@ -10,6 +10,7 @@ class HomePage:
     BUTTON_SEARCH_ID = "nav-search-submit-button"
     LOGO_ID = "nav-logo-sprites"
     DESKTOP_BANNER_ID = "desktop-banner"
+    INPUT_CAPTCHA_ID = 'captchacharacters'
 
     def __init__(self, driver, logger):
         """Initialize WebDriver, WebDriverWait, Screenshots, and Logger."""
@@ -24,6 +25,23 @@ class HomePage:
         log_method = self.logger.error if is_error else self.logger.info
         log_method(f"{'Error' if is_error else 'Info'} :: {self.browser_name} :: {message}")
 
+    def refresh_if_captcha(self):
+        """Check for CAPTCHA presence and refresh the page if detected."""
+
+        try:
+            self.wait.until(EC.presence_of_element_located((By.ID, self.INPUT_CAPTCHA_ID)))
+            self._log("CAPTCHA detected, refreshing the page.")
+            self.driver.refresh()
+            self._log("Page refreshed successfully.")
+
+            # Recheck for CAPTCHA after refresh
+            self.wait.until(EC.presence_of_element_located((By.ID, self.INPUT_CAPTCHA_ID)))
+            self._log("Run Failed due to CAPTCHA being present.")
+            assert False, "Run Failed due to CAPTCHA being present."
+
+        except (TimeoutException, NoSuchElementException):
+            self._log("No CAPTCHA element found on the page.")
+
     def open_amazon_website(self, device='desktop'):
         """
         Opens the Amazon home page and verifies essential elements.
@@ -37,6 +55,8 @@ class HomePage:
         try:
             self.driver.set_window_size(*SCREEN_SIZES[device])
             self.driver.get(BASE_URL)
+
+            self.refresh_if_captcha()
 
             logo_displayed = self.wait.until(EC.presence_of_element_located((By.ID, self.LOGO_ID))).is_displayed()
             banner_displayed = self.wait.until(EC.presence_of_element_located((By.ID, self.DESKTOP_BANNER_ID))).is_displayed()

@@ -19,35 +19,32 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: "3.9"
 
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Debug: List Files
-      - name: Debug: List Files
-        run: ls -R
-
       - name: Run Tests and Generate Report
-        run: pytest -s -v --html=Reports/report.html --self-contained-html || true
-
+        run: |
+          mkdir -p Reports/screenshots  # Ensure directories exist
+          pytest -s -v --html=Reports/report.html --self-contained-html | true
 
       - name: Upload Test Report
         uses: actions/upload-artifact@v4
         with:
           name: test-report
-          path: Reports/report.html  # Ensure this path matches the generated report location
+          path: Reports/report.html
 
       - name: Upload Screenshots
         uses: actions/upload-artifact@v4
         with:
           name: test-screenshots
-          path: Reports/screenshots/  # Ensure this path matches where your screenshots are stored
+          path: Reports/screenshots/
 
       - name: Upload Test Data (CSV File)
         uses: actions/upload-artifact@v4
         with:
           name: product-info-csv
-          path: test_data/product_info.csv  # Ensure this matches the actual path
+          path: test_data/product_info.csv

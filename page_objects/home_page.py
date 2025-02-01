@@ -1,3 +1,6 @@
+from time import sleep
+from random import randint
+import random
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -27,20 +30,25 @@ class HomePage:
 
     def refresh_if_captcha(self):
         """Check for CAPTCHA presence and refresh the page if detected."""
+        
+        attempts = 3
+        for attempt in range(attempts):
+            self._log(f"Attempt {attempt + 1} to check CAPTCHA.")
+            try:
+                self.wait.until(EC.presence_of_element_located((By.ID, self.INPUT_CAPTCHA_ID)))
+                self._log("CAPTCHA detected, refreshing the page.")
+                sleep(randint(2, 6))
+                self.driver.refresh()
+                self._log("Page refreshed successfully.")
+                # Re-check for CAPTCHA after refresh
+                self.wait.until(EC.presence_of_element_located((By.ID, self.INPUT_CAPTCHA_ID)))
+                self._log("CAPTCHA still present after refresh.")
+            except (TimeoutException, NoSuchElementException):
+                self._log("No CAPTCHA element found on the page.")
+                return
 
-        try:
-            self.wait.until(EC.presence_of_element_located((By.ID, self.INPUT_CAPTCHA_ID)))
-            self._log("CAPTCHA detected, refreshing the page.")
-            self.driver.refresh()
-            self._log("Page refreshed successfully.")
-
-            # Recheck for CAPTCHA after refresh
-            self.wait.until(EC.presence_of_element_located((By.ID, self.INPUT_CAPTCHA_ID)))
-            self._log("Run Failed due to CAPTCHA being present.")
-            assert False, "Run Failed due to CAPTCHA being present."
-
-        except (TimeoutException, NoSuchElementException):
-            self._log("No CAPTCHA element found on the page.")
+        self._log("Run failed due to CAPTCHA being present after maximum attempts.")
+        assert False, "Run failed due to CAPTCHA being present."
 
     def open_amazon_website(self, device='desktop'):
         """

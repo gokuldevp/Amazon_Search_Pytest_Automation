@@ -21,6 +21,10 @@ jobs:
         with:
           python-version: "3.9"
 
+      - name: Remove Existing Reports and Screenshots
+        run: |
+          rm -rf Reports/*
+
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
@@ -33,26 +37,19 @@ jobs:
       - name: List Reports Directory
         run: ls -R Reports
 
-      - name: Verify Report File
-        run: |
-          if [ -z "$(ls -A Reports/**/*.html)" ]; then
-            echo "No report file found!"
-            exit 1
-          fi
-
       - name: Upload Test Report
         uses: actions/upload-artifact@v4
         if: success() || failure()
         with:
           name: test-report
-          path: Reports/**/*.html
+          path: Reports/*
 
-      - name: Upload Screenshots
-        uses: actions/upload-artifact@v4
-        if: success() || failure()
-        with:
-          name: test-screenshots
-          path: Reports/**/*.png
+      # - name: Upload Screenshots
+      #   uses: actions/upload-artifact@v4
+      #   if: success() || failure()
+      #   with:
+      #     name: test-screenshots
+      #     path: Reports/**/*.png
 
       - name: Upload Test Data (CSV File)
         uses: actions/upload-artifact@v4

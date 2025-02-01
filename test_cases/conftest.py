@@ -53,7 +53,7 @@ def setup(request):
         driver = webdriver.Chrome(service=service, options=options)
     elif browser == "edge":
         options = webdriver.EdgeOptions()
-        # options.add_argument('--headless')
+        options.add_argument('--headless')
         service = EdgeService(EdgeChromiumDriverManager().install())
         driver = webdriver.Edge(service=service, options=options)
     elif browser == "firefox":

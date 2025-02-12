@@ -13,9 +13,16 @@ class TestBasicCrawling:
         """
         Removes the existing CSV file before running tests, ensuring this runs only once.
         """
-        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'test_data', 'product_info.csv')
+        dir_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'test_data')
+        file_path = os.path.join(dir_path, 'product_info.csv')
+
+        # Remove the existing CSV file
         if os.path.exists(file_path):
             os.remove(file_path)
+
+        # Create the directory if it doesn't exist
+        if not os.path.exists(dir_path):
+            os.makedirs(dir_path)
 
     @pytest.fixture(autouse=True)
     def setup_pages(self):

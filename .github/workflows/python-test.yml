@@ -32,7 +32,7 @@ jobs:
 
       - name: Run Tests
         run: |
-          pytest -s -v -n=4
+          pytest -s -v -n=3
 
       - name: List Reports Directory
         run: ls -R Reports

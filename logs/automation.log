@@ -22,3 +22,107 @@
 02/12/2025 10:05:16 AM: INFO: INFO :: MicrosoftEdge :: Image gallery is present.
 02/12/2025 10:05:17 AM: INFO: INFO :: MicrosoftEdge :: Navigating to Amazon home page.
 02/12/2025 10:05:18 AM: INFO: INFO :: MicrosoftEdge :: Attempt 1 to check CAPTCHA.
+02/12/2025 10:16:08 AM: INFO: Launching Edge Browser
+02/12/2025 10:16:08 AM: INFO: INFO :: MicrosoftEdge :: Navigating to Amazon home page.
+02/12/2025 10:16:14 AM: INFO: INFO :: MicrosoftEdge :: Attempt 1 to check CAPTCHA.
+02/12/2025 10:16:44 AM: INFO: INFO :: MicrosoftEdge :: No CAPTCHA element found on the page.
+02/12/2025 10:16:44 AM: INFO: INFO :: MicrosoftEdge :: Amazon home page loaded successfully.
+02/12/2025 10:16:44 AM: INFO: INFO :: MicrosoftEdge :: Attempting to search for: mobile
+02/12/2025 10:16:48 AM: INFO: INFO :: MicrosoftEdge :: Search executed successfully.
+02/12/2025 10:16:48 AM: INFO: INFO :: MicrosoftEdge :: Starting to extract product information.
+02/12/2025 10:16:48 AM: INFO: INFO :: MicrosoftEdge :: Found product details in the search results.
+02/12/2025 10:16:49 AM: INFO: INFO :: MicrosoftEdge :: Finished extracting product information.
+02/12/2025 10:16:49 AM: INFO: INFO :: MicrosoftEdge :: Attempting to click the Next Page link.
+02/12/2025 10:16:49 AM: INFO: INFO :: MicrosoftEdge :: Successfully clicked the Next Page link.
+02/12/2025 10:16:49 AM: INFO: INFO :: MicrosoftEdge :: Starting to extract product information.
+02/12/2025 10:16:52 AM: INFO: INFO :: MicrosoftEdge :: Found product details in the search results.
+02/12/2025 10:16:52 AM: INFO: INFO :: MicrosoftEdge :: Finished extracting product information.
+02/12/2025 10:16:52 AM: INFO: INFO :: MicrosoftEdge :: Saving product information for mobile.
+02/12/2025 10:16:52 AM: INFO: INFO :: MicrosoftEdge :: Product information for mobile saved successfully.
+02/12/2025 10:16:53 AM: INFO: INFO :: MicrosoftEdge :: Navigating to Amazon home page.
+02/12/2025 10:16:59 AM: INFO: INFO :: MicrosoftEdge :: Attempt 1 to check CAPTCHA.
+02/12/2025 10:17:29 AM: INFO: INFO :: MicrosoftEdge :: No CAPTCHA element found on the page.
+02/12/2025 10:17:29 AM: INFO: INFO :: MicrosoftEdge :: Amazon home page loaded successfully.
+02/12/2025 10:17:29 AM: INFO: INFO :: MicrosoftEdge :: Attempting to search for: mobile
+02/12/2025 10:17:32 AM: INFO: INFO :: MicrosoftEdge :: Search executed successfully.
+02/12/2025 10:17:32 AM: INFO: INFO :: MicrosoftEdge :: Starting to extract product information.
+02/12/2025 10:17:32 AM: INFO: INFO :: MicrosoftEdge :: Found product details in the search results.
+02/12/2025 10:17:33 AM: INFO: INFO :: MicrosoftEdge :: Finished extracting product information.
+02/12/2025 10:17:33 AM: INFO: INFO :: MicrosoftEdge :: Attempting to click the Next Page link.
+02/12/2025 10:17:33 AM: INFO: INFO :: MicrosoftEdge :: Successfully clicked the Next Page link.
+02/12/2025 10:17:33 AM: INFO: INFO :: MicrosoftEdge :: Starting to extract product information.
+02/12/2025 10:17:34 AM: INFO: INFO :: MicrosoftEdge :: Found product details in the search results.
+02/12/2025 10:17:34 AM: INFO: INFO :: MicrosoftEdge :: Finished extracting product information.
+02/12/2025 10:17:34 AM: INFO: INFO :: MicrosoftEdge :: Saving product information for mobile.
+02/12/2025 10:17:34 AM: INFO: INFO :: MicrosoftEdge :: Product information for mobile saved successfully.
+02/12/2025 10:17:34 AM: INFO: INFO :: MicrosoftEdge :: Navigating to Amazon home page.
+02/12/2025 10:17:38 AM: INFO: INFO :: MicrosoftEdge :: Attempt 1 to check CAPTCHA.
+02/12/2025 10:18:08 AM: INFO: INFO :: MicrosoftEdge :: No CAPTCHA element found on the page.
+02/12/2025 10:18:08 AM: INFO: INFO :: MicrosoftEdge :: Amazon home page loaded successfully.
+02/12/2025 10:18:08 AM: INFO: INFO :: MicrosoftEdge :: Attempting to search for: mobile
+02/12/2025 10:18:10 AM: INFO: INFO :: MicrosoftEdge :: Search executed successfully.
+02/12/2025 10:18:10 AM: INFO: INFO :: MicrosoftEdge :: Starting to extract product information.
+02/12/2025 10:18:10 AM: INFO: INFO :: MicrosoftEdge :: Found product details in the search results.
+02/12/2025 10:18:10 AM: INFO: INFO :: MicrosoftEdge :: Finished extracting product information.
+02/12/2025 10:18:10 AM: INFO: INFO :: MicrosoftEdge :: Attempting to click the Next Page link.
+02/12/2025 10:18:10 AM: INFO: INFO :: MicrosoftEdge :: Successfully clicked the Next Page link.
+02/12/2025 10:18:10 AM: INFO: INFO :: MicrosoftEdge :: Starting to extract product information.
+02/12/2025 10:18:11 AM: INFO: INFO :: MicrosoftEdge :: Found product details in the search results.
+02/12/2025 10:18:11 AM: INFO: INFO :: MicrosoftEdge :: Finished extracting product information.
+02/12/2025 10:18:11 AM: INFO: INFO :: MicrosoftEdge :: Saving product information for mobile.
+02/12/2025 10:18:11 AM: INFO: INFO :: MicrosoftEdge :: Product information for mobile saved successfully.
+02/12/2025 10:18:12 AM: INFO: INFO :: MicrosoftEdge :: Navigating to Amazon home page.
+02/12/2025 10:18:14 AM: INFO: INFO :: MicrosoftEdge :: Attempt 1 to check CAPTCHA.
+02/12/2025 10:18:44 AM: INFO: INFO :: MicrosoftEdge :: No CAPTCHA element found on the page.
+02/12/2025 10:18:44 AM: INFO: INFO :: MicrosoftEdge :: Amazon home page loaded successfully.
+02/12/2025 10:18:44 AM: INFO: INFO :: MicrosoftEdge :: Attempting to search for: laptop
+02/12/2025 10:18:46 AM: INFO: INFO :: MicrosoftEdge :: Search executed successfully.
+02/12/2025 10:18:46 AM: INFO: INFO :: MicrosoftEdge :: Starting to extract product information.
+02/12/2025 10:18:46 AM: INFO: INFO :: MicrosoftEdge :: Found product details in the search results.
+02/12/2025 10:18:46 AM: INFO: INFO :: MicrosoftEdge :: Finished extracting product information.
+02/12/2025 10:18:46 AM: INFO: INFO :: MicrosoftEdge :: Attempting to click the Next Page link.
+02/12/2025 10:18:46 AM: INFO: INFO :: MicrosoftEdge :: Successfully clicked the Next Page link.
+02/12/2025 10:18:46 AM: INFO: INFO :: MicrosoftEdge :: Starting to extract product information.
+02/12/2025 10:18:47 AM: INFO: INFO :: MicrosoftEdge :: Found product details in the search results.
+02/12/2025 10:18:48 AM: INFO: INFO :: MicrosoftEdge :: Finished extracting product information.
+02/12/2025 10:18:48 AM: INFO: INFO :: MicrosoftEdge :: Saving product information for laptop.
+02/12/2025 10:18:48 AM: INFO: INFO :: MicrosoftEdge :: Product information for laptop saved successfully.
+02/12/2025 10:18:48 AM: INFO: INFO :: MicrosoftEdge :: Navigating to Amazon home page.
+02/12/2025 10:18:49 AM: INFO: INFO :: MicrosoftEdge :: Attempt 1 to check CAPTCHA.
+02/12/2025 10:19:20 AM: INFO: INFO :: MicrosoftEdge :: No CAPTCHA element found on the page.
+02/12/2025 10:19:20 AM: INFO: INFO :: MicrosoftEdge :: Amazon home page loaded successfully.
+02/12/2025 10:19:20 AM: INFO: INFO :: MicrosoftEdge :: Attempting to search for: laptop
+02/12/2025 10:19:22 AM: INFO: INFO :: MicrosoftEdge :: Search executed successfully.
+02/12/2025 10:19:22 AM: INFO: INFO :: MicrosoftEdge :: Starting to extract product information.
+02/12/2025 10:19:22 AM: INFO: INFO :: MicrosoftEdge :: Found product details in the search results.
+02/12/2025 10:19:22 AM: INFO: INFO :: MicrosoftEdge :: Finished extracting product information.
+02/12/2025 10:19:22 AM: INFO: INFO :: MicrosoftEdge :: Attempting to click the Next Page link.
+02/12/2025 10:19:22 AM: INFO: INFO :: MicrosoftEdge :: Successfully clicked the Next Page link.
+02/12/2025 10:19:22 AM: INFO: INFO :: MicrosoftEdge :: Starting to extract product information.
+02/12/2025 10:19:23 AM: INFO: INFO :: MicrosoftEdge :: Found product details in the search results.
+02/12/2025 10:19:24 AM: INFO: INFO :: MicrosoftEdge :: Finished extracting product information.
+02/12/2025 10:19:24 AM: INFO: INFO :: MicrosoftEdge :: Saving product information for laptop.
+02/12/2025 10:19:24 AM: INFO: INFO :: MicrosoftEdge :: Product information for laptop saved successfully.
+02/12/2025 10:19:24 AM: INFO: INFO :: MicrosoftEdge :: Navigating to Amazon home page.
+02/12/2025 10:19:26 AM: INFO: INFO :: MicrosoftEdge :: Attempt 1 to check CAPTCHA.
+02/12/2025 10:19:56 AM: INFO: INFO :: MicrosoftEdge :: No CAPTCHA element found on the page.
+02/12/2025 10:19:56 AM: INFO: INFO :: MicrosoftEdge :: Amazon home page loaded successfully.
+02/12/2025 10:19:56 AM: INFO: INFO :: MicrosoftEdge :: Attempting to search for: laptop
+02/12/2025 10:19:58 AM: INFO: INFO :: MicrosoftEdge :: Search executed successfully.
+02/12/2025 10:19:58 AM: INFO: INFO :: MicrosoftEdge :: Starting to extract product information.
+02/12/2025 10:19:58 AM: INFO: INFO :: MicrosoftEdge :: Found product details in the search results.
+02/12/2025 10:19:58 AM: INFO: INFO :: MicrosoftEdge :: Finished extracting product information.
+02/12/2025 10:19:58 AM: INFO: INFO :: MicrosoftEdge :: Attempting to click the Next Page link.
+02/12/2025 10:19:58 AM: INFO: INFO :: MicrosoftEdge :: Successfully clicked the Next Page link.
+02/12/2025 10:19:58 AM: INFO: INFO :: MicrosoftEdge :: Starting to extract product information.
+02/12/2025 10:20:00 AM: INFO: INFO :: MicrosoftEdge :: Found product details in the search results.
+02/12/2025 10:20:00 AM: INFO: INFO :: MicrosoftEdge :: Finished extracting product information.
+02/12/2025 10:20:00 AM: INFO: INFO :: MicrosoftEdge :: Saving product information for laptop.
+02/12/2025 10:20:00 AM: INFO: INFO :: MicrosoftEdge :: Product information for laptop saved successfully.
+02/12/2025 10:20:00 AM: INFO: INFO :: MicrosoftEdge :: Navigating to Amazon home page.
+02/12/2025 10:20:02 AM: INFO: INFO :: MicrosoftEdge :: Attempt 1 to check CAPTCHA.
+02/12/2025 10:20:32 AM: INFO: INFO :: MicrosoftEdge :: No CAPTCHA element found on the page.
+02/12/2025 10:20:32 AM: INFO: INFO :: MicrosoftEdge :: Amazon home page loaded successfully.
+02/12/2025 10:20:32 AM: INFO: INFO :: MicrosoftEdge :: Attempting to search for: headphones
+02/12/2025 10:23:22 AM: INFO: Launching Edge Browser
+02/12/2025 10:23:22 AM: INFO: INFO :: MicrosoftEdge :: Navigating to Amazon home page.

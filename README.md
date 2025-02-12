@@ -22,6 +22,7 @@ configs/
   ├── configs.py
 page_objects/
   ├── __init__.py
+  ├── base_page.py  
   ├── home_page.py
   ├── product_detailed_page.py
   ├── search_result_page.py

@@ -5,7 +5,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException, WebDriverException
-from utilities.utilities import ScreeShots
 from configs.configs import BASE_URL, TIMEOUT, SCREEN_SIZES
 
 class HomePage:
@@ -19,7 +18,6 @@ class HomePage:
         """Initialize WebDriver, WebDriverWait, Screenshots, and Logger."""
         self.driver = driver
         self.wait = WebDriverWait(self.driver, TIMEOUT, 2)
-        self.SS = ScreeShots(self.driver)
         self.logger = logger
         self.browser_name = self.driver.capabilities.get('browserName', 'Unknown')
 

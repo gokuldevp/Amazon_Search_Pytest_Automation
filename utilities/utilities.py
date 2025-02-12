@@ -102,21 +102,21 @@ class Browser(ABC):
 class ChromeBrowser(Browser):
     def create_driver(self):
         options = webdriver.ChromeOptions()
-        # options.add_argument('--headless')
+        options.add_argument('--headless')
         service = ChromeService(ChromeDriverManager().install())
         return Chrome(service=service, options=options)
 
 class FirefoxBrowser(Browser):
     def create_driver(self):
         options = webdriver.FirefoxOptions()
-        # options.add_argument('--headless')
+        options.add_argument('--headless')
         service = FirefoxService(GeckoDriverManager().install())
         return Firefox(service=service, options=options)
 
 class EdgeBrowser(Browser):
     def create_driver(self):
         options = webdriver.EdgeOptions()
-        # options.add_argument('--headless')
+        options.add_argument('--headless')
         service = EdgeService(EdgeChromiumDriverManager().install())
         return Edge(service=service, options=options)
 

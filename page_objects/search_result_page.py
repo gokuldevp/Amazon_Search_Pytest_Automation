@@ -1,12 +1,11 @@
 import csv
 import os
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
-from configs.configs import TIMEOUT
+from page_objects.base_page import BasePage
 
-class SearchResultPage:
+class SearchResultPage(BasePage):
     INPUT_SEARCH_ID = "twotabsearchtextbox"
     BUTTON_SEARCH_ID = "nav-search-submit-button"
     LOGO_ID = "nav-logo-sprites"
@@ -17,17 +16,6 @@ class SearchResultPage:
     TEXT_PRODUCT_RATING_XPATH = '//i[@data-cy="reviews-ratings-slot"]/parent::a'
     TEXT_PRODUCT_URL_XPATH = '//div[@data-component-type="s-search-result"]//span[@data-component-type="s-product-image"]//a'
     LINK_NEXT_PAGE_XPATH = '//a[contains(@aria-label,"Go to next page")]'
-
-    def __init__(self, driver, logger):
-        self.driver = driver
-        self.wait = WebDriverWait(self.driver, TIMEOUT, 2)
-        self.logger = logger
-        self.browser_name = self.driver.capabilities.get('browserName', 'Unknown')
-
-    def _log(self, message, is_error=False):
-        """Log messages with appropriate severity."""
-        log_method = self.logger.error if is_error else self.logger.info
-        log_method(f"{'Error' if is_error else 'Info'} :: {self.browser_name} :: {message}")
 
     def extract_product_information(self):
         """Extracts product information from Amazon search results."""

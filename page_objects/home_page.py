@@ -1,30 +1,17 @@
 from time import sleep
 from random import randint
-import random
+from page_objects.base_page import BasePage
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException, WebDriverException
-from configs.configs import BASE_URL, TIMEOUT, SCREEN_SIZES
+from configs.configs import BASE_URL, SCREEN_SIZES
 
-class HomePage:
+class HomePage(BasePage):
     INPUT_SEARCH_ID = "twotabsearchtextbox"
     BUTTON_SEARCH_ID = "nav-search-submit-button"
     LOGO_ID = "nav-logo-sprites"
     DESKTOP_BANNER_ID = "desktop-banner"
     INPUT_CAPTCHA_ID = 'captchacharacters'
-
-    def __init__(self, driver, logger):
-        """Initialize WebDriver, WebDriverWait, Screenshots, and Logger."""
-        self.driver = driver
-        self.wait = WebDriverWait(self.driver, TIMEOUT, 2)
-        self.logger = logger
-        self.browser_name = self.driver.capabilities.get('browserName', 'Unknown')
-
-    def _log(self, message, is_error=False):
-        """Log messages with appropriate severity."""
-        log_method = self.logger.error if is_error else self.logger.info
-        log_method(f"{'Error' if is_error else 'Info'} :: {self.browser_name} :: {message}")
 
     def refresh_if_captcha(self):
         """Check for CAPTCHA presence and refresh the page if detected."""

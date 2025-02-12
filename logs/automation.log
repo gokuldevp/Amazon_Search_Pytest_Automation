@@ -1,0 +1,24 @@
+02/12/2025 10:04:27 AM: INFO: Launching Edge Browser
+02/12/2025 10:04:27 AM: INFO: INFO :: MicrosoftEdge :: Navigating to Amazon home page.
+02/12/2025 10:04:34 AM: INFO: INFO :: MicrosoftEdge :: Attempt 1 to check CAPTCHA.
+02/12/2025 10:05:04 AM: INFO: INFO :: MicrosoftEdge :: No CAPTCHA element found on the page.
+02/12/2025 10:05:04 AM: INFO: INFO :: MicrosoftEdge :: Amazon home page loaded successfully.
+02/12/2025 10:05:04 AM: INFO: INFO :: MicrosoftEdge :: Attempting to search for: mobile
+02/12/2025 10:05:07 AM: INFO: INFO :: MicrosoftEdge :: Search executed successfully.
+02/12/2025 10:05:07 AM: INFO: INFO :: MicrosoftEdge :: Attempting to retrieve the name of the first product.
+02/12/2025 10:05:07 AM: INFO: INFO :: MicrosoftEdge :: First product name retrieved successfully
+02/12/2025 10:05:07 AM: INFO: INFO :: MicrosoftEdge :: Attempting to click the first product.
+02/12/2025 10:05:08 AM: INFO: INFO :: MicrosoftEdge :: First product link clicked successfully.
+02/12/2025 10:05:08 AM: INFO: INFO :: MicrosoftEdge :: Switched to the new tab successfully.
+02/12/2025 10:05:08 AM: INFO: INFO :: MicrosoftEdge :: Attempting to verify product page is loaded for Samsung Galaxy M05 (Mint Green, 4GB RAM, 64 GB Storage) | 50MP Dual Camera | Bigger 6.7" HD+ Display | 5000mAh Battery | 25W Fast Charging | 2 Gen OS Upgrade & 4 Year Security Update | Without Charger.
+02/12/2025 10:05:16 AM: INFO: INFO :: MicrosoftEdge :: Product page loaded successfully.
+02/12/2025 10:05:16 AM: INFO: INFO :: MicrosoftEdge :: Attempting to verify presence of Add to Cart button.
+02/12/2025 10:05:16 AM: INFO: INFO :: MicrosoftEdge :: Add to Cart button is present.
+02/12/2025 10:05:16 AM: INFO: INFO :: MicrosoftEdge :: Attempting to verify presence of Product overview section.
+02/12/2025 10:05:16 AM: INFO: INFO :: MicrosoftEdge :: Product overview section is present.
+02/12/2025 10:05:16 AM: INFO: INFO :: MicrosoftEdge :: Attempting to verify presence of Product details section.
+02/12/2025 10:05:16 AM: INFO: INFO :: MicrosoftEdge :: Product details section is present.
+02/12/2025 10:05:16 AM: INFO: INFO :: MicrosoftEdge :: Attempting to verify presence of Image gallery.
+02/12/2025 10:05:16 AM: INFO: INFO :: MicrosoftEdge :: Image gallery is present.
+02/12/2025 10:05:17 AM: INFO: INFO :: MicrosoftEdge :: Navigating to Amazon home page.
+02/12/2025 10:05:18 AM: INFO: INFO :: MicrosoftEdge :: Attempt 1 to check CAPTCHA.
